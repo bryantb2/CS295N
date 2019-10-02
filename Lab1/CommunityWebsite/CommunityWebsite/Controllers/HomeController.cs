@@ -8,30 +8,38 @@ using CommunityWebsite.Models;
 
 namespace CommunityWebsite.Controllers
 {
+    //"has a..." is composition
+    //"is a..." is inheritence
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Home()
         {
-            return View();
+            return View("Home");
         }
 
-        public IActionResult About()
+        public IActionResult History()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            return View("History");
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            return View("Contact");
         }
 
-        public IActionResult Privacy()
+        public IActionResult Info()
         {
-            return View();
+            return View("Info");
+        }
+        
+        public IActionResult Locations()
+        {
+            return View("Locations");
+        }
+
+        public IActionResult People()
+        {
+            return View("People");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
