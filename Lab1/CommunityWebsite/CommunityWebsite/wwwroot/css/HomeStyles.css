@@ -1,0 +1,11 @@
+﻿.jumbotron {
+    min-height: 100% !important;
+    width: 100% !important;
+}
+
+.contextBoxRestricted {
+    max-width:50%;
+    margin-left: 25%;
+    margin-top: 20%;
+    margin-bottom:20%;
+}
