@@ -36,3 +36,8 @@ body {
     }
 }
 
+.mainBackgroundImage {
+    background-image: url(https://wallpaperplay.com/walls/full/b/e/4/124178.jpg) !important;
+    background-size: cover;
+}
+

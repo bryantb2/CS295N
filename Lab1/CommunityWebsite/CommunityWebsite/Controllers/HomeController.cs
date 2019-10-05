@@ -12,6 +12,7 @@ namespace CommunityWebsite.Controllers
     //"is a..." is inheritence
     public class HomeController : Controller
     {
+        //THESE ARE ACTION METHODS
         public IActionResult Home()
         {
             return View("Home");
@@ -25,21 +26,6 @@ namespace CommunityWebsite.Controllers
         public IActionResult Contact()
         {
             return View("Contact");
-        }
-
-        public IActionResult Info()
-        {
-            return View("Info");
-        }
-        
-        public IActionResult Locations()
-        {
-            return View("Locations");
-        }
-
-        public IActionResult People()
-        {
-            return View("People");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
