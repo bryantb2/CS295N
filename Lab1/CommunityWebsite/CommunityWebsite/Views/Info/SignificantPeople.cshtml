@@ -1,4 +1,44 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Significant People";
+    Layout = "_Layout";
 }
 
+<section class="pageContainerCenter justify-content-center">
+    <article class="contextBoxRestricted text-light">
+        <div class="d-flex p-4 justify-content-left darkParagraphBackground"><h1 class="pageHeaderCustom">Significant People</h1></div>
+        <p class="d-flex mb-5 p-4 pageParagraph darkParagraphBackground">
+            Below is a short section on people who have had a major impact on our community.
+        </p>
+        <div class="d-flex justify-content-left darkParagraphBackground">
+            <figure class="figure p-4">
+                <img width="300px" src="https://images2.minutemediacdn.com/image/upload/c_crop,h_1126,w_2000,x_0,y_0/f_auto,q_auto,w_1100/v1564085984/shape/mentalfloss/george-lucas-gettyimages-929360234.jpg" class="figure-img img-fluid rounded" alt="">
+                <figcaption class="text-light figure-caption">George Lucas</figcaption>
+            </figure>
+            <figure class="figure p-4">
+                <img width="300px" src="https://lumiere-a.akamaihd.net/v1/images/Darth-Vader_6bda9114.jpeg?region=0%2C23%2C1400%2C785&width=960" class="figure-img img-fluid rounded" alt="">
+                <figcaption class="text-light figure-caption">Darth Vader</figcaption>
+            </figure>
+            <figure class="figure p-4">
+                <img width="300px" src="https://lumiere-a.akamaihd.net/v1/images/databank_jarjarbinks_01_169_c70767ab.jpeg?region=0%2C0%2C1560%2C878&width=960" class="figure-img img-fluid rounded" alt="">
+                <figcaption class="text-light figure-caption">Darth Vader</figcaption>
+            </figure>
+        </div>
+        <div class="d-flex p-4 justify-content-left">
+            <div class="pageSelectorContainer">
+                <p class="d-flex pt-2">
+                    Please select an option from the dropdown menu to visit more of our site!
+                </p>
+            </div>
+            <div class="dropdown">
+                <button class="dropdownMenuButton btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Go to
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-controller="Info" asp-action="Locations">Locations</a>
+                    <a class="dropdown-item" asp-controller="Info" asp-action="SignificantPeople">Important People</a>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>

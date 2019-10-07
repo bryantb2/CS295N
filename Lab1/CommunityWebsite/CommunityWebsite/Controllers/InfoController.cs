@@ -12,16 +12,19 @@ namespace CommunityWebsite.Controllers
     {
         public IActionResult Info()
         {
+            ViewBag.BackgroundStyle = "pageContainer4";
             return View("Info");
         }
 
         public IActionResult Locations()
         {
+            ViewBag.BackgroundStyle = "pageContainer5";
             return View("Locations");
         }
 
         public IActionResult SignificantPeople()
         {
+            ViewBag.BackgroundStyle = "pageContainer6";
             return View("SignificantPeople");
         }
 

@@ -77,4 +77,23 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
+.pageContainer4 {
+    min-height: 100% !important;
+    background-image: url(https://i.imgur.com/OuSizUw.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
+.pageContainer5 {
+    min-height: 100% !important;
+    background-image: url(https://i0.wp.com/wallpapersly.com/wp-content/uploads/2019/07/star-wars-wallpaper-4k-hd-1.jpg?ssl=1);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.pageContainer6 {
+    min-height: 100% !important;
+    background-image: url(http://epicwallpaperz.com/wallpaper-hd/star-wars-wallpapers-desktop-background-On-wallpaper-hd.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
