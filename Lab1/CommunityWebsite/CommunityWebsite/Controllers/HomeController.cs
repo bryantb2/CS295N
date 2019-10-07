@@ -28,7 +28,7 @@ namespace CommunityWebsite.Controllers
 
         public IActionResult Contact()
         {
-            ViewBag.BackgroundStyle = "pageContainer2";
+            ViewBag.BackgroundStyle = "pageContainer3";
             return View("Contact");
         }
 

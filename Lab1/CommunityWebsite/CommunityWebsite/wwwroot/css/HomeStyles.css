@@ -1,34 +1,29 @@
-﻿
-/*CONTAINERS AND TEXT STYLES*/
-.homePageContainer {
+﻿/*CONTAINERS AND TEXT STYLES*/
+.pageContainerCenter {
     width: 100%;
     display: flex;
 }
 
 .contextBoxRestricted {
     margin-top: 25%;
-    margin-bottom:30%;
+    margin-bottom: 30%;
 }
 
-.homePageHeader {
+.pageHeaderCustom {
     font-family: 'FuturaPT-Bold';
     font-size: 30pt;
     letter-spacing: 0.5px
 }
 
-.homePageParagraph {
+.pageParagraph {
     font-family: 'FuturaPT-Book';
     font-size: 15pt;
 }
 
-.homePageParagraph2Container {
+.pageSelectorContainer {
     font-family: 'FuturaPT-Book';
     font-size: 12pt;
     width: 50%;
-}
-
-.homePageParagraph{
-
 }
 
 /* BUTTON STYLES*/

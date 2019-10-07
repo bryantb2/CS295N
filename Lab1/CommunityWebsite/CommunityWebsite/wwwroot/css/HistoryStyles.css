@@ -10,24 +10,25 @@
     margin-bottom: 30%;
 }
 
-.homePageHeader {
+.pageHeaderCustom {
     font-family: 'FuturaPT-Bold';
     font-size: 30pt;
     letter-spacing: 0.5px
 }
 
-.homePageParagraph {
+.pageParagraph {
     font-family: 'FuturaPT-Book';
     font-size: 15pt;
 }
 
-.homePageParagraph2Container {
+.pageSelectorContainer {
     font-family: 'FuturaPT-Book';
     font-size: 12pt;
     width: 50%;
 }
 
-.homePageParagraph {
+.darkParagraphBackground {
+    background-color: rgba(125,125,125,0.8);
 }
 
 /* BUTTON STYLES*/
@@ -40,10 +41,4 @@
     padding: 8px 30px;
 }
 
-/*OVERWRITTING BACKGROUND STYLES*/
-.pageContainer2 {
-    min-height: 100% !important;
-    background-image: url(http://getwallpapers.com/wallpaper/full/e/7/3/34863.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+
