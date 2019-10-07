@@ -7,7 +7,7 @@
 
 .contextBoxRestricted {
     margin-top: 25%;
-    margin-bottom:30%;
+    margin-bottom: 30%;
 }
 
 .homePageHeader {
@@ -27,8 +27,7 @@
     width: 50%;
 }
 
-.homePageParagraph{
-
+.homePageParagraph {
 }
 
 /* BUTTON STYLES*/
@@ -39,4 +38,12 @@
     font-family: 'FuturaPT-Light';
     font-size: 15pt;
     padding: 8px 30px;
+}
+
+/*OVERWRITTING BACKGROUND STYLES*/
+.pageContainer2 {
+    min-height: 100% !important;
+    background-image: url(http://getwallpapers.com/wallpaper/full/e/7/3/34863.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }

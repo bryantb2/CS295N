@@ -1,4 +1,30 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+﻿/*FONT IMPORTATION*/
+@font-face {
+    font-family: 'FuturaPT-Bold';
+    src: local('FuturaPT Bold'), local('FuturaPTBold'), url(../fonts/FuturaPTBold.otf);
+}
+
+@font-face {
+    font-family: "FuturaPT-Medium";
+    src: local('FuturaPT Medium'), local('FuturaPTMedium'), url(../fonts/FuturaPTMedium.otf) format("opentype");
+}
+
+@font-face {
+    font-family: "FuturaPT-MediumOblique";
+    src: local('FuturaPT Medium Oblique'), local('FuturaPTMediumOblique'),url(../fonts/FuturaPTCondMediumOblique.otf) format("opentype");
+}
+
+@font-face {
+    font-family: "FuturaPT-Book";
+    src: local('FuturaPT Book'), local('FuturaPTBook'), url(../fonts/FuturaPTBook.otf) format("opentype");
+}
+
+@font-face {
+    font-family: "FuturaPT-Light";
+    src: local('FuturaPT Light'), local('FuturaPTLight'),url(../fonts/FuturaPTLight.otf) format("opentype");
+}
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
 }
@@ -6,9 +32,35 @@ body {
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    height: 100%;
-    padding-top:5%;
+    min-height: 100%;
 }
 
+/*NAVBAR STYLES*/
+.navbar-brand {
+    font-family: 'FuturaPT-Medium';
+    font-size: 23pt;
+    color: white;
+}
+
+.nav-item {
+    /*spacing out nav items*/
+    margin-left: 40px;
+    font-size: 15pt;
+}
+
+/*GENERAL PAGE BACKGROUND STYLES*/
+.pageContainer {
+    min-height: 100% !important;
+    background-image: url(https://wallpaperplay.com/walls/full/b/e/4/124178.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.opacityControl {
+    min-height: 100vh;
+    background-color: rgba(125,125,125,0.35);
+    overflow: hidden;
+    padding-bottom: 10px;
+}
 
 

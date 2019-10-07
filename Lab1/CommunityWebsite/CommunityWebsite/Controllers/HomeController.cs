@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CommunityWebsite.Models;
 
+
 namespace CommunityWebsite.Controllers
 {
     //"has a..." is composition
@@ -15,16 +16,19 @@ namespace CommunityWebsite.Controllers
         //THESE ARE ACTION METHODS
         public IActionResult Home()
         {
+            ViewBag.BackgroundStyle = "pageContainer";
             return View("Home");
         }
 
         public IActionResult History()
         {
+            ViewBag.BackgroundStyle = "pageContainer2";
             return View("History");
         }
 
         public IActionResult Contact()
         {
+            ViewBag.BackgroundStyle = "pageContainer2";
             return View("Contact");
         }
 
