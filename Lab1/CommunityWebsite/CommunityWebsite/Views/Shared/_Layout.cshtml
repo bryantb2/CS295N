@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
-<head runat="server">
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Star Wars Community</title>
@@ -8,8 +8,6 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="~/css/HomeStyles.css" />
-        <link rel="stylesheet" href="~/css/HistoryStyles.css" />
         <link rel="stylesheet" href="~/css/ContactStyles.css" />
         <link rel="stylesheet" href="~/css/LocationsStyles.css" />
     </environment>
@@ -33,7 +31,11 @@
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
                     <ul class="nav navbar-nav">
                         <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Home">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="History">History</a></li>
+                        <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Post</a></li>
                         <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Info" asp-action="Info">Info</a></li>
+                        <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Info" asp-action="Locations">Locations/Resources</a></li>
+                        <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Info" asp-action="SignificantPeople">Important Figures</a></li>
                     </ul>
                 </div>
             </div>
