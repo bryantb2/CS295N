@@ -1,3 +1,10 @@
 ﻿.contactFormContainer {
-    margin-top: 5%;
+    margin-top: 5% !important;
+}
+.messageContentBoxRestricted {
+    margin-top: 25% !important;
+}
+
+.halfWidthLimiter {
+    max-width: 50%;
 }
