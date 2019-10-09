@@ -7,17 +7,28 @@ namespace CommunityWebsite.Models
 {
     public class Message
     {
-        //CLASS FIELDS
+        //STATIC FIELDS
+        private static int messageNumber = 0;
+
+        //CLASS FIELDS (instance variables)
         private string messageContent;
-        private int digitalSignature; //unique message ID
+        private int messageID; //unique message ID
         private string userNameSignature; //name of user who inputted the message
 
         //CONSTRUCTOR
-        public Message(string content, int signature, string nameOfUser)
+        public Message(string content, string nameOfUser)
         {
             this.messageContent = content;
-            this.digitalSignature = signature;
+            //increments and set message ID
+            this.messageID = GetNewMessageID();
             this.userNameSignature = nameOfUser;
+        }
+
+        //STATIC METHODS FOR IDs
+        public int GetNewMessageID()
+        {
+            Message.messageNumber += 1;
+            return Message.messageNumber;
         }
 
         //PROPERTIES
@@ -29,8 +40,7 @@ namespace CommunityWebsite.Models
         
         public int DigitalSignature
         {
-            get { return this.digitalSignature; }
-            set { this.digitalSignature = value; }
+            get { return this.messageID; }
         }
 
         public string UserNameSignature

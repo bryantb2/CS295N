@@ -12,3 +12,9 @@
 div#success_message {
     display: none;
 }
+
+.limitedInputTextArea {
+    min-height: 130px;
+    max-height: 130px;
+    height: 130px;
+}
