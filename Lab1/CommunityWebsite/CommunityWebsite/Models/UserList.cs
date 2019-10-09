@@ -5,7 +5,14 @@ using System.Threading.Tasks;
 
 namespace CommunityWebsite.Models
 {
-    public class UserList
+    public static class UserList
     {
+        //CLASS FIELDS
+
+
+        //PROPERTIES
+
+
+        //METHODS
     }
 }
