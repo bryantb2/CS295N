@@ -25,6 +25,17 @@ namespace CommunityWebsite.Models
             get { return this.messageHistory; }
         }
 
+        public string Username
+        {
+            get { return this.userName; }
+            set { this.userName = value; }
+        }
+
+        public string Password
+        {
+            get { return this.password; }
+        }
+
         //METHODS
         public void AddMessageToHistory(Message message)
         {

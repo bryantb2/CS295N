@@ -8,3 +8,7 @@
 .halfWidthLimiter {
     max-width: 50%;
 }
+
+div#success_message {
+    display: none;
+}
