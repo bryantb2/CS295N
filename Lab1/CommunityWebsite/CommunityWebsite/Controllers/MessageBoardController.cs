@@ -16,7 +16,7 @@ namespace CommunityWebsite.Controllers
         }
 
         [HttpPost]
-        public RedirectToActionResult GenerateModelObjects(string topic, string userName,string password,string passwordConfirmed,
+        public RedirectToActionResult GenerateModelObjects(string messageTitle, string topic, string userName,string password,string passwordConfirmed,
             string messageContent)
         {
             User newUser;
@@ -50,7 +50,7 @@ namespace CommunityWebsite.Controllers
                 //add to messaging history of the user
                 //add message to messsage board
                 newUser = new User(userName, password);
-                newMessage = new Message(messageContent, userName, topic);
+                newMessage = new Message(messageTitle, messageContent, userName, topic);
                 newUser.AddMessageToHistory(newMessage);
                 UserList.AddNewUser(newUser);
                 MessageBoard.addMessageToBoard(topic, newMessage);
@@ -65,7 +65,7 @@ namespace CommunityWebsite.Controllers
                     the method will return either -1, meaning the user was not found, or the index of the element the user exists in
                 */
                 //add message to message board
-                newMessage = new Message(messageContent, userName, topic);
+                newMessage = new Message(messageTitle, messageContent, userName, topic);
                 UserList.ModifyUserMessageHistory(userName, "add", newMessage);
                 MessageBoard.addMessageToBoard(topic,newMessage);
             }
