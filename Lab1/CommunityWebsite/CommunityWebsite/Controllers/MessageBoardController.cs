@@ -7,28 +7,24 @@ using CommunityWebsite.Models;
 
 namespace CommunityWebsite.Controllers
 {
-    public class MessagingController : Controller
+    public class MessageBoardController : Controller
     {
         
         public IActionResult Index()
         {
-            return View();
+            return View("UglyRedirect");
         }
 
         [HttpPost]
         public RedirectToActionResult GenerateModelObjects(string topic, string userName,string password,string passwordConfirmed,
             string messageContent)
         {
-            //build a user
-            //add user to user list
-            //build a message
-            //add to messaging history of the user
-            //add message to messsage board
             User newUser;
             Message newMessage;
             List<User> listOfUsers = UserList.GetListOfUsers;
             bool userExists = false;
-            foreach(User u in listOfUsers)
+            
+            foreach (User u in listOfUsers)
             {
                 //checking database to user if the username already exists
                 if(u.Username == userName)
@@ -47,6 +43,12 @@ namespace CommunityWebsite.Controllers
             }
             if (userExists != true)
             {
+                //assumes that user does not exist in "database"
+                //build a user
+                //add user to user list
+                //build a message
+                //add to messaging history of the user
+                //add message to messsage board
                 newUser = new User(userName, password);
                 newMessage = new Message(messageContent, userName, topic);
                 newUser.AddMessageToHistory(newMessage);
@@ -67,7 +69,7 @@ namespace CommunityWebsite.Controllers
                 UserList.ModifyUserMessageHistory(userName, "add", newMessage);
                 MessageBoard.addMessageToBoard(topic,newMessage);
             }
-            return 
+            return RedirectToAction("Index");
         }
 
     }

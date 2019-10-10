@@ -1,0 +1,22 @@
+﻿@model Message
+@{List<Message> messageBoard = MessageBoard.GetMessageList("general");}
+@{
+    ViewData["Title"] = "Community Posts Redirect";
+}
+
+<h2>List of Messages:</h2>
+@foreach (Message message in messageBoard)
+    {
+    <div class="overflow-auto">
+        <div class="userMessage text-light darkParagraphBackground p-4">
+            <h1 class="secondaryPageHeaderCustom">@message.UserNameSignature</h1>
+            <p class="pageParagraph">
+                @message.MessageContent
+            </p>
+            <p class="digitalSignature">@message.UserNameSignature</p>
+        </div>
+    </div>
+     }
+<a asp-controller="Home" asp-action="Contact">Contact</a><br />
+<a asp-controller="Home" asp-action="Home">Home</a>
+

@@ -8,7 +8,7 @@
                 <article class="contextBoxRestricted text-light">
                     <!--Form design borrowed from https://codepen.io/juff03/pen/OXaXRG -->
                     <div class="container contactFormContainer p-0">
-                        <form class="well form-horizontal" asp-controller="Messaging" asp-action="GenerateModelObjects" method="post" id="contact_form">
+                        <form class="well form-horizontal" asp-controller="MessageBoard" asp-action="GenerateModelObjects" method="post" id="contact_form">
                             <fieldset>
 
                                 <!-- Form Name -->
@@ -17,11 +17,11 @@
                                 <!-- Text input-->
 
                                 <div class="form-group">
-                                    <label asp-for="topic" class="col-md-6 control-label text-light">Thread Topic for Post</label>
+                                    <label for="topic" class="col-md-6 control-label text-light">Thread Topic for Post</label>
                                     <div class="col-md-6 selectContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select asp-for="topic" name="threadSelector" class="form-control selectpicker text-dark">
+                                            <select name="topic" class="form-control selectpicker text-dark">
                                                 <option value="">Select a discussion thread</option>
                                                 <option value="generalChat">General Chat</option>
                                                 <option value="starWarsChat">Star Wars Chat</option>
@@ -33,11 +33,11 @@
                                 <!-- Text input-->
 
                                 <div class="form-group">
-                                    <label asp-for="username" class="col-md-6 control-label text-light">Username</label>
+                                    <label for="username" class="col-md-6 control-label text-light">Username</label>
                                     <div class="col-md-6 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input asp-for="username" name="user_name" placeholder="Username" class="form-control" type="text">
+                                            <input name="username" placeholder="Username" class="form-control" type="text">
                                         </div>
                                     </div>
                                 </div>
@@ -45,11 +45,11 @@
                                 <!-- Text input-->
 
                                 <div class="form-group">
-                                    <label asp-for="password" class="col-md-6 control-label text-light">Password</label>
+                                    <label for="password" class="col-md-6 control-label text-light">Password</label>
                                     <div class="col-md-6 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input asp-for="password" name="user_password" placeholder="Password" class="form-control" type="password">
+                                            <input name="password" placeholder="Password" class="form-control" type="password">
                                         </div>
                                     </div>
                                 </div>
@@ -57,11 +57,11 @@
                                 <!-- Text input-->
 
                                 <div class="form-group">
-                                    <label asp-for="passwordConfirmed" class="col-md-6 control-label text-light">Confirm Password</label>
+                                    <label for="passwordConfirmed" class="col-md-6 control-label text-light">Confirm Password</label>
                                     <div class="col-md-6 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input asp-for="passwordConfirmed" name="confirm_password" placeholder="Confirm Password" class="form-control text-light" type="password">
+                                            <input name="passwordConfirmed" placeholder="Confirm Password" class="form-control text-light" type="password">
                                         </div>
                                     </div>
                                 </div>
@@ -69,11 +69,11 @@
                                 <!-- Text input-->
 
                                 <div class="form-group">
-                                    <label asp-for="messageContent" class="col-md-6 control-label text-light">Message</label>
+                                    <label for="messageContent" class="col-md-6 control-label text-light">Message</label>
                                     <div class="col-md-6 inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                            <textarea asp-for="messageContent" name="message" placeholder="Write message here" class="form-control limitedInputTextArea" type="text"></textarea>
+                                            <textarea name="messageContent" placeholder="Write message here" class="form-control limitedInputTextArea" type="text"></textarea>
                                         </div>
                                     </div>
                                 </div>
