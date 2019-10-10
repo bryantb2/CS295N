@@ -67,6 +67,7 @@ namespace CommunityWebsite.Controllers
                 UserList.ModifyUserMessageHistory(userName, "add", newMessage);
                 MessageBoard.addMessageToBoard(topic,newMessage);
             }
+            return 
         }
 
     }
