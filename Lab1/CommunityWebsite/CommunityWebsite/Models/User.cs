@@ -9,7 +9,7 @@ namespace CommunityWebsite.Models
     {
         //CLASS FIELDS
         private string userName;
-        private List<Message> messageHistory;
+        private List<Message> messageHistory = new List<Message>();
         private string password;
 
         //CONSTRUCTOR

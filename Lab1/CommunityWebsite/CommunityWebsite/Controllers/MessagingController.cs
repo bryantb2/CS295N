@@ -30,29 +30,42 @@ namespace CommunityWebsite.Controllers
             bool userExists = false;
             foreach(User u in listOfUsers)
             {
-                //if the user does not already exist (validation done before building user object
-                if((u.Username == userName && u.Password == password))
+                //checking database to user if the username already exists
+                if(u.Username == userName)
                 {
-                    //sets topic to the appropriate input string for the model
-                    if(topic=="generalChat")
-                    {
-                        topic = "general";
-                    }
-                    else
-                    {
-                        topic = "starWars";
-                    }
-                    newUser = new User(userName, password);
-                    newMessage = new Message(messageContent, userName, topic);
-                    newUser.AddMessageToHistory(newMessage);
-                    UserList.AddNewUser(newUser);
-                    MessageBoard.addMessageToBoard(topic, newMessage);
-                    userExists = true;  //this means that the user has been entered into the "database"
+                    userExists = true;  //this means that the user has been found in the "database"
                 }
             }
-            if(userExists != true)
+            //sets topic to the appropriate input string for the model
+            if (topic == "generalChat")
             {
-                //assumes that user already exists, and therefore userCreated is false
+                topic = "general";
+            }
+            else
+            {
+                topic = "starwars";
+            }
+            if (userExists != true)
+            {
+                newUser = new User(userName, password);
+                newMessage = new Message(messageContent, userName, topic);
+                newUser.AddMessageToHistory(newMessage);
+                UserList.AddNewUser(newUser);
+                MessageBoard.addMessageToBoard(topic, newMessage);
+            }
+            else
+            {
+                //assumes that the user already exists in the database
+                //build message
+                //add to message history of the user 
+                /*
+                    this is done by passing the desired username into the FindUser method in the userlist static class
+                    the method will return either -1, meaning the user was not found, or the index of the element the user exists in
+                */
+                //add message to message board
+                newMessage = new Message(messageContent, userName, topic);
+                UserList.ModifyUserMessageHistory(userName, "add", newMessage);
+                MessageBoard.addMessageToBoard(topic,newMessage);
             }
         }
 

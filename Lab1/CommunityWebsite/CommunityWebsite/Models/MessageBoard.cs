@@ -8,8 +8,8 @@ namespace CommunityWebsite.Models
     public static class MessageBoard
     {
         //CLASS FIELDS
-        private static List<Message> generalChat;
-        private static List<Message> starWarsChat;
+        private static List<Message> generalChat = new List<Message>();
+        private static List<Message> starWarsChat = new List<Message>();
         
 
         //PROPERTIES
@@ -32,10 +32,13 @@ namespace CommunityWebsite.Models
             {
                 MessageBoard.generalChat.Add(message);
             }
-            else
+            else if (chatRoomName == "starwars")
             {
                 MessageBoard.starWarsChat.Add(message);
             }
+            else
+                throw new ArgumentException("Chat room argument must be either string 'starwars'" +
+                    "or string 'general'");
         }
 
         public static void removeMessageFromBaord(string chatRoomName, int messageSignature, string writterUserName)
@@ -50,7 +53,7 @@ namespace CommunityWebsite.Models
                     }
                 }
             }
-            else
+            else if (chatRoomName == "starwars")
             {
                 foreach (Message message in MessageBoard.starWarsChat)
                 {
@@ -60,6 +63,9 @@ namespace CommunityWebsite.Models
                     }
                 }
             }
+            else
+                throw new ArgumentException("Chat room argument must be either string 'starwars'" +
+                    "or string 'general'");
         }
     }
 }

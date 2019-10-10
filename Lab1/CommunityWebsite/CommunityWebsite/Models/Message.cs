@@ -12,16 +12,18 @@ namespace CommunityWebsite.Models
 
         //CLASS FIELDS (instance variables)
         private string messageContent;
+        private string topic;
         private int messageID; //unique message ID
         private string userNameSignature; //name of user who inputted the message
 
         //CONSTRUCTOR
-        public Message(string content, string nameOfUser)
+        public Message(string content, string nameOfUser, string topic)
         {
             this.messageContent = content;
             //increments and set message ID
             this.messageID = GetNewMessageID();
             this.userNameSignature = nameOfUser;
+            this.topic = topic;
         }
 
         //STATIC METHODS FOR IDs
