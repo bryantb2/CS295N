@@ -15,15 +15,17 @@ namespace CommunityWebsite.Models
         private string topic;
         private int messageID; //unique message ID
         private string userNameSignature; //name of user who inputted the message
+        private string messageTitle;
 
         //CONSTRUCTOR
-        public Message(string content, string nameOfUser, string topic)
+        public Message(string contentHeader, string content, string nameOfUser, string topic)
         {
             this.messageContent = content;
             //increments and set message ID
             this.messageID = GetNewMessageID();
             this.userNameSignature = nameOfUser;
             this.topic = topic;
+            this.messageTitle = contentHeader;
         }
 
         //STATIC METHODS FOR IDs
@@ -39,7 +41,13 @@ namespace CommunityWebsite.Models
             get { return this.messageContent; }
             set { this.messageContent = value; }
         }
-        
+
+        public string MessageTitle
+        {
+            get { return this.messageTitle; }
+            set { this.messageTitle = value; }
+        }
+
         public int DigitalSignature
         {
             get { return this.messageID; }
