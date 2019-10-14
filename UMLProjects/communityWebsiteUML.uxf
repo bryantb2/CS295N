@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>490</y>
-      <w>230</w>
-      <h>150</h>
+      <x>441</x>
+      <y>576</y>
+      <w>207</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -25,10 +25,10 @@ addOwnMessage()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>700</x>
-      <y>200</y>
-      <w>230</w>
-      <h>100</h>
+      <x>1008</x>
+      <y>594</y>
+      <w>207</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Message
 --
@@ -41,10 +41,10 @@ digital signature: &lt;User&gt;.toString()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>40</y>
-      <w>230</w>
-      <h>140</h>
+      <x>738</x>
+      <y>171</y>
+      <w>207</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Message Board
 --
@@ -61,10 +61,10 @@ addMessagetoBoard()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>740</y>
-      <w>240</w>
-      <h>140</h>
+      <x>441</x>
+      <y>801</y>
+      <w>216</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Admin
 --
@@ -81,10 +81,10 @@ deleteAnyMessage(message object)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>200</y>
-      <w>230</w>
-      <h>170</h>
+      <x>441</x>
+      <y>315</y>
+      <w>207</w>
+      <h>153</h>
     </coordinates>
     <panel_attributes>User List
 --
@@ -102,45 +102,83 @@ getUser(&lt;user&gt;)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>190</y>
-      <w>250</w>
-      <h>300</h>
+      <x>594</x>
+      <y>288</y>
+      <w>234</w>
+      <h>297</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>230.0;10.0;10.0;280.0</additional_attributes>
+    <additional_attributes>240.0;10.0;10.0;310.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>380</y>
-      <w>30</w>
-      <h>110</h>
+      <x>522</x>
+      <y>459</y>
+      <w>27</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>650</y>
-      <w>30</w>
+      <x>936</x>
+      <y>216</y>
+      <w>171</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1008</x>
+      <y>315</y>
+      <w>207</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <panel_attributes>Messageboard
+--
+content: string
+content character limit: int
+digital signature: &lt;User&gt;.toString()
+</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>110</y>
-      <w>150</w>
-      <h>90</h>
+      <x>531</x>
+      <y>702</y>
+      <w>27</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1107</x>
+      <y>396</y>
+      <w>27</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>621</y>
+      <w>378</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;400.0;10.0</additional_attributes>
   </element>
 </diagram>
