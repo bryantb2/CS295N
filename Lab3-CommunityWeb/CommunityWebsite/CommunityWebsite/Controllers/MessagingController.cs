@@ -16,7 +16,7 @@ namespace CommunityWebsite.Controllers
         }
 
         [HttpPost]
-        public RedirectToActionResult GenerateModelObjects(string messageTitle, string topic, string userName,
+        public RedirectToActionResult GenerateMessage(string messageTitle, string topic, string userName,
             string messageContent)
         {
             User newUser;
@@ -69,6 +69,18 @@ namespace CommunityWebsite.Controllers
                 UserList.ModifyUserMessageHistory(userName, "add", newMessage);
                 Messaging.addMessageToBoard(topic,newMessage);
             }
+            return RedirectToAction("Index");
+        }
+
+        
+        public IActionResult ReplyForm()
+        {
+            return View("ReplyForm");
+        }
+
+        [HttpPost]
+        public RedirectToActionResult GenerateReply()
+        {
             return RedirectToAction("Index");
         }
 

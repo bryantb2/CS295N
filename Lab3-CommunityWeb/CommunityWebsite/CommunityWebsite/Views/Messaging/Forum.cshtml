@@ -7,28 +7,28 @@
     <h2 class="text-light">List of Messages:</h2>
     @foreach (Message message in messageBoard)
     {
-        <div class="overflow-auto">
-            <div class="userMessage text-light darkParagraphBackground p-4">
-                <h1 class="messageTitle">@message.MessageTitle</h1>
-                <p class="pageParagraph"> @message.MessageContent</p>
-                <div class="d-flex flex-row">
-                    <p class="digitalSignature">Post by @message.UserNameSignature on @message.GetTimePosted</p>
-                </div>
-            </div>
-
-        </div>
-
-        foreach (Reply r in message.GetReplyHistory)
-        {
-        <div class="pt-4 reply">
-            <p class="pageParagraph">@r.ReplyContent</p>
+    <div class="overflow-auto">
+        <div class="userMessage text-light darkParagraphBackground p-4">
+            <h1 class="messageTitle">@message.MessageTitle</h1>
+            <p class="pageParagraph"> @message.MessageContent</p>
             <div class="d-flex flex-row">
                 <p class="digitalSignature">Post by @message.UserNameSignature on @message.GetTimePosted</p>
             </div>
         </div>
-        }
-
-    }
+        <button type="button" class="btn btn-link text-light">Reply</button>
+    </div>
+            
+        <div class="pt-4 d-flex replyContainer justify-content-right">
+            @foreach (Reply r in message.GetReplyHistory)
+            {
+                <div class="reply p-2 mt-3 mb-3 bg-dark">
+                    <p class="pageParagraph">@r.ReplyContent</p>
+                    <div class="d-flex flex-row">
+                        <p class="digitalSignature">Post by @message.UserNameSignature on @message.GetTimePosted</p>
+                    </div>
+                </div>
+            }
+        </div>
 
     }
     <a asp-controller="Home" asp-action="Home">Go home</a><br />

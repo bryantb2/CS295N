@@ -11,5 +11,9 @@
 .digitalSignature {
 }
 
+.replyContainer {
+}
+
 .reply {
+    max-width: 60%;
 }
