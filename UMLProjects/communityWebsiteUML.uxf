@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>225</x>
+      <x>126</x>
       <y>576</y>
       <w>207</w>
       <h>171</h>
@@ -26,7 +26,7 @@ addOwnMessage()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>792</x>
+      <x>693</x>
       <y>594</y>
       <w>207</w>
       <h>135</h>
@@ -36,13 +36,14 @@ addOwnMessage()
 content: string
 content character limit: int
 digital signature: &lt;User&gt;.toString()
-replies: &lt;reply&gt;List</panel_attributes>
+replies: &lt;reply&gt;List
+date posted: time object</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>522</x>
+      <x>423</x>
       <y>171</y>
       <w>207</w>
       <h>126</h>
@@ -62,7 +63,7 @@ addMessagetoBoard()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>225</x>
+      <x>126</x>
       <y>837</y>
       <w>216</w>
       <h>126</h>
@@ -82,7 +83,7 @@ deleteAnyMessage(message object)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>225</x>
+      <x>126</x>
       <y>315</y>
       <w>207</w>
       <h>153</h>
@@ -103,7 +104,7 @@ getUser(&lt;user&gt;)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>369</x>
+      <x>270</x>
       <y>288</y>
       <w>243</w>
       <h>306</h>
@@ -114,7 +115,7 @@ getUser(&lt;user&gt;)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>306</x>
+      <x>207</x>
       <y>459</y>
       <w>27</w>
       <h>135</h>
@@ -125,7 +126,7 @@ getUser(&lt;user&gt;)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>315</x>
+      <x>216</x>
       <y>738</y>
       <w>27</w>
       <h>117</h>
@@ -136,7 +137,7 @@ getUser(&lt;user&gt;)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
+      <x>621</x>
       <y>207</y>
       <w>198</w>
       <h>405</h>
@@ -147,7 +148,7 @@ getUser(&lt;user&gt;)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>423</x>
+      <x>324</x>
       <y>621</y>
       <w>387</w>
       <h>27</h>
@@ -158,23 +159,23 @@ getUser(&lt;user&gt;)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>801</x>
+      <x>702</x>
       <y>810</y>
       <w>207</w>
-      <h>90</h>
+      <h>144</h>
     </coordinates>
     <panel_attributes>Reply
 --
 content: string
 content character limit: int
 digital signature: &lt;User&gt;.toString()
-</panel_attributes>
+date posted: time object</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>891</x>
+      <x>792</x>
       <y>720</y>
       <w>27</w>
       <h>108</h>
@@ -185,7 +186,7 @@ digital signature: &lt;User&gt;.toString()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>423</x>
+      <x>324</x>
       <y>648</y>
       <w>396</w>
       <h>234</h>

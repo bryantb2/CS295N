@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace CommunityWebsite.Models
 {
-    public static class MessageBoard
+    public static class Messaging
     {
         //CLASS FIELDS
+        private static String[] chatGenres = new String[] { "General Chat", "Star Wars Chat" };
         private static List<Message> generalChat = new List<Message>();
         private static List<Message> starWarsChat = new List<Message>();
         
@@ -17,12 +18,22 @@ namespace CommunityWebsite.Models
         {
             if (chatRoomName == "general")
             {
-                return MessageBoard.generalChat;
+                return Messaging.generalChat;
             }
             else
             {
-                return MessageBoard.starWarsChat;
+                return Messaging.starWarsChat;
             }
+        }
+
+        public static int GetNumberOfChats
+        {
+            get { return chatGenres.Length; }
+        }
+
+        public static String[] GetChatNameArray
+        {
+            get { return chatGenres; }
         }
 
         //METHODS
@@ -30,11 +41,11 @@ namespace CommunityWebsite.Models
         {
             if (chatRoomName == "general")
             {
-                MessageBoard.generalChat.Add(message);
+                Messaging.generalChat.Add(message);
             }
             else if (chatRoomName == "starwars")
             {
-                MessageBoard.starWarsChat.Add(message);
+                Messaging.starWarsChat.Add(message);
             }
             else
                 throw new ArgumentException("Chat room argument must be either string 'starwars'" +
@@ -45,21 +56,21 @@ namespace CommunityWebsite.Models
         {
             if (chatRoomName == "general")
             {
-                foreach (Message message in MessageBoard.generalChat)
+                foreach (Message message in Messaging.generalChat)
                 {
                     if(message.DigitalSignature == messageSignature && message.UserNameSignature == writterUserName)
                     {
-                        MessageBoard.generalChat.Remove(message);
+                        Messaging.generalChat.Remove(message);
                     }
                 }
             }
             else if (chatRoomName == "starwars")
             {
-                foreach (Message message in MessageBoard.starWarsChat)
+                foreach (Message message in Messaging.starWarsChat)
                 {
                     if (message.DigitalSignature == messageSignature && message.UserNameSignature == writterUserName)
                     {
-                        MessageBoard.starWarsChat.Remove(message);
+                        Messaging.starWarsChat.Remove(message);
                     }
                 }
             }

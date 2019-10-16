@@ -13,10 +13,9 @@ namespace CommunityWebsite.Models
         private string password;
 
         //CONSTRUCTOR
-        public User(string userName, string password)
+        public User(string userName)
         {
             this.userName = userName;
-            this.password = password;
         }
 
         //PROPERTIES
@@ -33,6 +32,7 @@ namespace CommunityWebsite.Models
 
         public string Password
         {
+            set { this.password = value; }
             get { return this.password; }
         }
 

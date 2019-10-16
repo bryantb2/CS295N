@@ -7,16 +7,16 @@ using CommunityWebsite.Models;
 
 namespace CommunityWebsite.Controllers
 {
-    public class MessageBoardController : Controller
+    public class MessagingController : Controller
     {
         
         public IActionResult Index()
         {
-            return View("UglyRedirect");
+            return View("Forum");
         }
 
         [HttpPost]
-        public RedirectToActionResult GenerateModelObjects(string messageTitle, string topic, string userName,string password,string passwordConfirmed,
+        public RedirectToActionResult GenerateModelObjects(string messageTitle, string topic, string userName,
             string messageContent)
         {
             User newUser;
@@ -49,11 +49,11 @@ namespace CommunityWebsite.Controllers
                 //build a message
                 //add to messaging history of the user
                 //add message to messsage board
-                newUser = new User(userName, password);
+                newUser = new User(userName);
                 newMessage = new Message(messageTitle, messageContent, userName, topic);
                 newUser.AddMessageToHistory(newMessage);
                 UserList.AddNewUser(newUser);
-                MessageBoard.addMessageToBoard(topic, newMessage);
+                Messaging.addMessageToBoard(topic, newMessage);
             }
             else
             {
@@ -67,7 +67,7 @@ namespace CommunityWebsite.Controllers
                 //add message to message board
                 newMessage = new Message(messageTitle, messageContent, userName, topic);
                 UserList.ModifyUserMessageHistory(userName, "add", newMessage);
-                MessageBoard.addMessageToBoard(topic,newMessage);
+                Messaging.addMessageToBoard(topic,newMessage);
             }
             return RedirectToAction("Index");
         }

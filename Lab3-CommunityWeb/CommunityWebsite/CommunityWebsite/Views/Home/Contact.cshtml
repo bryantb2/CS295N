@@ -1,4 +1,7 @@
 ﻿@{
+    String[] chatGenreNames = Messaging.GetChatNameArray;
+}
+@{
     ViewData["Title"] = "Contact";
 }
 <section class="homePageContainer">
@@ -8,7 +11,7 @@
                 <article class="contextBoxRestricted text-light">
                     <!--Form design borrowed from https://codepen.io/juff03/pen/OXaXRG -->
                     <div class="container contactFormContainer p-0">
-                        <form class="well form-horizontal" asp-controller="MessageBoard" asp-action="GenerateModelObjects" method="post" id="contact_form">
+                        <form class="well form-horizontal" asp-controller="Messaging" asp-action="GenerateModelObjects" method="post" id="contact_form">
                             <fieldset>
 
                                 <!-- Form Name -->
@@ -38,30 +41,6 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                             <input name="username" placeholder="Username" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label for="password" class="col-md-6 control-label text-light">Password</label>
-                                    <div class="col-md-6 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="password" placeholder="Password" class="form-control" type="password">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label for="passwordConfirmed" class="col-md-6 control-label text-light">Confirm Password</label>
-                                    <div class="col-md-6 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="passwordConfirmed" placeholder="Confirm Password" class="form-control text-light" type="password">
                                         </div>
                                     </div>
                                 </div>
@@ -121,19 +100,9 @@
                                 Explore Forum Posts
                             </button>
                             <div class="dropdown-menu p-4" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" asp-action="">Genre 1</a>
-                                <a class="dropdown-item" asp-action="">Genre 2</a>
-                                <a class="dropdown-item" asp-action="">Genre 3</a>
+                                <a class="dropdown-item" asp-action="">General Chat</a>
+                                <a class="dropdown-item" asp-action="">Star Wars Chat</a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="overflow-auto">
-                        <div class="userMessage text-light darkParagraphBackground p-4">
-                            <h1 class="secondaryPageHeaderCustom">[User specified title]</h1>
-                            <p class="pageParagraph">
-                                This is an example message, pretty cool eh?
-                            </p>
-                            <p class="digitalSignature">[username]</p>
                         </div>
                     </div>
                 </article>

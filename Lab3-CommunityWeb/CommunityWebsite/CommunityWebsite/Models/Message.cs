@@ -13,6 +13,7 @@ namespace CommunityWebsite.Models
         //CLASS FIELDS (instance variables)
         private string messageContent;
         private string topic;
+        private Int32 unixTimeStamp;
         private int messageID; //unique message ID
         private string userNameSignature; //name of user who inputted the message
         private string messageTitle;
@@ -26,6 +27,7 @@ namespace CommunityWebsite.Models
             this.userNameSignature = nameOfUser;
             this.topic = topic;
             this.messageTitle = contentHeader;
+            this.unixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; ;
         }
 
         //STATIC METHODS FOR IDs
@@ -36,10 +38,26 @@ namespace CommunityWebsite.Models
         }
 
         //PROPERTIES
+        public Int32 UnixTimeStamp
+        {
+            get { return unixTimeStamp; }
+            set { this.unixTimeStamp = value; }
+        }
         public string MessageContent
         {
             get { return this.messageContent; }
             set { this.messageContent = value; }
+        }
+
+        public DateTimeOffset GetTimePosted
+        {
+            //credit goes to: https://stackoverflow.com/questions/249760/how-can-i-convert-a-unix-timestamp-to-datetime-and-vice-versa
+            get
+            {
+                DateTime unixStart = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                long unixTimeStampInTicks = (long)(this.unixTimeStamp * TimeSpan.TicksPerSecond);
+                return new DateTime(unixStart.Ticks + unixTimeStampInTicks, System.DateTimeKind.Utc);
+            }
         }
 
         public string MessageTitle
