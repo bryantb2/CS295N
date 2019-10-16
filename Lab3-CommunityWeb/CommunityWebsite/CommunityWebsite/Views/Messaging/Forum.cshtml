@@ -10,18 +10,22 @@
         <div class="overflow-auto">
             <div class="userMessage text-light darkParagraphBackground p-4">
                 <h1 class="messageTitle">@message.MessageTitle</h1>
-                <p class="pageParagraph">
-                    @message.MessageContent
-                </p>
+                <p class="pageParagraph"> @message.MessageContent</p>
                 <div class="d-flex flex-row">
                     <p class="digitalSignature">Post by @message.UserNameSignature on @message.GetTimePosted</p>
                 </div>
             </div>
+
         </div>
 
-        foreach (Reply r in message)
+        foreach (Reply r in message.GetReplyHistory)
         {
-            <div class="pt-4 reply">fffff</div>
+        <div class="pt-4 reply">
+            <p class="pageParagraph">@r.ReplyContent</p>
+            <div class="d-flex flex-row">
+                <p class="digitalSignature">Post by @message.UserNameSignature on @message.GetTimePosted</p>
+            </div>
+        </div>
         }
 
     }
