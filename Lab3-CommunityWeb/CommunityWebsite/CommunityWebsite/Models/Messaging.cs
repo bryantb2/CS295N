@@ -20,9 +20,13 @@ namespace CommunityWebsite.Models
             {
                 return Messaging.generalChat;
             }
-            else
+            else if(chatRoomName == "starwars")
             {
                 return Messaging.starWarsChat;
+            }
+            else
+            {
+                return null;
             }
         }
 

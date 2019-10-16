@@ -32,14 +32,20 @@ namespace CommunityWebsite.Models
             this.unixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }
 
-        //STATIC METHODS FOR IDs
-        public int GetNewMessageID()
+        //METHOD MANIPULATING STATIC MESSAGE ID INT
+        private int GetNewMessageID()
         {
+            //this should only get called within the class upon object instantiation
             Message.messageNumber += 1;
             return Message.messageNumber;
         }
 
         //PROPERTIES
+        public int MessageID
+        {
+            get { return this.messageID; }
+        }
+
         public List<Reply> GetReplyHistory
         {
             get { return this.replies; }
