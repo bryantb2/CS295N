@@ -1,13 +1,10 @@
-﻿@model Message
-@{  String viewbagTemp = (string)ViewData["ChatCategory"];
-    List<Message> messageBoard = Messaging.GetMessageList(viewbagTemp);
-}
+﻿@model List<Message>
 @{
     ViewData["Title"] = "Community Posts Redirect";
 }
 <section class="p-4">
     <h2 class="text-light">List of Messages:</h2>
-    @foreach (Message message in messageBoard)
+    @foreach (Message message in Model)
     {
         <div class="overflow-auto">
             <div class="userMessage text-light darkParagraphBackground p-4">

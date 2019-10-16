@@ -9,13 +9,6 @@ namespace CommunityWebsite.Controllers
 {
     public class MessagingController : Controller
     {
-        
-        public IActionResult Forum()
-        {
-            ViewBag.ChatCategory = topic;
-            return View("Forum");
-        }
-
         [HttpPost]
         public RedirectToActionResult GenerateMessage(string messageTitle, string topic, string userName, string messageContent)
         {
@@ -61,7 +54,15 @@ namespace CommunityWebsite.Controllers
                 UserList.ModifyUserMessageHistory(userName, "add", newMessage);
                 Messaging.addMessageToBoard(topic,newMessage);
             }
-            return RedirectToAction("Forum", topic);
+            //set the genre the user selected for retrieval later
+            Messaging.SelectedGenre = topic;
+            return RedirectToAction("Forum");
+        }
+
+        public IActionResult Forum()
+        {
+            List<Message> messageBoardContent = Messaging.GetMessageList(Messaging.SelectedGenre);
+            return View("Forum", messageBoardContent);
         }
 
         //METHODS FOR REPLY SYSTEM

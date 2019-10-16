@@ -11,9 +11,23 @@ namespace CommunityWebsite.Models
         private static String[] chatGenres = new String[] { "General Chat", "Star Wars Chat" };
         private static List<Message> generalChat = new List<Message>();
         private static List<Message> starWarsChat = new List<Message>();
-        
+        //this tracks the genre the user wants to load
+        private static string selectedGenre = "";
+        /*
+         * this fangled BS exists because I want to the load the messageboard genre the user selected BUT
+         * the topic string that the user select only exists in the redirect method I called to handle the form data.
+         * It is super annoying to pass data from a redirect to an action method, so I opted to store it in the Message board (Messaging)
+         * model.
+         */
+
 
         //PROPERTIES
+        public static string SelectedGenre
+        {
+            get { return selectedGenre; }
+            set { selectedGenre = value; }
+        }
+
         public static List<Message> GetMessageList(string chatRoomName)
         {
             if (chatRoomName == "general")
