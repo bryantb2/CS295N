@@ -17,6 +17,7 @@ namespace CommunityWebsite.Models
         private int messageID; //unique message ID
         private string userNameSignature; //name of user who inputted the message
         private string messageTitle;
+        private List<Reply> replies;
 
         //CONSTRUCTOR
         public Message(string contentHeader, string content, string nameOfUser, string topic)
@@ -38,18 +39,29 @@ namespace CommunityWebsite.Models
         }
 
         //PROPERTIES
+        public List<Reply> GetReplyHistory
+        {
+            get { return this.replies; }
+        }
+
+        public void AddToReplyHistory(Reply reply)
+        {
+            this.replies.Add(reply);
+        }
+
         public Int32 UnixTimeStamp
         {
             get { return unixTimeStamp; }
             set { this.unixTimeStamp = value; }
         }
+
         public string MessageContent
         {
             get { return this.messageContent; }
             set { this.messageContent = value; }
         }
 
-        public DateTimeOffset GetTimePosted
+        public DateTime GetTimePosted
         {
             //credit goes to: https://stackoverflow.com/questions/249760/how-can-i-convert-a-unix-timestamp-to-datetime-and-vice-versa
             get
@@ -76,5 +88,6 @@ namespace CommunityWebsite.Models
             get { return this.userNameSignature; }
             set { this.userNameSignature = value; }
         }
+
     }
 }
