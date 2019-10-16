@@ -28,7 +28,7 @@ namespace CommunityWebsite.Models
             this.userNameSignature = nameOfUser;
             this.topic = topic;
             this.messageTitle = contentHeader;
-            this.unixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; ;
+            this.unixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }
 
         //STATIC METHODS FOR IDs
