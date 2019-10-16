@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Locations";
+    Layout = "_Layout";
+}
+
+<section class="pageContainerCenter justify-content-center">
+    <article class="contextBoxRestricted text-light">
+        <div class="d-flex p-4 justify-content-left darkParagraphBackground"><h1 class="pageHeaderCustom">Locations and Resources</h1></div>
+        <p class="d-flex mb-5 p-4 pageParagraph darkParagraphBackground">
+            Real life meetups happen in LCC's computer lab on Tuesday's and Thursdays, so wear a SW shirt! Below is an interactable
+            list of important resources and locations related to our club meetups:
+        </p>
+        <ul class="list-group mt-2 text-light">
+            <li class="list-group-item customListItemStyle darkParagraphBackground"><a class="locationListItemAnchor" href="https://www.google.com/maps/d/embed?mid=18FqAfCw5eOOrFrBbQaTk1zGIvK8&hl">LCC Location (Google Maps)</a></li>
+            <li class="list-group-item customListItemStyle darkParagraphBackground"><a class="locationListItemAnchor" href="https://www.amazon.com/Star-Wars-Tropical-Stormtrooper-Graphic/dp/B07KVJJJV7/ref=lp_16698506011_1_7?s=apparel&ie=UTF8&qid=1570434439&sr=1-7&nodeID=16698506011&psd=1">Star Wars shirts (Amazon)</a></li>
+            <li class="list-group-item customListItemStyle darkParagraphBackground"><a class="locationListItemAnchor" href="https://www.starwars.com/news/d23-expo-2019-star-wars-the-rise-of-skywalker-poster-revealed">Weekly fan wiki read</a></li>
+            <li class="list-group-item customListItemStyle darkParagraphBackground"><a class="locationListItemAnchor" href="https://starwars.fandom.com/wiki/Hyperdrive">The history of hyperdrives</a></li>
+            <li class="list-group-item customListItemStyle darkParagraphBackground"><a class="locationListItemAnchor" href="https://en.wikipedia.org/wiki/Cultural_impact_of_Star_Wars">Star Wars in pop culture</a></li>
+        </ul>
+        <div class="d-flex p-4 justify-content-left">
+            <div class="pageSelectorContainer">
+                <p class="d-flex pt-2">
+                    Please select an option from the dropdown menu to visit more of our site!
+                </p>
+            </div>
+            <div class="dropdown">
+                <button class="dropdownMenuButton btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Go to
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-controller="Info" asp-action="Locations">Locations</a>
+                    <a class="dropdown-item" asp-controller="Info" asp-action="SignificantPeople">Important People</a>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
