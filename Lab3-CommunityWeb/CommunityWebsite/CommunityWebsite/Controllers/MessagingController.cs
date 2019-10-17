@@ -55,7 +55,7 @@ namespace CommunityWebsite.Controllers
                 Messaging.addMessageToBoard(topic,newMessage);
             }
             //set the genre the user selected for retrieval later
-            Messaging.SelectedGenre = topic;
+            TempData["chatRoom"] = topic;
             return RedirectToAction("Forum");
         }
 
@@ -63,22 +63,22 @@ namespace CommunityWebsite.Controllers
         public RedirectToActionResult GeneralForum()
         {
             //set the genre the user selected for retrieval later
-            Messaging.SelectedGenre = "general";
+            TempData["chatRoom"] = "general";
             return RedirectToAction("Forum");
         }
 
-        
+
         public RedirectToActionResult StarwarsForum()
         {
             //set the genre the user selected for retrieval later
-            Messaging.SelectedGenre = "starwars";
+            TempData["chatRoom"] = "starwars";
             return RedirectToAction("Forum");
         }
 
         public IActionResult Forum()
         {
             ViewBag.BackgroundStyle = "pageContainer7";
-            List<Message> messageBoardContent = Messaging.GetMessageList(Messaging.SelectedGenre);
+            List<Message> messageBoardContent = Messaging.GetMessageList(TempData["chatRoom"].ToString());
             return View("Forum", messageBoardContent);
         }
 
