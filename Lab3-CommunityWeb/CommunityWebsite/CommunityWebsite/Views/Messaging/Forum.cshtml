@@ -3,7 +3,7 @@
     ViewData["Title"] = "Community Posts Redirect";
 }
 <section class="p-4">
-    <h2 class="text-light">List of Messages:</h2>
+    <h2 class="text-light py-4">List of Messages:</h2>
     @foreach (Message message in Model)
     {
         <div class="overflow-auto">
@@ -14,7 +14,7 @@
                     <p class="digitalSignature">Post by @message.UserNameSignature on @message.GetTimePosted</p>
                 </div>
             </div>
-            <button type="button" class="btn btn-link text-light" name="parentMessageID" value=@message.MessageID asp-action="ReplyButtonSubmit">Reply</button>
+            <a class="btn btn-link text-light" name="parentMessageID" value=@message.MessageID asp-action="ReplyButtonSubmit">Reply</a>
         </div>
 
         <div class="pt-4 d-flex replyContainer justify-content-right">
@@ -29,13 +29,8 @@
             }
         </div>
     }
-
-    <button type="button" class="text-light btn btn-link" asp-controller="Home" asp-action="Home">
-        Go Home
-    </button>
-    <button type="button" class="text-light btn btn-link" asp-controller="Home" asp-action="Contact">
-        Go Back
-    </button>
+    <a asp-controller="Home" asp-action="Home" class="btn btn-light btn-small active" role="button" aria-pressed="true">Go Home</a>
+    <a asp-controller="Home" asp-action="Contact" class="btn btn-light btn-small active" role="button" aria-pressed="true">Go Back</a>
 </section>
 
 

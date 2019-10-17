@@ -151,3 +151,10 @@ a.nav-link:hover {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.pageContainer7 {
+    min-height: 100% !important;
+    background-image: url(https://images7.alphacoders.com/394/394105.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}

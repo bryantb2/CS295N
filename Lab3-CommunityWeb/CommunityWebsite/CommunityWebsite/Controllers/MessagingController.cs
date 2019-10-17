@@ -59,8 +59,25 @@ namespace CommunityWebsite.Controllers
             return RedirectToAction("Forum");
         }
 
+        
+        public RedirectToActionResult GeneralForum()
+        {
+            //set the genre the user selected for retrieval later
+            Messaging.SelectedGenre = "general";
+            return RedirectToAction("Forum");
+        }
+
+        
+        public RedirectToActionResult StarwarsForum()
+        {
+            //set the genre the user selected for retrieval later
+            Messaging.SelectedGenre = "starwars";
+            return RedirectToAction("Forum");
+        }
+
         public IActionResult Forum()
         {
+            ViewBag.BackgroundStyle = "pageContainer7";
             List<Message> messageBoardContent = Messaging.GetMessageList(Messaging.SelectedGenre);
             return View("Forum", messageBoardContent);
         }
