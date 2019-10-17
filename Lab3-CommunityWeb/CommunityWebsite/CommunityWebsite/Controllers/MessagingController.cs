@@ -85,17 +85,28 @@ namespace CommunityWebsite.Controllers
         //METHODS FOR REPLY SYSTEM
 
         [HttpPost]
-        public RedirectToActionResult ReplyButtonSubmit(int parentMessageID, string chatCategory)
+        public RedirectToActionResult ReplyButtonSubmit(string parentMessageID, string chatGenre)
         {
             //method takes the message ID of message being replied to and passes a complete comment object into the reply form
-            
+            TempData["originalMessage"] = parentMessageID;
+            TempData["discussionThread"] = chatGenre;
             return RedirectToAction("ReplyForm", parentMessageID);
         }
 
-        public IActionResult ReplyForm(int parentMessageID)
+        public IActionResult ReplyForm()
         {
             //ReplyForm needs a parent message ID because it tells the code which comment the reply belongs to
-            return View("ReplyForm", parentMessageID);
+            
+            //get the messageID
+            //get the discussion genre (make it easier to search the messageboard content)
+            int messageID = int.Parse(TempData["originalMessage"].ToString());
+            string threadGenre = TempData["discussionThread"].ToString();
+
+            //search the messageboard to find the original message object
+            Message originalMessage = Messaging.findMessageFromBoard(threadGenre, messageID);
+
+            //pass in original message to be parsed and used
+            return View("ReplyForm", originalMessage);
         }
 
         [HttpPost]

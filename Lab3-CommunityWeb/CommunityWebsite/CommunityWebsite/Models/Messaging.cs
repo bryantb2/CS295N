@@ -96,5 +96,38 @@ namespace CommunityWebsite.Models
                 throw new ArgumentException("Chat room argument must be either string 'starwars'" +
                     "or string 'general'");
         }
+
+        public static Message findMessageFromBoard(string chatRoomName, int messageID)
+        {
+            if(chatRoomName == "general")
+            {
+                //returns a null if the message does not exist
+                foreach (Message m in generalChat)
+                {
+                    if(m.MessageID == messageID)
+                    {
+                        return m;
+                    }
+                }
+                return null;
+            }
+            else if(chatRoomName == "starwars")
+            {
+                //returns a null if the message does not exist
+                foreach (Message m in starWarsChat)
+                {
+                    if (m.MessageID == messageID)
+                    {
+                        return m;
+                    }
+                }
+                return null;
+            }
+            else
+            {
+                //means that the chatroom name is invalid
+                return null;
+            }
+        }
     }
 }
