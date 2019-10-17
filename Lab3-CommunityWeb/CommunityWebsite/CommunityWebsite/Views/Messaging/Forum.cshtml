@@ -16,8 +16,8 @@
             </div>
             <form>
                 <fieldset>
-                    <input name="chatGenre" value=@Messaging.SelectedGenre class="form-control" type="hidden">
-                    <input name="parentMessageID" value=@message.UnixTimeStamp class="form-control" type="hidden">
+                    <input name="chatGenre" value="@Messaging.SelectedGenre" class="form-control" type="hidden">
+                    <input name="parentMessageID" value="@message.UnixTimeStamp" class="form-control" type="hidden">
                     <button type="submit" class="btn btn-link text-light" asp-action="ReplyButtonSubmit">Reply</button>
                 </fieldset>
             </form>

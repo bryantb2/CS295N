@@ -90,7 +90,7 @@ namespace CommunityWebsite.Controllers
             //method takes the message ID of message being replied to and passes a complete comment object into the reply form
             TempData["originalMessage"] = parentMessageID;
             TempData["discussionThread"] = chatGenre;
-            return RedirectToAction("ReplyForm", parentMessageID);
+            return RedirectToAction("ReplyForm");
         }
 
         public IActionResult ReplyForm()
@@ -106,7 +106,7 @@ namespace CommunityWebsite.Controllers
             Message originalMessage = Messaging.findMessageFromBoard(threadGenre, messageID);
 
             //pass in original message to be parsed and used
-            return View("ReplyForm", originalMessage);
+            return View(originalMessage);
         }
 
         [HttpPost]

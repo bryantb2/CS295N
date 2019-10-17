@@ -36,7 +36,10 @@ namespace CommunityWebsite.Models
         private int GetNewMessageID()
         {
             //this should only get called within the class upon object instantiation
-            Message.messageNumber += 1;
+            if (messageNumber != 0)
+            {
+                Message.messageNumber += 1;
+            }
             return Message.messageNumber;
         }
 
