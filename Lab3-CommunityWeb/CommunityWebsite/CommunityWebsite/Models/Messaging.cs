@@ -76,7 +76,7 @@ namespace CommunityWebsite.Models
             {
                 foreach (Message message in Messaging.generalChat)
                 {
-                    if(message.DigitalSignature == messageSignature && message.UserNameSignature == writterUserName)
+                    if(message.MessageID == messageSignature && message.UserNameSignature == writterUserName)
                     {
                         Messaging.generalChat.Remove(message);
                     }
@@ -86,7 +86,7 @@ namespace CommunityWebsite.Models
             {
                 foreach (Message message in Messaging.starWarsChat)
                 {
-                    if (message.DigitalSignature == messageSignature && message.UserNameSignature == writterUserName)
+                    if (message.MessageID == messageSignature && message.UserNameSignature == writterUserName)
                     {
                         Messaging.starWarsChat.Remove(message);
                     }
@@ -109,7 +109,6 @@ namespace CommunityWebsite.Models
                         return m;
                     }
                 }
-                return null;
             }
             else if(chatRoomName == "starwars")
             {
@@ -123,11 +122,8 @@ namespace CommunityWebsite.Models
                 }
                 return null;
             }
-            else
-            {
-                //means that the chatroom name is invalid
-                return null;
-            }
+            //means that the chatroom name is invalid
+            return null;
         }
     }
 }

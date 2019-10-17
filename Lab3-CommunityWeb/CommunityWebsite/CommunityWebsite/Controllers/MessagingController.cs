@@ -87,7 +87,8 @@ namespace CommunityWebsite.Controllers
         [HttpPost]
         public RedirectToActionResult ReplyButtonSubmit(string parentMessageID, string chatGenre)
         {
-            //method takes the message ID of message being replied to and passes a complete comment object into the reply form
+            //method takes the message ID of message being replied to AND the current chat thread
+            //will make it temp data so it can be used in the ReplyForm action
             TempData["originalMessage"] = parentMessageID;
             TempData["discussionThread"] = chatGenre;
             return RedirectToAction("ReplyForm");
@@ -105,21 +106,24 @@ namespace CommunityWebsite.Controllers
             //search the messageboard to find the original message object
             Message originalMessage = Messaging.findMessageFromBoard(threadGenre, messageID);
 
+            //Viewbag for background image
+            ViewBag.BackgroundStyle = "pageContainer8";
+
             //pass in original message to be parsed and used
             return View(originalMessage);
         }
 
         [HttpPost]
-        public RedirectToActionResult GenerateReply(string messageContent, string usernameSignature)
+        public RedirectToActionResult GenerateReply(string messageContent, string poster, string chatGenre, string parentMessageID)
         {
             //called when the user submits a completed reply form from the ReplyForm view
             //redirects to the main forum page, which will load the new reply
 
-            //get reply data
-            //build a reply object
+            //get reply data and build a reply object
             //set reply object in the replier's reply history
             //set reply object in comment's reply list
             //set reply in UserList
+            Reply reply = new Reply(messageContent, poster);
 
             return RedirectToAction("Forum");
         }

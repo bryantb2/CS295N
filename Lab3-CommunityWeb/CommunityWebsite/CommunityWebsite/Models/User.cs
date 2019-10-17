@@ -61,7 +61,7 @@ namespace CommunityWebsite.Models
         {
             foreach (Message message in this.messageHistory)
             {
-                if (message.DigitalSignature == messageSignature && message.UserNameSignature == writterUserName)
+                if (message.MessageID == messageSignature && message.UserNameSignature == writterUserName)
                 {
                     this.messageHistory.Remove(message);
                 }

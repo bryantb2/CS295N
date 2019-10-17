@@ -44,6 +44,12 @@ namespace CommunityWebsite.Models
         }
 
         //PROPERTIES
+        public string Topic
+        {
+            get { return this.topic; }
+            set { this.topic = value; }
+        }
+
         public int MessageID
         {
             get { return this.messageID; }
@@ -73,6 +79,7 @@ namespace CommunityWebsite.Models
 
         public DateTime GetTimePosted
         {
+            //HUMAN READABLE VERSION OF THE TIME
             //credit goes to: https://stackoverflow.com/questions/249760/how-can-i-convert-a-unix-timestamp-to-datetime-and-vice-versa
             get
             {
@@ -86,11 +93,6 @@ namespace CommunityWebsite.Models
         {
             get { return this.messageTitle; }
             set { this.messageTitle = value; }
-        }
-
-        public int DigitalSignature
-        {
-            get { return this.messageID; }
         }
 
         public string UserNameSignature

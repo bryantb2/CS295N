@@ -14,11 +14,11 @@
                     <p class="digitalSignature">Post by @message.UserNameSignature on @message.GetTimePosted</p>
                 </div>
             </div>
-            <form>
+            <form asp-action="ReplyButtonSubmit" asp-controller="Messaging">
                 <fieldset>
                     <input name="chatGenre" value="@Messaging.SelectedGenre" class="form-control" type="hidden">
-                    <input name="parentMessageID" value="@message.UnixTimeStamp" class="form-control" type="hidden">
-                    <button type="submit" class="btn btn-link text-light" asp-action="ReplyButtonSubmit">Reply</button>
+                    <input name="parentMessageID" value="@message.MessageID" class="form-control" type="hidden">
+                    <button type="submit" class="btn btn-link text-light">Reply</button>
                 </fieldset>
             </form>
         </div>
@@ -35,6 +35,7 @@
             }
         </div>
     }
+    <br/>
     <a asp-controller="Home" asp-action="Home" class="btn btn-light btn-small active" role="button" aria-pressed="true">Go Home</a>
     <a asp-controller="Home" asp-action="Contact" class="btn btn-light btn-small active" role="button" aria-pressed="true">Go Back</a>
 </section>
