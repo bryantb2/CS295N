@@ -12,7 +12,6 @@ namespace CommunityWebsite.Models
         private static List<Message> generalChat = new List<Message>();
         private static List<Message> starWarsChat = new List<Message>();
         //this tracks the genre the user wants to load
-        private static string selectedGenre = "";
         /*
          * this fangled BS exists because I want to the load the messageboard genre the user selected BUT
          * the topic string that the user select only exists in the redirect method I called to handle the form data.
@@ -22,12 +21,6 @@ namespace CommunityWebsite.Models
 
 
         //PROPERTIES
-        public static string SelectedGenre
-        {
-            get { return selectedGenre; }
-            set { selectedGenre = value; }
-        }
-
         public static List<Message> GetMessageList(string chatRoomName)
         {
             if (chatRoomName == "general")
@@ -70,13 +63,13 @@ namespace CommunityWebsite.Models
                     "or string 'general'");
         }
 
-        public static void removeMessageFromBaord(string chatRoomName, int messageSignature, string writterUserName)
+        public static void removeMessageFromBaord(string chatRoomName, int messageID)
         {
             if (chatRoomName == "general")
             {
                 foreach (Message message in Messaging.generalChat)
                 {
-                    if(message.MessageID == messageSignature && message.UserNameSignature == writterUserName)
+                    if(message.MessageID == messageID)
                     {
                         Messaging.generalChat.Remove(message);
                     }
@@ -86,7 +79,7 @@ namespace CommunityWebsite.Models
             {
                 foreach (Message message in Messaging.starWarsChat)
                 {
-                    if (message.MessageID == messageSignature && message.UserNameSignature == writterUserName)
+                    if (message.MessageID == messageID)
                     {
                         Messaging.starWarsChat.Remove(message);
                     }
@@ -97,7 +90,7 @@ namespace CommunityWebsite.Models
                     "or string 'general'");
         }
 
-        public static Message findMessageFromBoard(string chatRoomName, int messageID)
+        public static Message getMessageFromBoard(string chatRoomName, int messageID)
         {
             if(chatRoomName == "general")
             {
@@ -124,6 +117,35 @@ namespace CommunityWebsite.Models
             }
             //means that the chatroom name is invalid
             return null;
+        }
+
+        public static bool findAddReplaceMessage(string chatRoomName, int messageID, Message newMessage)
+        {
+            if (chatRoomName == "general")
+            {
+                //finds and replaces the message if found
+                for(int i = 0; i < generalChat.Count(); i++)
+                {
+                    if(messageID == generalChat[i].MessageID)
+                    {
+                        generalChat[i] = newMessage;
+                        return true;
+                    }
+                }
+            }
+            else if (chatRoomName == "starwars")
+            {
+                //finds and replaces the message if found
+                for (int i = 0; i < starWarsChat.Count(); i++)
+                {
+                    if (messageID == starWarsChat[i].MessageID)
+                    {
+                        starWarsChat[i] = newMessage;
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

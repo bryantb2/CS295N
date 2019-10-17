@@ -11,7 +11,7 @@ namespace CommunityWebsite.Models
         private static List<User> listOfUsers = new List<User>();
 
         //PROPERTIES
-        public static  List<User> GetListOfUsers
+        public static  List<User> ListOfUsers
         {
             get { return listOfUsers; }
         }
@@ -55,6 +55,91 @@ namespace CommunityWebsite.Models
                 else
                     listOfUsers.RemoveAt(elementIndex);
             }
+        }
+
+        public static void FindAndReplaceSameUser(string userName, User newUser)
+        {
+            //GENERAL INFO:
+            //takes in a username and a newUser object
+            //finds the old user via the username parameter
+            //the found user will then be replaced with the newUSer
+
+            //ensures that target username and username of the newUser object are the same
+            if (userName == newUser.Username)
+            {
+                int userIndex = FindUser(userName);
+                listOfUsers[userIndex] = newUser;
+            }
+            else
+                throw new ArgumentException("please pass in a newUser and userName string that have equivalent user name values");
+        }
+
+        public static void FindAndReplaceUserMessage(string userName, int messageID, Message newMessage)
+        {
+            //GENERAL INFO:
+            //takes in a username and a neweMessage object
+            //finds the old user via the username parameter
+            //the found user will then have the message connected to the messageID replaced with the newMessage
+
+            //ensures that target username and username of the newUser object are the same
+            if (userName == newMessage.UserNameSignature)
+            {
+                int userIndex = FindUser(userName);
+                User userInQuestion = listOfUsers[userIndex];
+                List<Message> userMessageHistory = userInQuestion.GetMessageList;
+                for (int i = 0; i < userMessageHistory.Count(); i++)
+                {
+                    if (messageID == userMessageHistory[i].MessageID)
+                    {
+                        //easy way to switch out the old message for the new one
+                        Message tempReply = userMessageHistory[i];
+                        ListOfUsers[userIndex].RemoveMessageFromHistory(messageID);
+                        ListOfUsers[userIndex].AddMessageToHistory(newMessage);
+                    }
+                }
+            }
+            else
+                throw new ArgumentException("please pass in a newMessage and userName string that have equivalent user name values");
+        }
+
+        public static void AddToUserReplyHistory(string userName, Reply newReply)
+        {
+            //GENERAL INFO:
+            //takes in a username and a newUser object
+            //finds the replier via the username parameter
+            //the found user will then have the newReply added to their history
+
+            //ensures that target username and username of the newReply object are the same
+            if (userName == newReply.UserNameSignature)
+            {
+                int userIndex = FindUser(userName);
+                listOfUsers[userIndex].AddToReplyHistory(newReply);
+            }
+            else
+                throw new ArgumentException("please pass in a newReply and userName string that have equivalent user name values");
+        }
+
+        public static Reply RemoveReplyFromUserHistory(string userName, int replyID)
+        {
+            //GENERAL INFO:
+            //takes in a username and a newUser object
+            //finds the replier via the username parameter
+            //the found user will then have the newReply added to their history
+
+            int userIndex = FindUser(userName);
+            User userInQuestion = listOfUsers[userIndex];
+            List<Reply> userReplyHistory = userInQuestion.GetReplyHistory;
+            //ensures that target username and username of the newReply object are the same
+            for (int i =0; i < userReplyHistory.Count(); i++)
+            {
+                if (replyID == userReplyHistory[i].ReplyID)
+                {
+                    Reply tempReply = userReplyHistory[i];
+                    ListOfUsers[userIndex].RemoveReplyFromHistory(replyID);
+                    return tempReply;
+                }
+            }
+            return null;
         }
 
         public static void AddNewUser(User user)

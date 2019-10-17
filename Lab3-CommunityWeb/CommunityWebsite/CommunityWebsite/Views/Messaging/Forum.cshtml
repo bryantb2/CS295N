@@ -16,7 +16,7 @@
             </div>
             <form asp-action="ReplyButtonSubmit" asp-controller="Messaging">
                 <fieldset>
-                    <input name="chatGenre" value="@Messaging.SelectedGenre" class="form-control" type="hidden">
+                    <input name="chatGenre" value="@ViewBag.SelectedChat" class="form-control" type="hidden">
                     <input name="parentMessageID" value="@message.MessageID" class="form-control" type="hidden">
                     <button type="submit" class="btn btn-link text-light">Reply</button>
                 </fieldset>

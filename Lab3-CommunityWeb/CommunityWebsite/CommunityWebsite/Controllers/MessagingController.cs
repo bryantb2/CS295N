@@ -14,7 +14,7 @@ namespace CommunityWebsite.Controllers
         {
             User newUser;
             Message newMessage;
-            List<User> listOfUsers = UserList.GetListOfUsers;
+            List<User> listOfUsers = UserList.ListOfUsers;
             bool userExists = false;
             
             foreach (User u in listOfUsers)
@@ -78,6 +78,7 @@ namespace CommunityWebsite.Controllers
         public IActionResult Forum()
         {
             ViewBag.BackgroundStyle = "pageContainer7";
+            ViewBag.SelectedChat = TempData["chatRoom"];
             List<Message> messageBoardContent = Messaging.GetMessageList(TempData["chatRoom"].ToString());
             return View("Forum", messageBoardContent);
         }
@@ -104,7 +105,7 @@ namespace CommunityWebsite.Controllers
             string threadGenre = TempData["discussionThread"].ToString();
 
             //search the messageboard to find the original message object
-            Message originalMessage = Messaging.findMessageFromBoard(threadGenre, messageID);
+            Message originalMessage = Messaging.getMessageFromBoard(threadGenre, messageID);
 
             //Viewbag for background image
             ViewBag.BackgroundStyle = "pageContainer8";
@@ -114,17 +115,26 @@ namespace CommunityWebsite.Controllers
         }
 
         [HttpPost]
-        public RedirectToActionResult GenerateReply(string messageContent, string poster, string chatGenre, string parentMessageID)
+        public RedirectToActionResult GenerateReply(string replyMessageContent, string poster, string chatGenre, string parentMessageID)
         {
             //called when the user submits a completed reply form from the ReplyForm view
             //redirects to the main forum page, which will load the new reply
 
-            //get reply data and build a reply object
-            //set reply object in the replier's reply history
-            //set reply object in comment's reply list
-            //set reply in UserList
-            Reply reply = new Reply(messageContent, poster);
+            //use parameters to build a reply object
+            //get old message that is being replied to (we will set new data in it and replace it)
+            Reply reply = new Reply(replyMessageContent, poster);
+            Message oldMessage = Messaging.getMessageFromBoard(chatGenre, int.Parse(parentMessageID));
 
+            //set reply object in the REPLIER's reply history
+            UserList.AddToUserReplyHistory(poster, reply);
+
+
+            //set reply object in comment's reply list
+            //sync message replies with OG POSTER's reply history (essentially add the reply to comment of the actual commenter)
+            oldMessage.AddToReplyHistory(reply);
+            UserList.FindAndReplaceUserMessage(oldMessage.UserNameSignature, int.Parse(parentMessageID), oldMessage);
+            Messaging.findAddReplaceMessage(chatGenre, int.Parse(parentMessageID), oldMessage);
+            
             return RedirectToAction("Forum");
         }
 

@@ -65,6 +65,15 @@ namespace CommunityWebsite.Models
             this.replies.Add(reply);
         }
 
+        public void RemoveReplyHistory(int replyID)
+        {
+            foreach(Reply r in replies)
+            {
+                if (r.ReplyID == replyID)
+                    replies.Remove(r);
+            }
+        }
+
         public Int32 UnixTimeStamp
         {
             get { return unixTimeStamp; }
