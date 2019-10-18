@@ -26,8 +26,10 @@ namespace CommunityWebsite.Controllers
 
         public IActionResult SignificantPeople()
         {
+            //get and pass in significantPeople class object
+            SignificantPeople peoplePage = new SignificantPeople();
             ViewBag.BackgroundStyle = "pageContainer6";
-            return View("SignificantPeople");
+            return View("SignificantPeople", peoplePage);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
