@@ -117,15 +117,69 @@ namespace CommunityWebsite.Controllers
         [HttpPost]
         public RedirectToActionResult GenerateReply(string replyMessageContent, string poster, string chatGenre, string parentMessageID)
         {
-            //called when the user submits a completed reply form from the ReplyForm view
-            //redirects to the main forum page, which will load the new reply
+            //CALLED WHEN the user submits a completed reply form from the ReplyForm view
+            //REDIRECTS TO the main forum page, which will load the new reply
 
-            //use parameters to build a reply object
-            //get old message that is being replied to (we will set new data in it and replace it)
-            Reply reply = new Reply(replyMessageContent, poster);
-            Message oldMessage = Messaging.getMessageFromBoard(chatGenre, int.Parse(parentMessageID));
+            //check if replier's username exists
+                //add to userlist if not
+            //generate reply
+            //add reply to message in forum (via MessageBoard)
+            //add reply to poster's history (via userlist)
+            //add reply to the reply list of the original MESSAGE (via userlist)
+
+            User newUser;
+            Reply reply;
+            List<User> listOfUsers = UserList.ListOfUsers;
+            bool userExists = false;
+
+            foreach (User u in listOfUsers)
+            {
+                //checking database to user if the username already exists
+                if (u.Username == poster)
+                {
+                    userExists = true;  //this means that the user has been found in the "database"
+                }
+            }
+            if(userExists != true)
+            {
+                //create new user
+                //add user to Userlist
+                newUser = new User(poster);
+                UserList.AddNewUser(newUser);
+            }
+
+            //building old message object to grab important info such as usernames (easier than passing around a bunch of view form data)
+            int OGMessageID = int.Parse(parentMessageID);
+            Message message = Messaging.getMessageFromBoard(chatGenre, OGMessageID);
+            string OGCommenter = message.UserNameSignature;
+            
+            //instantiating reply object
+            reply = new Reply(replyMessageContent, poster);
+
+            Messaging.findAndAddToMessageReplies(chatGenre, OGMessageID, reply);
+            UserList.ModifyUserReplyHistory(poster, "add", reply);
+            UserList.AddReplyToMessage(OGCommenter, OGMessageID, reply);
+
+            //determine which chatRoom will be displayed in the form when called
+            if(chatGenre == "general")
+            {
+                TempData["chatRoom"] = "general";
+            }
+            else if(chatGenre == "starwars")
+            {
+                TempData["chatRoom"] = "starwars";
+            }
+            else
+            {
+                throw new ArgumentException("please enter a valid chatRoomGenre");
+            }
+                
+
+
+
 
             //set reply object in the REPLIER's reply history
+            /*
             UserList.AddToUserReplyHistory(poster, reply);
 
 
@@ -133,8 +187,8 @@ namespace CommunityWebsite.Controllers
             //sync message replies with OG POSTER's reply history (essentially add the reply to comment of the actual commenter)
             oldMessage.AddToReplyHistory(reply);
             UserList.FindAndReplaceUserMessage(oldMessage.UserNameSignature, int.Parse(parentMessageID), oldMessage);
-            Messaging.findAddReplaceMessage(chatGenre, int.Parse(parentMessageID), oldMessage);
-            
+            Messaging.findAddReplaceMessage(chatGenre, int.Parse(parentMessageID), oldMessage);*/
+
             return RedirectToAction("Forum");
         }
 

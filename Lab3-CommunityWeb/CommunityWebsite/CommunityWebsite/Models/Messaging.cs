@@ -37,15 +37,18 @@ namespace CommunityWebsite.Models
             }
         }
 
+
         public static int GetNumberOfChats
         {
             get { return chatGenres.Length; }
         }
 
+
         public static String[] GetChatNameArray
         {
             get { return chatGenres; }
         }
+
 
         //METHODS
         public static void addMessageToBoard(string chatRoomName, Message message)
@@ -62,6 +65,7 @@ namespace CommunityWebsite.Models
                 throw new ArgumentException("Chat room argument must be either string 'starwars'" +
                     "or string 'general'");
         }
+
 
         public static void removeMessageFromBaord(string chatRoomName, int messageID)
         {
@@ -89,6 +93,7 @@ namespace CommunityWebsite.Models
                 throw new ArgumentException("Chat room argument must be either string 'starwars'" +
                     "or string 'general'");
         }
+
 
         public static Message getMessageFromBoard(string chatRoomName, int messageID)
         {
@@ -119,6 +124,37 @@ namespace CommunityWebsite.Models
             return null;
         }
 
+
+        public static bool findAndAddToMessageReplies(string chatRoomName, int parentMessageID, Reply newReply)
+        {
+            if (chatRoomName == "general")
+            {
+                //finds and replaces the message if found
+                for (int i = 0; i < generalChat.Count(); i++)
+                {
+                    if (parentMessageID == generalChat[i].MessageID)
+                    {
+                        generalChat[i].AddToReplyHistory(newReply);
+                        return true;
+                    }
+                }
+            }
+            else if (chatRoomName == "starwars")
+            {
+                //finds and replaces the message if found
+                for (int i = 0; i < starWarsChat.Count(); i++)
+                {
+                    if (parentMessageID == starWarsChat[i].MessageID)
+                    {
+                        starWarsChat[i].AddToReplyHistory(newReply);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /*
         public static bool findAddReplaceMessage(string chatRoomName, int messageID, Message newMessage)
         {
             if (chatRoomName == "general")
@@ -146,6 +182,6 @@ namespace CommunityWebsite.Models
                 }
             }
             return false;
-        }
+        }*/
     }
 }

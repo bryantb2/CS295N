@@ -22,6 +22,24 @@ namespace CommunityWebsite.Models
         }
 
         //METHODS
+        /* this series of methods will modify the reply history of a MESSAGE */
+        public static void AddReplyToMessage(string userName, int messageID, Reply newReply)
+        {
+            //find user in userlist
+            //set reply in message reply list
+            int userIndex = UserList.FindUserIndex(userName);
+            UserList.listOfUsers[userIndex].AddReplyToMessage(messageID, newReply);
+        }
+
+        public static void RemoveReplyFromMessage(string userName, int messageID, int replyID)
+        {
+            //find user in userlist
+            //remove reply from message reply list
+            int userIndex = UserList.FindUserIndex(userName);
+            UserList.listOfUsers[userIndex].RemoveReplyFromMessage(messageID, replyID);
+        }
+
+        /* this series of method will modify the message or reply history of a USER */
         public static void ModifyUserMessageHistory(string userName, string operation, Message newMessage=null, int messageID=-1)
         {
             //GENERAL INFO:
@@ -30,7 +48,7 @@ namespace CommunityWebsite.Models
             //messageID is set to -1 by default if the operation is not remove
 
             //validation of non-operation specific parameters
-            int elementIndex = UserList.FindUser(userName);
+            int elementIndex = UserList.FindUserIndex(userName);
             if (elementIndex == -1)
                 throw new ArgumentException("Username is not valid or does not exist in the UserList collection");
             if (!(operation == "add" || operation == "remove"))
@@ -53,27 +71,57 @@ namespace CommunityWebsite.Models
                 if (messageID == -1)
                     throw new ArgumentException("messageID must be defined");
                 else
-                    listOfUsers.RemoveAt(elementIndex);
+                    listOfUsers[elementIndex].RemoveMessageFromHistory(messageID);
             }
         }
 
-        public static void FindAndReplaceSameUser(string userName, User newUser)
+        public static void ModifyUserReplyHistory(string userName, string operation, Reply newReply = null, int replyID = -1)
+        {
+            //GENERAL INFO:
+            //username and operation must be defined ALWAYS
+            //set newReply to null if removing and to a valid object if adding
+            //replyID is set to -1 by default if the operation is not remove
+
+            //validation of non-operation specific parameters
+            int elementIndex = UserList.FindUserIndex(userName);
+            if (elementIndex == -1)
+                throw new ArgumentException("Username is not valid or does not exist in the UserList collection");
+            if (!(operation == "add" || operation == "remove"))
+                throw new ArgumentException("Enter a valid operation; either string 'add' or string 'remove'");
+            if (operation == "add")
+            {
+                //validate inside the if block because this parameter is only defined when the operation is add
+                if (newReply != null)
+                {
+                    //index into list
+                    //add to user message history
+                    listOfUsers[elementIndex].AddToReplyHistory(newReply);
+                }
+                else
+                    throw new ArgumentException("message is invalid; either null or undefined");
+            }
+            else
+            {
+                //validated inside the else block because this parameter is only defined when the operation is defined as remove
+                if (replyID == -1)
+                    throw new ArgumentException("messageID must be defined");
+                else
+                    listOfUsers[elementIndex].RemoveReplyFromHistory(replyID);
+            }
+        }
+
+        public static void FindAndReplaceUser(string userName, User newUser)
         {
             //GENERAL INFO:
             //takes in a username and a newUser object
             //finds the old user via the username parameter
             //the found user will then be replaced with the newUSer
-
-            //ensures that target username and username of the newUser object are the same
-            if (userName == newUser.Username)
-            {
-                int userIndex = FindUser(userName);
-                listOfUsers[userIndex] = newUser;
-            }
-            else
-                throw new ArgumentException("please pass in a newUser and userName string that have equivalent user name values");
+            
+            int userIndex = FindUserIndex(userName);
+            listOfUsers[userIndex] = newUser;
         }
 
+        /*
         public static void FindAndReplaceUserMessage(string userName, int messageID, Message newMessage)
         {
             //GENERAL INFO:
@@ -100,8 +148,8 @@ namespace CommunityWebsite.Models
             }
             else
                 throw new ArgumentException("please pass in a newMessage and userName string that have equivalent user name values");
-        }
-
+        }*/
+        /*
         public static void AddToUserReplyHistory(string userName, Reply newReply)
         {
             //GENERAL INFO:
@@ -140,25 +188,25 @@ namespace CommunityWebsite.Models
                 }
             }
             return null;
-        }
+        }*/
 
         public static void AddNewUser(User user)
         {
             UserList.listOfUsers.Add(user);
         }
 
-        public static void RemoveUser(string userName, string password)
+        public static void RemoveUser(string userName)
         {
             foreach (User user in listOfUsers)
             {
-                if (user.Username == userName && user.Password == password)
+                if (user.Username == userName)
                 {
                     UserList.listOfUsers.Remove(user);
                 }
             }
         }
 
-        private static int FindUser(string userName)
+        private static int FindUserIndex(string userName)
         {
             //returns index in list where the user exists
             for (int i = 0; i < listOfUsers.Count; i++)
