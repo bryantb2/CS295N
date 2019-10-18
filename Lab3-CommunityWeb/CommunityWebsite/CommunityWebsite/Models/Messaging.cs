@@ -51,6 +51,19 @@ namespace CommunityWebsite.Models
 
 
         //METHODS
+        public static void SortMessagesByDate(string chatRoom)
+        {
+            if(chatRoom == "general")
+            {
+                generalChat.Sort((message1, message2) => message2.UnixTimeStamp.CompareTo(message1.UnixTimeStamp));
+            }
+            else if (chatRoom == "starwars")
+            {
+                starWarsChat.Sort((message1, message2) => message2.UnixTimeStamp.CompareTo(message1.UnixTimeStamp));
+            }
+            
+        }
+
         public static void addMessageToBoard(string chatRoomName, Message message)
         {
             if (chatRoomName == "general")

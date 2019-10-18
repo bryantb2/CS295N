@@ -87,6 +87,7 @@ namespace CommunityWebsite.Controllers
 
         public IActionResult Forum()
         {
+            Messaging.SortMessagesByDate(TempData["chatRoom"].ToString());
             ViewBag.BackgroundStyle = "pageContainer7";
             ViewBag.SelectedChat = TempData["chatRoom"];
             ViewBag.TitleText = TempData["pageTitleText"];
@@ -172,6 +173,8 @@ namespace CommunityWebsite.Controllers
             //UserList.AddReplyToMessage(OGCommenter, OGMessageID, reply);
 
             //determine which chatRoom will be displayed in the form when called
+            //determines what the title text will be
+            //determines the which message list gets sorted
             if(chatGenre == "general")
             {
                 TempData["chatRoom"] = "general";
@@ -188,7 +191,7 @@ namespace CommunityWebsite.Controllers
             }
                 
 
-
+            
 
 
             //set reply object in the REPLIER's reply history

@@ -22,7 +22,7 @@ namespace CommunityWebsite.Models
         }
 
         //METHODS
-
+        
         /* this series of methods will modify the reply history of a MESSAGE */
         /*public static void AddReplyToMessage(string userName, int messageID, Reply newReply)
         {
