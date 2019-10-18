@@ -56,6 +56,14 @@ namespace CommunityWebsite.Controllers
             }
             //set the genre the user selected for retrieval later
             TempData["chatRoom"] = topic;
+            if(topic == "general")
+            {
+                TempData["pageTitleText"] = "General Messageboard";
+            }
+            else
+            {
+                TempData["pageTitleText"] = "Star Wars Messageboard";
+            }
             return RedirectToAction("Forum");
         }
 
@@ -64,6 +72,7 @@ namespace CommunityWebsite.Controllers
         {
             //set the genre the user selected for retrieval later
             TempData["chatRoom"] = "general";
+            TempData["pageTitleText"] = "General Messageboard";
             return RedirectToAction("Forum");
         }
 
@@ -72,6 +81,7 @@ namespace CommunityWebsite.Controllers
         {
             //set the genre the user selected for retrieval later
             TempData["chatRoom"] = "starwars";
+            TempData["pageTitleText"] = "Star Wars Messageboard";
             return RedirectToAction("Forum");
         }
 
@@ -79,6 +89,7 @@ namespace CommunityWebsite.Controllers
         {
             ViewBag.BackgroundStyle = "pageContainer7";
             ViewBag.SelectedChat = TempData["chatRoom"];
+            ViewBag.TitleText = TempData["pageTitleText"];
             List<Message> messageBoardContent = Messaging.GetMessageList(TempData["chatRoom"].ToString());
             return View("Forum", messageBoardContent);
         }
@@ -158,16 +169,18 @@ namespace CommunityWebsite.Controllers
 
             Messaging.findAndAddToMessageReplies(chatGenre, OGMessageID, reply);
             UserList.ModifyUserReplyHistory(poster, "add", reply);
-            UserList.AddReplyToMessage(OGCommenter, OGMessageID, reply);
+            //UserList.AddReplyToMessage(OGCommenter, OGMessageID, reply);
 
             //determine which chatRoom will be displayed in the form when called
             if(chatGenre == "general")
             {
                 TempData["chatRoom"] = "general";
+                TempData["pageTitleText"] = "General Messageboard";
             }
             else if(chatGenre == "starwars")
             {
                 TempData["chatRoom"] = "starwars";
+                TempData["pageTitleText"] = "Star Wars Messageboard";
             }
             else
             {

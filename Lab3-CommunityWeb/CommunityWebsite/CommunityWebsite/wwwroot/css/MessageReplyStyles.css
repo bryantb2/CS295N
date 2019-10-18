@@ -20,3 +20,7 @@
 .reply {
     max-width: 60%;
 }
+
+.replyContentJustify {
+    justify-content: flex-end;
+}

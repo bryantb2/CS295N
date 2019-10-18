@@ -3,7 +3,7 @@
     ViewData["Title"] = "Community Posts Redirect";
 }
 <section class="p-4">
-    <h2 class="text-light py-4">List of Messages:</h2>
+    <h2 class="text-light py-4">@ViewBag.TitleText</h2>
     @foreach (Message message in Model)
     {
         <div class="overflow-auto">
@@ -23,21 +23,21 @@
             </form>
         </div>
 
-        <div class="pt-4 d-flex replyContainer justify-content-right">
+        <div class="pt-4 d-flex justify-content-end flex-column">
             @foreach (Reply r in message.GetReplyHistory)
             {
-                <div class="reply p-2 mt-3 mb-3 bg-dark">
-                    <p class="pageParagraph">@r.ReplyContent</p>
+                <div class="reply p-2 mt-3 mb-3 bg-dark p-4">
+                    <p class="pageParagraph text-light">@r.ReplyContent</p>
                     <div class="d-flex flex-row">
-                        <p class="digitalSignature">Post by @message.UserNameSignature on @message.GetTimePosted</p>
+                        <p class="digitalSignature text-light">Post by @message.UserNameSignature on @message.GetTimePosted</p>
                     </div>
                 </div>
             }
         </div>
     }
     <br/>
-    <a asp-controller="Home" asp-action="Home" class="btn btn-light btn-small active" role="button" aria-pressed="true">Go Home</a>
-    <a asp-controller="Home" asp-action="Contact" class="btn btn-light btn-small active" role="button" aria-pressed="true">Go Back</a>
+    <a asp-controller="Home" asp-action="Home" class="btn btn-light btn-small active mr-4" role="button" aria-pressed="true">Go Home</a>
+    <a asp-controller="Home" asp-action="Contact" class="btn btn-light btn-small active m-2" role="button" aria-pressed="true">Go Back</a>
 </section>
 
 

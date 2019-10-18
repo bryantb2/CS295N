@@ -22,8 +22,9 @@ namespace CommunityWebsite.Models
         }
 
         //METHODS
+
         /* this series of methods will modify the reply history of a MESSAGE */
-        public static void AddReplyToMessage(string userName, int messageID, Reply newReply)
+        /*public static void AddReplyToMessage(string userName, int messageID, Reply newReply)
         {
             //find user in userlist
             //set reply in message reply list
@@ -37,7 +38,7 @@ namespace CommunityWebsite.Models
             //remove reply from message reply list
             int userIndex = UserList.FindUserIndex(userName);
             UserList.listOfUsers[userIndex].RemoveReplyFromMessage(messageID, replyID);
-        }
+        }*/
 
         /* this series of method will modify the message or reply history of a USER */
         public static void ModifyUserMessageHistory(string userName, string operation, Message newMessage=null, int messageID=-1)
