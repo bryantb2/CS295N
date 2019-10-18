@@ -166,35 +166,5 @@ namespace CommunityWebsite.Models
             }
             return false;
         }
-
-        /*
-        public static bool findAddReplaceMessage(string chatRoomName, int messageID, Message newMessage)
-        {
-            if (chatRoomName == "general")
-            {
-                //finds and replaces the message if found
-                for(int i = 0; i < generalChat.Count(); i++)
-                {
-                    if(messageID == generalChat[i].MessageID)
-                    {
-                        generalChat[i] = newMessage;
-                        return true;
-                    }
-                }
-            }
-            else if (chatRoomName == "starwars")
-            {
-                //finds and replaces the message if found
-                for (int i = 0; i < starWarsChat.Count(); i++)
-                {
-                    if (messageID == starWarsChat[i].MessageID)
-                    {
-                        starWarsChat[i] = newMessage;
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }*/
     }
 }

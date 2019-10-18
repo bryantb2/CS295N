@@ -18,8 +18,10 @@ namespace CommunityWebsite.Controllers
 
         public IActionResult Locations()
         {
+            //get and pass in location class object
+            Locations locationPage = new Locations();
             ViewBag.BackgroundStyle = "pageContainer5";
-            return View("Locations");
+            return View("Locations", locationPage);
         }
 
         public IActionResult SignificantPeople()

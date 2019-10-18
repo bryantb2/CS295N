@@ -189,24 +189,23 @@ namespace CommunityWebsite.Controllers
             {
                 throw new ArgumentException("please enter a valid chatRoomGenre");
             }
-                
-
-            
-
-
-            //set reply object in the REPLIER's reply history
-            /*
-            UserList.AddToUserReplyHistory(poster, reply);
-
-
-            //set reply object in comment's reply list
-            //sync message replies with OG POSTER's reply history (essentially add the reply to comment of the actual commenter)
-            oldMessage.AddToReplyHistory(reply);
-            UserList.FindAndReplaceUserMessage(oldMessage.UserNameSignature, int.Parse(parentMessageID), oldMessage);
-            Messaging.findAddReplaceMessage(chatGenre, int.Parse(parentMessageID), oldMessage);*/
 
             return RedirectToAction("Forum");
         }
 
+
+        //METHODS FOR LOCATIONS AND SIGNIFICANT PEOPLE
+        /*[HttpPost]
+        public RedirectToActionResult LocationRedirect()
+        {
+            //get and 
+            return RedirectToAction("Locations");
+        }
+
+        public IActionResult Locations()
+        {
+
+            return View("Locations");
+        }*/
     }
 }
