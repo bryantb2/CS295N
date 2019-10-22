@@ -27,7 +27,7 @@
             @foreach (Reply r in message.GetReplyHistory)
             {
                 <div class="row justify-content-end">
-                    <div class="col-6 reply p-2 my-3 bg-dark p-4">
+                    <div class="col-6 reply p-2 my-3 bg-dark p-4">  
                         <p class="pageParagraph text-light">@r.ReplyContent</p>
                         <div class="d-flex flex-row">
                             <p class="digitalSignature text-light">Post by @r.UserNameSignature on @r.GetTimePosted</p>
@@ -38,8 +38,8 @@
         </div>
     }
     <br/>
-    <a asp-controller="Home" asp-action="Home" class="btn btn-light btn-small active mr-4" role="button" aria-pressed="true">Go Home</a>
-    <a asp-controller="Home" asp-action="Contact" class="btn btn-light btn-small active m-2" role="button" aria-pressed="true">Go Back</a>
+    <a asp-controller="Home" asp-action="Home" class="navigationButton btn btn-light btn-small active mr-4" role="button" aria-pressed="true">Go Home</a>
+    <a asp-controller="Home" asp-action="Contact" class="navigationButton btn btn-light btn-small active m-2" role="button" aria-pressed="true">Go Back</a>
 </section>
 
 

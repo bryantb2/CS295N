@@ -102,6 +102,12 @@ a.nav-link:hover {
     padding: 8px 30px;
 }
 
+/* Anchor Button Styles*/
+a.navigationAnchor:hover {
+    background-color: red;
+    color: black;
+}
+
 /*GENERAL PAGE BACKGROUND STYLES*/
 .pageContainer {
     min-height: 100% !important;
