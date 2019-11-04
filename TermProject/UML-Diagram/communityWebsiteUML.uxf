@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1078</x>
+      <y>0</y>
+      <w>264</w>
+      <h>275</h>
+    </coordinates>
+    <panel_attributes>User
+--
+Comment history: List&lt;Comment&gt;
+Owned threads: List&lt;Thread&gt;
+Username: String
+Password: int
+Date joined: Date
+Gender: String
+Favorite threads: List&lt;Thread&gt;
+
+--
+
+AddCommentToHistory(Comment)
+RemoveCommentFromHistory()
+AddToFavoriteThreads(Thread)
+RemoveFromFavoriteThreads()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1078</x>
+      <y>374</y>
+      <w>242</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>Thread
+--
+Name: String
+Category: String
+Color family: int
+Posts: List&lt;Post&gt;
+Blog pic: URL
+Bio: String
+
+--
+
+AddPostToThread(Post)
+RemovePostFromThread(Post)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1078</x>
+      <y>671</y>
+      <w>242</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>Post
+--
+Title: String
+Date published: Date
+Post content: String
+Image URL: URL
+
+--
+
+AddImage(URL)
+RemoveImage()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1078</x>
+      <y>968</y>
+      <w>242</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>Comment
+--
+Username: String
+Date published: Date
+Comment content: String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1540</x>
+      <y>374</y>
+      <w>242</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>Thread Repository
+--
+Thread list: List&lt;Thread&gt;
+
+--
+
+AddUserToThread(Thread)
+RemoveUserFromList()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1540</x>
+      <y>0</y>
+      <w>242</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>User Repository
+--
+User list: List&lt;User&gt;
+
+--
+
+AddUserToList(User)
+RemoveUserFromList()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1188</x>
+      <y>880</y>
+      <w>33</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1188</x>
+      <y>583</y>
+      <w>33</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1188</x>
+      <y>264</y>
+      <w>33</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1309</x>
+      <y>451</y>
+      <w>253</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1331</x>
+      <y>66</y>
+      <w>231</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>190.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
