@@ -1,31 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using BlogEngineProject.Models;
 
 namespace BlogEngineProject.Controllers
 {
-    public class HomeController : Controller
+    public class AboutController : Controller
     {
         public IActionResult Index()
         {
-            return View("Home");
+            return View("About");
         }
 
-        public IActionResult ReplyToPost()
+        public IActionResult AdvancedFeatures()
         {
             return View();
         }
 
-        public IActionResult ThreadSearch()
-        {
-            return View();
-        }
-
-        public IActionResult ViewBlog()
+        public IActionResult GettingStarted()
         {
             return View();
         }

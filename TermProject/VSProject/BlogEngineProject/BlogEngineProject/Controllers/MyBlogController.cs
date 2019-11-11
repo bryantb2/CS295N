@@ -1,31 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using BlogEngineProject.Models;
 
 namespace BlogEngineProject.Controllers
 {
-    public class HomeController : Controller
+    public class MyBlogController : Controller
     {
         public IActionResult Index()
         {
-            return View("Home");
+            return View("MyBlog");
         }
 
-        public IActionResult ReplyToPost()
+        public IActionResult AddRemovePosts()
         {
             return View();
         }
 
-        public IActionResult ThreadSearch()
+        public IActionResult EditProfile()
         {
             return View();
         }
 
-        public IActionResult ViewBlog()
+        public IActionResult GettingStarted()
+        {
+            return View();
+        }
+
+        public IActionResult MyBlogMainPanel()
         {
             return View();
         }
