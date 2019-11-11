@@ -12,18 +12,22 @@ namespace BlogEngineProject.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View("About");
         }
 
-        public IActionResult Privacy()
+        public IActionResult Home()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult ThreadSearch()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
+        }
+
+        public IActionResult MyBlog()
+        {
+            return View();
         }
     }
 }
