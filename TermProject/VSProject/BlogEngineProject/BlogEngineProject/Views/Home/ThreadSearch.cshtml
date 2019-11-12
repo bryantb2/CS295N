@@ -1,4 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Search Threads";
 }
-<h1>Search Page</h1>
+<section>
+    <h1>Search for Threads</h1>
+    <form method="get" asp-controller="Home" asp-action="ThreadSearchResults" >
+        <fieldset>
+            <div class="form-group">
+                <input name="searchParameter" placeholder="Title" class="form-control" type="text">
+            </div>
+            <button type="submit" class="btn btn-dark text-light">SUBMIT</button>
+        </fieldset>
+    </form>
+    
+
+
+</section>

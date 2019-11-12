@@ -25,6 +25,11 @@ namespace BlogEngineProject.Controllers
             return View();
         }
 
+        public IActionResult ThreadSearchResults(string searchParameter)
+        {
+            return View();
+        }
+
         public IActionResult ViewBlog()
         {
             return View();

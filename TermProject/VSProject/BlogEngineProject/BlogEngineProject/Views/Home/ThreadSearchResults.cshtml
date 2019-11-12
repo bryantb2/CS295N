@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Search Results";
+}
+<section>
+    <h1 class="mt-5">Search Results</h1>
+
+    <article id="[thread name]" class="bg-secondary profileContainer mb-3">
+        <div class="innerContentContainer d-flex p-4 text-light">
+            <img class="maxSize profileImageStyle img-thumbnail" src="https://theofficeanalytics.files.wordpress.com/2017/11/dwight.jpeg?w=1200" alt="" />
+            <div class="pl-4">
+                <h1 id="userName" class="pb-2"><a class="text-light" href="#">[name of thread]</a></h1>
+                <div class="text-white">
+                    [Name of Creator]
+                    <span class="pr-2">&nbsp;</span>
+                    [Topic]
+                </div>
+            </div>
+            <div class="d-flex favoritesContainer justify-content-end text-light">
+                <a class="mt-2 editProfileButton btn text-dark btn-light btn-md active" role="button" aria-pressed="true" href="#">Favorite this?</a>
+            </div>
+        </div>
+    </article>
+
+    <article id="[thread name]" class="bg-secondary profileContainer mb-3">
+        <div class="innerContentContainer d-flex p-4 text-light">
+            <img class="maxSize profileImageStyle img-thumbnail" src="https://theofficeanalytics.files.wordpress.com/2017/11/dwight.jpeg?w=1200" alt="" />
+            <div class="pl-4">
+                <h1 id="userName" class="pb-2"><a class="text-light" href="#">[name of thread]</a></h1>
+                <div class="text-white">
+                    [Name of Creator]
+                    <span class="pr-2">&nbsp;</span>
+                    [Topic]
+                </div>
+            </div>
+            <div class="d-flex favoritesContainer justify-content-end text-light">
+                <a class="mt-2 editProfileButton btn text-dark btn-light btn-md active" role="button" aria-pressed="true" href="#">Favorite this?</a>
+            </div>
+        </div>
+    </article>
+
+    <a asp-controller="Home" asp-action="ThreadSearch" class="navigationButton btn btn-light btn-small active ml-5 mt-3" role="button" aria-pressed="true">Go Back</a>
+</section>
+
+
