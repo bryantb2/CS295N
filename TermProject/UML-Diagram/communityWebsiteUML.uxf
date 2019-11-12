@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>11</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1078</x>
-      <y>0</y>
-      <w>264</w>
-      <h>275</h>
+      <x>693</x>
+      <y>224</y>
+      <w>168</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -31,10 +31,10 @@ RemoveFromFavoriteThreads()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1078</x>
-      <y>374</y>
-      <w>242</w>
-      <h>220</h>
+      <x>693</x>
+      <y>462</y>
+      <w>154</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Thread
 --
@@ -55,10 +55,10 @@ RemovePostFromThread(Post)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1078</x>
-      <y>671</y>
-      <w>242</w>
-      <h>220</h>
+      <x>693</x>
+      <y>651</y>
+      <w>210</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Post
 --
@@ -66,21 +66,22 @@ Title: String
 Date published: Date
 Post content: String
 Image URL: URL
+Comment History: List&lt;Comment&gt;
 
 --
 
-AddImage(URL)
-RemoveImage()
+RemoveCommentFromHistory(int commentID)
+AddCommentToHistory(Comment c)
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1078</x>
-      <y>968</y>
-      <w>242</w>
-      <h>99</h>
+      <x>693</x>
+      <y>840</y>
+      <w>154</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>Comment
 --
@@ -94,10 +95,10 @@ Comment content: String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1540</x>
-      <y>374</y>
-      <w>242</w>
-      <h>132</h>
+      <x>987</x>
+      <y>462</y>
+      <w>154</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>Thread Repository
 --
@@ -112,10 +113,10 @@ RemoveUserFromList()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1540</x>
-      <y>0</y>
-      <w>242</w>
-      <h>132</h>
+      <x>987</x>
+      <y>224</y>
+      <w>154</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>User Repository
 --
@@ -130,10 +131,10 @@ RemoveUserFromList()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1188</x>
-      <y>880</y>
-      <w>33</w>
-      <h>110</h>
+      <x>763</x>
+      <y>784</y>
+      <w>21</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
@@ -141,10 +142,10 @@ RemoveUserFromList()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1188</x>
-      <y>583</y>
-      <w>33</w>
-      <h>110</h>
+      <x>763</x>
+      <y>595</y>
+      <w>21</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
@@ -152,10 +153,10 @@ RemoveUserFromList()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1188</x>
-      <y>264</y>
-      <w>33</w>
-      <h>132</h>
+      <x>763</x>
+      <y>392</y>
+      <w>21</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
@@ -163,10 +164,10 @@ RemoveUserFromList()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1309</x>
-      <y>451</y>
-      <w>253</w>
-      <h>33</h>
+      <x>840</x>
+      <y>511</y>
+      <w>161</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>210.0;10.0;10.0;10.0</additional_attributes>
@@ -174,10 +175,10 @@ RemoveUserFromList()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1331</x>
-      <y>66</y>
-      <w>231</w>
-      <h>33</h>
+      <x>854</x>
+      <y>266</y>
+      <w>147</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>190.0;10.0;10.0;10.0</additional_attributes>
