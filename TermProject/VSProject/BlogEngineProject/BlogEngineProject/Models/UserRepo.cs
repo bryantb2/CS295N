@@ -28,6 +28,22 @@ namespace BlogEngineProject.Models
             }
         }
 
+        public static User RemoveUserfromRepo(int userID)
+        {
+            // find user
+            // then remove it
+            User removedUser = null;
+            foreach (User u in userList)
+            {
+                if (u.UserID == userID)
+                {
+                    removedUser = u;
+                    userList.Remove(u);
+                }
+            }
+            return removedUser;
+        }
+
         private static bool IsUsernameValid(String username)
         {
             // looks through the user list for an identical username string

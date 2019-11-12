@@ -23,8 +23,22 @@ namespace BlogEngineProject.Models
             }
         }
 
-
-
+        public static Thread RemoveThreadfromRepo(int threadID)
+        {
+            // find thread
+            // then remove it
+            Thread removedThread = null;
+            foreach (Thread t in activeThreads)
+            {
+                if (t.ThreadID == threadID)
+                {
+                    removedThread = t;
+                    activeThreads.Remove(t);
+                }
+            }
+            return removedThread;
+        }
+        
         private static bool IsThreadnameValid(String threadName)
         {
             // looks through the thread list for an identical threadname string
