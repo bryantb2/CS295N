@@ -11,6 +11,24 @@ namespace BlogEngineProject.Models
         private static List<Thread> activeThreads = new List<Thread>();
 
         // METHODS
+        public static List<Thread> GetThreads()
+        {
+            return activeThreads;
+        }
+
+        public static List<Thread> GetThreads(String category)
+        {
+            List<Thread> categorySpecificThreads = new List<Thread>();
+            // iterate through activeThreads list
+            // add a reference to the thread in categorySEpcificThread list
+            foreach (Thread t in activeThreads)
+            {
+                if (t.Category == category)
+                    categorySpecificThreads.Add(t);
+            }
+            return categorySpecificThreads;
+        }
+
         public static void AddThreadtoRepo(Thread thread)
         {
             if (IsThreadnameValid(thread.Name) == true)
