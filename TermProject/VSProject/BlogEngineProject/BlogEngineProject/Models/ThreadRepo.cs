@@ -16,7 +16,7 @@ namespace BlogEngineProject.Models
             return activeThreads;
         }
 
-        public static List<Thread> GetThreads(String category)
+        public static List<Thread> GetCategoryOfThreads(String category)
         {
             List<Thread> categorySpecificThreads = new List<Thread>();
             // iterate through activeThreads list
