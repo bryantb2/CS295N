@@ -20,7 +20,7 @@ namespace BlogEngineProject.Models
 
         public Post RemoveCommentFromHistory(int postID)
         {
-            // find comment
+            // find post
             // then remove it
             Post removedPost = null;
             foreach (Post p in Posts)
