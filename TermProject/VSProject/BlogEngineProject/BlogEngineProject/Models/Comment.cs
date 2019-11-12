@@ -7,9 +7,10 @@ namespace BlogEngineProject.Models
 {
     public class Comment
     {
-        public int CommentInt { get; set; }
+        // auto setting properties
+        public int CommentID { get; set; }
         public String Username { get; set; }
-        public String CommentContent { get; set; }
+        public String Content { get; set; }
         public DateTime DatePublished { get; set; }
     }
 }
