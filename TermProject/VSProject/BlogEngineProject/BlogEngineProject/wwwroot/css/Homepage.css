@@ -4,6 +4,7 @@
     border-style: none;
     background: none;
     padding: 0px;
+    border-radius: 0px;
     object-fit: cover;
     min-width:400px;
 }
@@ -20,7 +21,6 @@
 .profileContainer {
     margin-top: 5%;
     margin-right: 5%;
-    border-radius: 3px;
 }
 
 .innerContentContainer {
