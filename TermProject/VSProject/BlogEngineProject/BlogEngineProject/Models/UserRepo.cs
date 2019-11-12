@@ -15,6 +15,7 @@ namespace BlogEngineProject.Models
             return userList;
         }
 
+        // METHODS
         public static void AddUsertoRepo(User user)
         {
             if(IsUsernameValid(user.Username) == true)
