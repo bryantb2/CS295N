@@ -41,3 +41,10 @@
 .editProfileButton:hover {
     color: grey !important;
 }
+
+
+/* Text Styling */
+.subTitleStyle {
+    font-family: 'FuturaPT-Book';
+    font-size: 20pt;
+}

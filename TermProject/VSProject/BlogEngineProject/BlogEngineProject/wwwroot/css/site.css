@@ -35,7 +35,7 @@ body {
     min-height: 100%;
 }
 
-/*NAVBAR STYLES*/
+/* NAVBAR STYLES */
 .navbar-brand {
     font-family: 'FuturaPT-Medium';
     font-size: 23pt;
@@ -52,4 +52,10 @@ a.nav-link:hover {
     background-color: white !important;
     color: #343a40 !important;
     border-radius: 3px;
+}
+
+/* Universal Page Styles */
+.universalPageTitleStyle {
+    font-family: 'FuturaPT-Medium';
+    font-size: 40pt;
 }
