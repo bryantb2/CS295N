@@ -1,5 +1,26 @@
-﻿.profileDetails {
+﻿
+/* Profile styling */
+.profileTitle {
+    font-family: 'FuturaPT-Bold';
+    font-size: 35pt;
+}
 
+.bioTitle {
+    font-family: 'FuturaPT-Medium';
+}
+
+.profileDetailsText {
+    font-family: 'FuturaPT-Book';
+    font-size: 15pt;
+}
+
+.profileDetails {
+
+}
+
+.postSectionTitle {
+    font-family: 'FuturaPT-Medium';
+    font-size: 30pt;
 }
 
 /* Post Styles */
