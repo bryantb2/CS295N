@@ -13,6 +13,11 @@ namespace BlogEngineProject.Controllers
             return View("MyBlogSignIn");
         }
 
+        public IActionResult SignUp()
+        {
+            return View("MyBlogSignUp");
+        }
+
         public IActionResult AddRemovePosts()
         {
             return View();

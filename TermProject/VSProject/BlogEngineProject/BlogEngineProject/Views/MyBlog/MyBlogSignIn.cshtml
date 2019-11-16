@@ -3,13 +3,12 @@
 }
 <section>
     <h1 class="universalPageTitleStyle mt-5 replyTitleCustomSpacing">Sign In to Proceed to Your Profile</h1>
-    <div class="row mb-5 ">
+    <div class="row mb-5 ml-2">
         <div class="col-4 p-4 customBorder">
             <article class="text-dark mb-2">
-                <!--Form design borrowed from https://codepen.io/juff03/pen/OXaXRG -->
                 <form class="inputFieldText well form-horizontal" asp-controller="" asp-action="" method="get" id="signIn_form">
                     <fieldset>
-                        <legend class="formHeaderText mb-3">Sign In to Continue</legend>
+                        <legend class="formHeaderText mb-1">Sign In</legend>
 
                         <div class="form-group">
                             <label for="poster" class=" control-label text-dark">Username</label>
@@ -33,10 +32,7 @@
                     </fieldset>
                 </form>
             </article>
-            <a asp-controller="" asp-action="" class="" role="button" aria-pressed="true">Or Sign Up</a>
+            <a asp-controller="MyBlog" asp-action="SignUp" class="" role="button" aria-pressed="true">Or Sign Up</a>
         </div>
-
     </div>
-
-
 </section>
