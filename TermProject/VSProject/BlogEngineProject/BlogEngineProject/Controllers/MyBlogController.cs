@@ -10,7 +10,7 @@ namespace BlogEngineProject.Controllers
     {
         public IActionResult Index()
         {
-            return View("MyBlog");
+            return View("MyBlogSignIn");
         }
 
         public IActionResult AddRemovePosts()
