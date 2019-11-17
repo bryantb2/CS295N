@@ -18,7 +18,12 @@ namespace BlogEngineProject.Controllers
             return View("MyBlogSignUp");
         }
 
-        public IActionResult AddRemovePosts()
+        public IActionResult PostDashboard()
+        {
+            return View();
+        }
+
+        public IActionResult PostEditor()
         {
             return View();
         }
@@ -33,9 +38,9 @@ namespace BlogEngineProject.Controllers
             return View();
         }
 
-        public IActionResult MyBlogMainPanel()
+        public IActionResult MyBlogDashboard()
         {
-            return View();
+            return View("MyBlogMainPanel");
         }
     }
 }
