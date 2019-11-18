@@ -16,7 +16,7 @@
                 @{
                     for (int i = 0; i < numberOfCategories; i++)
                     {
-                        <button class="dropdown-item" type="submit" value=@ThreadCategories.GetCategory(i)> @ThreadCategories.GetCategory(i) </button>
+                        <button class="dropdown-item" asp-controller="Home" asp-action="GetCategoryThreads" asp-route-category="@i"> @ThreadCategories.GetCategory(i) </button>
                     }
                 }
             </div>
@@ -33,9 +33,9 @@
                         <div class="pl-4">
                             <h1 id="userName" class="pb-2"><a class="text-light" href="#">@t.Name</a></h1>
                             <div class="text-white">
-                                @t.CreatorName
+                                <b>Creator:</b> @t.CreatorName
                                 <span class="pr-2">&nbsp;</span>
-                                @t.Category
+                                <b>Category:</b> @t.Category
                             </div>
                         </div>
                     </div>

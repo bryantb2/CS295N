@@ -13,8 +13,13 @@ namespace BlogEngineProject.Controllers
         public IActionResult Index()
         {
             // Get thread objects
+                // check if search results have already been queued
             // Pass thread list into Home
-            List<Thread> threadList = ThreadRepo.GetThreads();
+            List<Thread> threadList;
+            if (TempData["searchResults"] != null)
+                threadList = (List<Thread>)TempData["searchResults"];
+            else
+                threadList = ThreadRepo.GetThreads();
             return View("Home",threadList);
         }
 
@@ -36,6 +41,15 @@ namespace BlogEngineProject.Controllers
         public IActionResult ViewBlog()
         {
             return View();
+        }
+
+        // specific get request or related actions
+        public RedirectToActionResult GetCategoryThreads(string category)
+        {
+            int categoryAsInt = int.Parse(category);
+            List<Thread> searchResults = ThreadRepo.GetCategoryOfThreads(categoryAsInt);
+            TempData["searchResults"] = searchResults;
+            return RedirectToAction("Index");
         }
     }
 }

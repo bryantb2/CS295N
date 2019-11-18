@@ -16,14 +16,15 @@ namespace BlogEngineProject.Models
             return activeThreads;
         }
 
-        public static List<Thread> GetCategoryOfThreads(String category)
+        public static List<Thread> GetCategoryOfThreads(int categoryIndex)
         {
+            string CATEGORY = ThreadCategories.GetCategory(categoryIndex);
             List<Thread> categorySpecificThreads = new List<Thread>();
             // iterate through activeThreads list
             // add a reference to the thread in categorySEpcificThread list
             foreach (Thread t in activeThreads)
             {
-                if (t.Category == category)
+                if (t.Category == CATEGORY)
                     categorySpecificThreads.Add(t);
             }
             return categorySpecificThreads;
