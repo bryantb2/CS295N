@@ -14,7 +14,7 @@ namespace CommunityWebsite.Controllers
         {
             User newUser;
             Message newMessage;
-            List<User> listOfUsers = UserList.ListOfUsers;
+            List<User> listOfUsers = FakeUserRepo.ListOfUsers;
             bool userExists = false;
             
             foreach (User u in listOfUsers)
@@ -37,8 +37,8 @@ namespace CommunityWebsite.Controllers
                 newUser = new User(userName);
                 newMessage = new Message(messageTitle, messageContent, userName, topic);
                 newUser.AddMessageToHistory(newMessage);
-                UserList.AddNewUser(newUser);
-                Messaging.addMessageToBoard(topic, newMessage);
+                FakeUserRepo.AddNewUser(newUser);
+                FakeMessageRepo.addMessageToBoard(topic, newMessage);
             }
             else
             {
@@ -51,8 +51,8 @@ namespace CommunityWebsite.Controllers
                 */
                 //add message to message board
                 newMessage = new Message(messageTitle, messageContent, userName, topic);
-                UserList.ModifyUserMessageHistory(userName, "add", newMessage);
-                Messaging.addMessageToBoard(topic,newMessage);
+                FakeUserRepo.ModifyUserMessageHistory(userName, "add", newMessage);
+                FakeMessageRepo.addMessageToBoard(topic,newMessage);
             }
             //set the genre the user selected for retrieval later
             TempData["chatRoom"] = topic;
@@ -87,11 +87,11 @@ namespace CommunityWebsite.Controllers
 
         public IActionResult Forum()
         {
-            Messaging.SortMessagesByDate(TempData["chatRoom"].ToString());
+            FakeMessageRepo.SortMessagesByDate(TempData["chatRoom"].ToString());
             ViewBag.BackgroundStyle = "pageContainer7";
             ViewBag.SelectedChat = TempData["chatRoom"];
             ViewBag.TitleText = TempData["pageTitleText"];
-            List<Message> messageBoardContent = Messaging.GetMessageList(TempData["chatRoom"].ToString());
+            List<Message> messageBoardContent = FakeMessageRepo.GetMessageList(TempData["chatRoom"].ToString());
             return View("Forum", messageBoardContent);
         }
 
@@ -117,7 +117,7 @@ namespace CommunityWebsite.Controllers
             string threadGenre = TempData["discussionThread"].ToString();
 
             //search the messageboard to find the original message object
-            Message originalMessage = Messaging.getMessageFromBoard(threadGenre, messageID);
+            Message originalMessage = FakeMessageRepo.getMessageFromBoard(threadGenre, messageID);
 
             //Viewbag for background image
             ViewBag.BackgroundStyle = "pageContainer8";
@@ -141,7 +141,7 @@ namespace CommunityWebsite.Controllers
 
             User newUser;
             Reply reply;
-            List<User> listOfUsers = UserList.ListOfUsers;
+            List<User> listOfUsers = FakeUserRepo.ListOfUsers;
             bool userExists = false;
 
             foreach (User u in listOfUsers)
@@ -157,19 +157,19 @@ namespace CommunityWebsite.Controllers
                 //create new user
                 //add user to Userlist
                 newUser = new User(poster);
-                UserList.AddNewUser(newUser);
+                FakeUserRepo.AddNewUser(newUser);
             }
 
             //building old message object to grab important info such as usernames (easier than passing around a bunch of view form data)
             int OGMessageID = int.Parse(parentMessageID);
-            Message message = Messaging.getMessageFromBoard(chatGenre, OGMessageID);
+            Message message = FakeMessageRepo.getMessageFromBoard(chatGenre, OGMessageID);
             string OGCommenter = message.UserNameSignature;
             
             //instantiating reply object
             reply = new Reply(replyMessageContent, poster);
 
-            Messaging.findAndAddToMessageReplies(chatGenre, OGMessageID, reply);
-            UserList.ModifyUserReplyHistory(poster, "add", reply);
+            FakeMessageRepo.findAndAddToMessageReplies(chatGenre, OGMessageID, reply);
+            FakeUserRepo.ModifyUserReplyHistory(poster, "add", reply);
             //UserList.AddReplyToMessage(OGCommenter, OGMessageID, reply);
 
             //determine which chatRoom will be displayed in the form when called

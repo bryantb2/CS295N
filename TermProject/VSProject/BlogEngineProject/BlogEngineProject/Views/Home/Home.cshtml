@@ -16,7 +16,7 @@
                 @{
                     for (int i = 0; i < numberOfCategories; i++)
                     {
-                        <button class="dropdown-item" asp-controller="Home" asp-action="GetCategoryThreads" asp-route-category="@i"> @ThreadCategories.GetCategory(i) </button>
+                        <button class="dropdown-item" asp-controller="Home" asp-action="GetCategoryThreads" asp-route-category="@i" formmethod="get"> @ThreadCategories.GetCategory(i) </button>
                     }
                 }
             </div>

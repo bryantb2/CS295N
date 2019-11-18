@@ -34,8 +34,8 @@ namespace CommunityWebsite.Controllers
         {
             User newUser = new User("bob");
             newUser.Password = "nice-Try-FBI!";
-            UserList.AddNewUser(newUser);
-            var jsonObject = UserList.ListOfUsers;
+            FakeUserRepo.AddNewUser(newUser);
+            var jsonObject = FakeUserRepo.ListOfUsers;
 
             return Json(jsonObject);
         }
