@@ -12,7 +12,10 @@ namespace BlogEngineProject.Controllers
     {
         public IActionResult Index()
         {
-            return View("Home");
+            // Get thread objects
+            // Pass thread list into Home
+            List<Thread> threadList = ThreadRepo.GetThreads();
+            return View("Home",threadList);
         }
 
         public IActionResult ReplyToPost()

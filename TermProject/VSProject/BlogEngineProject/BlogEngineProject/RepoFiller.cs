@@ -52,8 +52,11 @@ namespace BlogEngineProject
                     DateJoined = DateTime.UnixEpoch
                 };
 
-                // call thread builder to set owned thread property
+                // call thread builder
+                // pass creator username to thread
+                // set owned thread property
                 Thread thread = BuildThread(i);
+                thread.CreatorName = user.Username;
                 user.OwnedThread = thread;
 
                 // set objects to object repos
