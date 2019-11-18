@@ -7,14 +7,17 @@ namespace CommunityWebsite.Models
 {
     public interface IMessageRepo
     {
-        int GetNumberOfChats { get; }
-        String[] GetChatNameArray { get; }
-        IQueryable<Message> GetGeneralMessages { get; }
-        IQueryable<Message> GetSWMessages { get; }
+        int NumberOfChats { get; }
+        String[] ChatNameArray { get; }
+        List<Message> GeneralMessages { get; }
+        List<Message> SWMessages { get; }
         void addMessageToBoard(string chatRoomName, Message message);
         void removeMessageFromBaord(string chatRoomName, int messageID);
         Message getMessageFromBoard(string chatRoomName, int messageID);
         bool findAndAddToMessageReplies(string chatRoomName, int parentMessageID, Reply newReply);
         void SortMessagesByDate(string chatRoom);
+
+        // delete this later
+        void FillRepoWithMessages();
     }
 }

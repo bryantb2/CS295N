@@ -32,10 +32,11 @@ namespace CommunityWebsite.Controllers
 
         public JsonResult ReturnUsers()
         {
+            FakeUserRepo userRepo = new FakeUserRepo();
             User newUser = new User("bob");
             newUser.Password = "nice-Try-FBI!";
-            FakeUserRepo.AddNewUser(newUser);
-            var jsonObject = FakeUserRepo.ListOfUsers;
+            userRepo.AddNewUser(newUser);
+            var jsonObject = userRepo.ListOfUsers;
 
             return Json(jsonObject);
         }

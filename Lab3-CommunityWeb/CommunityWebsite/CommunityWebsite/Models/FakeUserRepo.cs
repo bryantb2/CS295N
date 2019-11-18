@@ -7,16 +7,15 @@ namespace CommunityWebsite.Models
 {
     public class FakeUserRepo : IUserRepo
     {
-        //CLASS FIELDS
+        // CLASS FIELDS
         private List<User> listOfUsers = new List<User>();
 
-        //PROPERTIES
-        public IQueryable<User> ListOfUsers { get { return listOfUsers.AsQueryable<User>(); } }
+        // PROPERTIES
+        public List<User> ListOfUsers { get { return listOfUsers; } }
         
         public int NumberOfUsers { get { return listOfUsers.Count; } }
         
-        //METHODS
-
+        // METHODS
         /* this series of method will modify the message or reply history of a USER */
         public void ModifyUserMessageHistory(string userName, string operation, Message newMessage=null, int messageID=-1)
         {

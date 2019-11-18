@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CommunityWebsite.Models;
 
 namespace CommunityWebsite
 {
@@ -33,6 +34,10 @@ namespace CommunityWebsite
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // injecting repositories into Message controller
+            services.AddTransient<IUserRepo, FakeUserRepo>();
+            services.AddTransient<IMessageRepo, FakeMessageRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

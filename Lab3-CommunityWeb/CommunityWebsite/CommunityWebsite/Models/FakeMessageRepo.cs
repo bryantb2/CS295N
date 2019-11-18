@@ -13,13 +13,13 @@ namespace CommunityWebsite.Models
         private List<Message> starWarsChat = new List<Message>();
 
         // PROPERTIES 
-        public IQueryable<Message> GetGeneralMessages { get { return generalChat.AsQueryable<Message>(); } }
+        public List<Message> GeneralMessages { get { return generalChat; } }
         
-        public IQueryable<Message> GetSWMessages { get { return starWarsChat.AsQueryable<Message>(); } }
+        public List<Message> SWMessages { get { return starWarsChat; } }
         
-        public int GetNumberOfChats { get { return chatGenres.Length; } }
+        public int NumberOfChats { get { return chatGenres.Length; } }
         
-        public String[] GetChatNameArray { get { return chatGenres; } }
+        public String[] ChatNameArray { get { return chatGenres; } }
         
         // METHODS
         public void FillRepoWithMessages()

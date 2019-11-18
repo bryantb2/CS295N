@@ -16,6 +16,9 @@ namespace CommunityWebsite.Controllers
             // THIS IS DEPENDENCY INJECTION
             userRepo = u;
             messageRepo = m;
+
+            // delete this later
+            messageRepo.FillRepoWithMessages();
         }
 
         [HttpPost]
@@ -25,7 +28,7 @@ namespace CommunityWebsite.Controllers
             Message newMessage;
             List<User> listOfUsers = userRepo.ListOfUsers.ToList();
             bool userExists = false;
-            
+
             foreach (User u in listOfUsers)
             {
                 //checking database to user if the username already exists
@@ -46,6 +49,7 @@ namespace CommunityWebsite.Controllers
                 newUser = new User(userName);
                 newMessage = new Message(messageTitle, messageContent, userName, topic);
                 newUser.AddMessageToHistory(newMessage);
+
                 userRepo.AddNewUser(newUser);
                 messageRepo.addMessageToBoard(topic, newMessage);
             }
@@ -96,11 +100,12 @@ namespace CommunityWebsite.Controllers
 
         public IActionResult Forum()
         {
-            messageRepo.SortMessagesByDate(TempData["chatRoom"].ToString());
+            string chatRoom = TempData["chatRoom"].ToString();
+            messageRepo.SortMessagesByDate(chatRoom);
             ViewBag.BackgroundStyle = "pageContainer7";
-            ViewBag.SelectedChat = TempData["chatRoom"];
+            ViewBag.SelectedChat = chatRoom;
             ViewBag.TitleText = TempData["pageTitleText"];
-            List<Message> messageBoardContent = (string)TempData["chatRoom"] == "general" ? messageRepo.GetGeneralMessages.ToList() : messageRepo.GetSWMessages.ToList();
+            List<Message> messageBoardContent = (chatRoom == "general") ? messageRepo.GeneralMessages : messageRepo.SWMessages;
             return View("Forum", messageBoardContent);
         }
 
