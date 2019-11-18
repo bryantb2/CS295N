@@ -5,45 +5,47 @@ using System.Threading.Tasks;
 
 namespace CommunityWebsite.Models
 {
-    public static class FakeMessageRepo
+    public class FakeMessageRepo : IMessageRepo
     {
-        //CLASS FIELDS
-        private static String[] chatGenres = new String[] { "General Chat", "Star Wars Chat" };
-        private static List<Message> generalChat = new List<Message>();
-        private static List<Message> starWarsChat = new List<Message>();
+        // CLASS FIELDS
+        private String[] chatGenres = new String[] { "General Chat", "Star Wars Chat" };
+        private List<Message> generalChat = new List<Message>();
+        private List<Message> starWarsChat = new List<Message>();
 
-        //PROPERTIES
-        public static List<Message> GetMessageList(string chatRoomName)
+        // PROPERTIES 
+        public IQueryable<Message> GetGeneralMessages { get { return generalChat.AsQueryable<Message>(); } }
+        
+        public IQueryable<Message> GetSWMessages { get { return starWarsChat.AsQueryable<Message>(); } }
+        
+        public int GetNumberOfChats { get { return chatGenres.Length; } }
+        
+        public String[] GetChatNameArray { get { return chatGenres; } }
+        
+        // METHODS
+        public void FillRepoWithMessages()
         {
-            if (chatRoomName == "general")
-            {
-                return FakeMessageRepo.generalChat;
-            }
-            else if(chatRoomName == "starwars")
-            {
-                return FakeMessageRepo.starWarsChat;
-            }
-            else
-            {
-                return null;
-            }
+            Message message = new Message("testMessage1",
+                "test message 1 content", "bob", "tech"
+                );
+            this.addMessageToBoard("general",message);
+
+            message = new Message("testMessage2",
+                "test message 2 content", "sally", "gaming"
+                );
+            this.addMessageToBoard("general", message);
+
+            message = new Message("testMessage3",
+                "test message 3 content", "gordon", "warm welcome"
+                );
+            this.addMessageToBoard("general", message);
+
+            message = new Message("testMessage4",
+                "test message 4 content", "hugh", "get out of here bro"
+                );
+            this.addMessageToBoard("general", message);
         }
 
-
-        public static int GetNumberOfChats
-        {
-            get { return chatGenres.Length; }
-        }
-
-
-        public static String[] GetChatNameArray
-        {
-            get { return chatGenres; }
-        }
-
-
-        //METHODS
-        public static void SortMessagesByDate(string chatRoom)
+        public void SortMessagesByDate(string chatRoom)
         {
             if(chatRoom == "general")
             {
@@ -56,15 +58,15 @@ namespace CommunityWebsite.Models
             
         }
 
-        public static void addMessageToBoard(string chatRoomName, Message message)
+        public void addMessageToBoard(string chatRoomName, Message message)
         {
             if (chatRoomName == "general")
             {
-                FakeMessageRepo.generalChat.Add(message);
+                 generalChat.Add(message);
             }
             else if (chatRoomName == "starwars")
             {
-                FakeMessageRepo.starWarsChat.Add(message);
+                 starWarsChat.Add(message);
             }
             else
                 throw new ArgumentException("Chat room argument must be either string 'starwars'" +
@@ -72,25 +74,25 @@ namespace CommunityWebsite.Models
         }
 
 
-        public static void removeMessageFromBaord(string chatRoomName, int messageID)
+        public void removeMessageFromBaord(string chatRoomName, int messageID)
         {
             if (chatRoomName == "general")
             {
-                foreach (Message message in FakeMessageRepo.generalChat)
+                foreach (Message message in  generalChat)
                 {
                     if(message.MessageID == messageID)
                     {
-                        FakeMessageRepo.generalChat.Remove(message);
+                         generalChat.Remove(message);
                     }
                 }
             }
             else if (chatRoomName == "starwars")
             {
-                foreach (Message message in FakeMessageRepo.starWarsChat)
+                foreach (Message message in  starWarsChat)
                 {
                     if (message.MessageID == messageID)
                     {
-                        FakeMessageRepo.starWarsChat.Remove(message);
+                         starWarsChat.Remove(message);
                     }
                 }
             }
@@ -100,7 +102,7 @@ namespace CommunityWebsite.Models
         }
 
 
-        public static Message getMessageFromBoard(string chatRoomName, int messageID)
+        public Message getMessageFromBoard(string chatRoomName, int messageID)
         {
             if(chatRoomName == "general")
             {
@@ -130,7 +132,7 @@ namespace CommunityWebsite.Models
         }
 
 
-        public static bool findAndAddToMessageReplies(string chatRoomName, int parentMessageID, Reply newReply)
+        public bool findAndAddToMessageReplies(string chatRoomName, int parentMessageID, Reply newReply)
         {
             if (chatRoomName == "general")
             {
