@@ -9,12 +9,21 @@ namespace CommunityWebsite.Controllers
 {
     public class MessagingController : Controller
     {
+        IUserRepo userRepo;
+        IMessageRepo messageRepo;
+        public MessagingController(IUserRepo u,IMessageRepo m)
+        {
+            // THIS IS DEPENDENCY INJECTION
+            userRepo = u;
+            messageRepo = m;
+        }
+
         [HttpPost]
         public RedirectToActionResult GenerateMessage(string messageTitle, string topic, string userName, string messageContent)
         {
             User newUser;
             Message newMessage;
-            List<User> listOfUsers = FakeUserRepo.ListOfUsers;
+            List<User> listOfUsers = userRepo.ListOfUsers.ToList();
             bool userExists = false;
             
             foreach (User u in listOfUsers)
@@ -37,8 +46,8 @@ namespace CommunityWebsite.Controllers
                 newUser = new User(userName);
                 newMessage = new Message(messageTitle, messageContent, userName, topic);
                 newUser.AddMessageToHistory(newMessage);
-                FakeUserRepo.AddNewUser(newUser);
-                FakeMessageRepo.addMessageToBoard(topic, newMessage);
+                userRepo.AddNewUser(newUser);
+                messageRepo.addMessageToBoard(topic, newMessage);
             }
             else
             {
@@ -51,8 +60,8 @@ namespace CommunityWebsite.Controllers
                 */
                 //add message to message board
                 newMessage = new Message(messageTitle, messageContent, userName, topic);
-                FakeUserRepo.ModifyUserMessageHistory(userName, "add", newMessage);
-                FakeMessageRepo.addMessageToBoard(topic,newMessage);
+                userRepo.ModifyUserMessageHistory(userName, "add", newMessage);
+                messageRepo.addMessageToBoard(topic,newMessage);
             }
             //set the genre the user selected for retrieval later
             TempData["chatRoom"] = topic;
@@ -87,11 +96,11 @@ namespace CommunityWebsite.Controllers
 
         public IActionResult Forum()
         {
-            FakeMessageRepo.SortMessagesByDate(TempData["chatRoom"].ToString());
+            messageRepo.SortMessagesByDate(TempData["chatRoom"].ToString());
             ViewBag.BackgroundStyle = "pageContainer7";
             ViewBag.SelectedChat = TempData["chatRoom"];
             ViewBag.TitleText = TempData["pageTitleText"];
-            List<Message> messageBoardContent = FakeMessageRepo.GetMessageList(TempData["chatRoom"].ToString());
+            List<Message> messageBoardContent = (string)TempData["chatRoom"] == "general" ? messageRepo.GetGeneralMessages.ToList() : messageRepo.GetSWMessages.ToList();
             return View("Forum", messageBoardContent);
         }
 
@@ -117,7 +126,7 @@ namespace CommunityWebsite.Controllers
             string threadGenre = TempData["discussionThread"].ToString();
 
             //search the messageboard to find the original message object
-            Message originalMessage = FakeMessageRepo.getMessageFromBoard(threadGenre, messageID);
+            Message originalMessage = messageRepo.getMessageFromBoard(threadGenre, messageID);
 
             //Viewbag for background image
             ViewBag.BackgroundStyle = "pageContainer8";
@@ -141,7 +150,7 @@ namespace CommunityWebsite.Controllers
 
             User newUser;
             Reply reply;
-            List<User> listOfUsers = FakeUserRepo.ListOfUsers;
+            List<User> listOfUsers = userRepo.ListOfUsers.ToList();
             bool userExists = false;
 
             foreach (User u in listOfUsers)
@@ -157,19 +166,19 @@ namespace CommunityWebsite.Controllers
                 //create new user
                 //add user to Userlist
                 newUser = new User(poster);
-                FakeUserRepo.AddNewUser(newUser);
+                userRepo.AddNewUser(newUser);
             }
 
             //building old message object to grab important info such as usernames (easier than passing around a bunch of view form data)
             int OGMessageID = int.Parse(parentMessageID);
-            Message message = FakeMessageRepo.getMessageFromBoard(chatGenre, OGMessageID);
+            Message message = messageRepo.getMessageFromBoard(chatGenre, OGMessageID);
             string OGCommenter = message.UserNameSignature;
             
             //instantiating reply object
             reply = new Reply(replyMessageContent, poster);
 
-            FakeMessageRepo.findAndAddToMessageReplies(chatGenre, OGMessageID, reply);
-            FakeUserRepo.ModifyUserReplyHistory(poster, "add", reply);
+            messageRepo.findAndAddToMessageReplies(chatGenre, OGMessageID, reply);
+            userRepo.ModifyUserReplyHistory(poster, "add", reply);
             //UserList.AddReplyToMessage(OGCommenter, OGMessageID, reply);
 
             //determine which chatRoom will be displayed in the form when called
@@ -192,20 +201,5 @@ namespace CommunityWebsite.Controllers
 
             return RedirectToAction("Forum");
         }
-
-
-        //METHODS FOR LOCATIONS AND SIGNIFICANT PEOPLE
-        /*[HttpPost]
-        public RedirectToActionResult LocationRedirect()
-        {
-            //get and 
-            return RedirectToAction("Locations");
-        }
-
-        public IActionResult Locations()
-        {
-
-            return View("Locations");
-        }*/
     }
 }

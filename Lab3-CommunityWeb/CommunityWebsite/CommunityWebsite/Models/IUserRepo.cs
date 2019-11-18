@@ -13,6 +13,5 @@ namespace CommunityWebsite.Models
         void ModifyUserReplyHistory(string userName, string operation, Reply newReply = null, int replyID = -1);
         void AddNewUser(User user);
         void RemoveUser(string userName);
-        int FindUserIndex(string userName);
     }
 }

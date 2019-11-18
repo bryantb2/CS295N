@@ -5,26 +5,20 @@ using System.Threading.Tasks;
 
 namespace CommunityWebsite.Models
 {
-    public static class FakeUserRepo
+    public class FakeUserRepo : IUserRepo
     {
         //CLASS FIELDS
-        private static List<User> listOfUsers = new List<User>();
+        private List<User> listOfUsers = new List<User>();
 
         //PROPERTIES
-        public static  List<User> ListOfUsers
-        {
-            get { return listOfUsers; }
-        }
-
-        public static int NumberOfUsers
-        {
-            get { return listOfUsers.Count; }
-        }
-
+        public IQueryable<User> ListOfUsers { get { return listOfUsers.AsQueryable<User>(); } }
+        
+        public int NumberOfUsers { get { return listOfUsers.Count; } }
+        
         //METHODS
 
         /* this series of method will modify the message or reply history of a USER */
-        public static void ModifyUserMessageHistory(string userName, string operation, Message newMessage=null, int messageID=-1)
+        public void ModifyUserMessageHistory(string userName, string operation, Message newMessage=null, int messageID=-1)
         {
             //GENERAL INFO:
             //username and operation must be defined ALWAYS
@@ -32,7 +26,7 @@ namespace CommunityWebsite.Models
             //messageID is set to -1 by default if the operation is not remove
 
             //validation of non-operation specific parameters
-            int elementIndex = FakeUserRepo.FindUserIndex(userName);
+            int elementIndex = this.FindUserIndex(userName);
             if (elementIndex == -1)
                 throw new ArgumentException("Username is not valid or does not exist in the UserList collection");
             if (!(operation == "add" || operation == "remove"))
@@ -59,7 +53,7 @@ namespace CommunityWebsite.Models
             }
         }
 
-        public static void ModifyUserReplyHistory(string userName, string operation, Reply newReply = null, int replyID = -1)
+        public void ModifyUserReplyHistory(string userName, string operation, Reply newReply = null, int replyID = -1)
         {
             //GENERAL INFO:
             //username and operation must be defined ALWAYS
@@ -67,7 +61,7 @@ namespace CommunityWebsite.Models
             //replyID is set to -1 by default if the operation is not remove
 
             //validation of non-operation specific parameters
-            int elementIndex = FakeUserRepo.FindUserIndex(userName);
+            int elementIndex = this.FindUserIndex(userName);
             if (elementIndex == -1)
                 throw new ArgumentException("Username is not valid or does not exist in the UserList collection");
             if (!(operation == "add" || operation == "remove"))
@@ -94,35 +88,22 @@ namespace CommunityWebsite.Models
             }
         }
 
-        public static void FindAndReplaceUser(string userName, User newUser)
-        {
-            //GENERAL INFO:
-            //takes in a username and a newUser object
-            //finds the old user via the username parameter
-            //the found user will then be replaced with the newUSer
-            
-            int userIndex = FindUserIndex(userName);
-            listOfUsers[userIndex] = newUser;
-        }
-        
+        public void FindAndReplaceUser(string userName, User newUser) => listOfUsers[FindUserIndex(userName)] = newUser;
+       
+        public void AddNewUser(User user) => this.listOfUsers.Add(user);
 
-        public static void AddNewUser(User user)
-        {
-            FakeUserRepo.listOfUsers.Add(user);
-        }
-
-        public static void RemoveUser(string userName)
+        public void RemoveUser(string userName)
         {
             foreach (User user in listOfUsers)
             {
                 if (user.Username == userName)
                 {
-                    FakeUserRepo.listOfUsers.Remove(user);
+                    this.listOfUsers.Remove(user);
                 }
             }
         }
 
-        private static int FindUserIndex(string userName)
+        private int FindUserIndex(string userName)
         {
             //returns index in list where the user exists
             for (int i = 0; i < listOfUsers.Count; i++)

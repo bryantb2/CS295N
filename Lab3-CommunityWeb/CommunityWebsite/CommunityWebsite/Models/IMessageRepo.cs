@@ -11,9 +11,10 @@ namespace CommunityWebsite.Models
         String[] GetChatNameArray { get; }
         IQueryable<Message> GetGeneralMessages { get; }
         IQueryable<Message> GetSWMessages { get; }
-        void SortMessagesByDate(string chatRoom);
         void addMessageToBoard(string chatRoomName, Message message);
         void removeMessageFromBaord(string chatRoomName, int messageID);
+        Message getMessageFromBoard(string chatRoomName, int messageID);
         bool findAndAddToMessageReplies(string chatRoomName, int parentMessageID, Reply newReply);
+        void SortMessagesByDate(string chatRoom);
     }
 }
