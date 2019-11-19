@@ -8,6 +8,7 @@ namespace BlogEngineProject
 {
     public static class RepoFiller
     {
+        private static bool hasRepoBeenFilled = false;
         // THIS CLASS FILLS THE USER AND THREAD REPOS
         // NOTE: THESE ARE PARALLEL ARRAYS THAT STORE THREAD AND USER DATA
         private static readonly String[] usernames = new String[] { "Bob", "Jerry", "Tim", "Sally", "Greg" };
@@ -23,6 +24,11 @@ namespace BlogEngineProject
             TimeStamp = DateTime.Now
         };
 
+        public static bool HasRepoBeenFilled()
+        {
+            return hasRepoBeenFilled;
+        }
+
         public static void FillRepos()
         {
             // BUILDS 5 USERS, EACH WITH THREADS
@@ -30,6 +36,7 @@ namespace BlogEngineProject
             // create user objects and fill repo of users
             // then create thread objects, since they are dependent on users existing
             BuildAndSendObjectsToRepos();
+            hasRepoBeenFilled = true;
         }
 
         private static void BuildAndSendObjectsToRepos()

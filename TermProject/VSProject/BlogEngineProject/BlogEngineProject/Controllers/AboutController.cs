@@ -14,7 +14,8 @@ namespace BlogEngineProject.Controllers
                this is the first action method to fire when the website loads, therefore it will be the place that
                the thread and user repos are filled 
             */
-            RepoFiller.FillRepos();
+            if(RepoFiller.HasRepoBeenFilled() != true)
+                RepoFiller.FillRepos();
             return View("About");
         }
 

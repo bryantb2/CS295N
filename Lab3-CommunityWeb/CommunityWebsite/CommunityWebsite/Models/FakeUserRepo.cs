@@ -8,7 +8,7 @@ namespace CommunityWebsite.Models
     public class FakeUserRepo : IUserRepo
     {
         // CLASS FIELDS
-        private List<User> listOfUsers = new List<User>();
+        private static List<User> listOfUsers = new List<User>();
 
         // PROPERTIES
         public List<User> ListOfUsers { get { return listOfUsers; } }
@@ -89,7 +89,7 @@ namespace CommunityWebsite.Models
 
         public void FindAndReplaceUser(string userName, User newUser) => listOfUsers[FindUserIndex(userName)] = newUser;
        
-        public void AddNewUser(User user) => this.listOfUsers.Add(user);
+        public void AddNewUser(User user) => listOfUsers.Add(user);
 
         public void RemoveUser(string userName)
         {
@@ -97,7 +97,7 @@ namespace CommunityWebsite.Models
             {
                 if (user.Username == userName)
                 {
-                    this.listOfUsers.Remove(user);
+                    listOfUsers.Remove(user);
                 }
             }
         }

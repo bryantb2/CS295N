@@ -9,8 +9,8 @@ namespace CommunityWebsite.Models
     {
         // CLASS FIELDS
         private String[] chatGenres = new String[] { "General Chat", "Star Wars Chat" };
-        private List<Message> generalChat = new List<Message>();
-        private List<Message> starWarsChat = new List<Message>();
+        private static List<Message> generalChat = new List<Message>();
+        private static List<Message> starWarsChat = new List<Message>();
 
         // PROPERTIES 
         public List<Message> GeneralMessages { get { return generalChat; } }
