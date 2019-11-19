@@ -10,16 +10,20 @@ namespace BlogEngineProject.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int category=-1)
         {
             // Get thread objects
-                // check if search results have already been queued
+            // check if search results have already been queued
             // Pass thread list into Home
             List<Thread> threadList;
-            if (TempData["searchResults"] != null)
-                threadList = (List<Thread>)TempData["searchResults"];
+            if (category != -1)
+            {
+                threadList = ThreadRepo.GetCategoryOfThreads(category);
+            }
             else
+            {
                 threadList = ThreadRepo.GetThreads();
+            }
             return View("Home",threadList);
         }
 
@@ -44,12 +48,12 @@ namespace BlogEngineProject.Controllers
         }
 
         // specific get request or related actions
-        public RedirectToActionResult GetCategoryThreads(string category)
+        /*public RedirectToActionResult GetCategoryThreads(int category)
         {
-            int categoryAsInt = int.Parse(category);
-            List<Thread> searchResults = ThreadRepo.GetCategoryOfThreads(categoryAsInt);
+            //int categoryAsInt = int.Parse(category);
+            List<Thread> searchResults = ThreadRepo.GetCategoryOfThreads(category);
             TempData["searchResults"] = searchResults;
             return RedirectToAction("Index");
-        }
+        }*/
     }
 }
