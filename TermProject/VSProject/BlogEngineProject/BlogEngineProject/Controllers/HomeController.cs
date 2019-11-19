@@ -37,9 +37,16 @@ namespace BlogEngineProject.Controllers
             return View();
         }
 
-        public IActionResult ThreadSearchResults(string searchParameter)
+        public IActionResult ThreadSearchResults(string searchString = "")
         {
-            return View();
+            List<Thread> searchResults = null;
+            if (searchString != "")
+            {
+                // called the repo search function
+                searchResults = UserRepo.SearchForUsersAndThreads(searchString);
+            }
+            ViewBag.SearchQuery = searchString;
+            return View(searchResults);
         }
 
         public IActionResult ViewBlog(int threadID = -1)
@@ -57,14 +64,5 @@ namespace BlogEngineProject.Controllers
             }
             return View(searchResult);
         }
-
-        // specific get request or related actions
-        /*public RedirectToActionResult GetCategoryThreads(int category)
-        {
-            //int categoryAsInt = int.Parse(category);
-            List<Thread> searchResults = ThreadRepo.GetCategoryOfThreads(category);
-            TempData["searchResults"] = searchResults;
-            return RedirectToAction("Index");
-        }*/
     }
 }

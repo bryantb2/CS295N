@@ -3,12 +3,12 @@
 }
 <section>
     <h1 class="mb-4 universalPageTitleStyle">Search for Threads</h1>
-    <form class="d-flex" method="get" asp-controller="Home" asp-action="ThreadSearchResults" >
+    <form class="d-flex" method="get" asp-controller="Home" asp-action="ThreadSearchResults">
         <fieldset>
             <div class="form-group">
-                <input name="searchParameter" placeholder="Title" class="form-control" type="text">
+                <input name="searchString" placeholder="Enter a username or threadname" class="form-control" type="text">
             </div>
-            <button type="submit" class="btn btn-dark text-light">SUBMIT</button>
+            <button type="submit" class="btn btn-dark text-light p-2">SUBMIT</button>
         </fieldset>
     </form>
 </section>
