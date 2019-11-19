@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "View Blog";
 }
+@model Thread
 
 <section>
     <div class="profileDetails profileDetailsText my-5">
@@ -9,145 +10,38 @@
             <img class="maxSize profileImageStyle img-thumbnail" src="https://theofficeanalytics.files.wordpress.com/2017/11/dwight.jpeg?w=1200" alt="" />
             <div class="pl-4">
                 <h1 id="userName" class="pb-2 text-dark profileTitle">
-                    <a class="profileTitle">[name of thread]</a>
+                    <a class="profileTitle">@Model.Name</a>
                 </h1>
                 <div class="text-dark">
-                    [Name of Creator]
+                    <b>Creator:</b> @Model.CreatorName
                     <span class="pr-2">&nbsp;</span>
-                    [Topic]
+                    <b>Category:</b> @Model.Category
                 </div>
             </div>
         </div>
         <div class="text-dark">
             <b class="bioTitle">Bio</b>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
-            euismod tinLorem ipsum dolor sit amet, </p>
+            <p>@Model.Bio</p>
         </div>
     </div>
 
     <div>
         <h3 class="mb-2 postSectionTitle">Posts</h3>
-
-        <div class="overflow-auto mb-5">
-            <div class="text-light darkParagraphBackground p-4">
-                <h1 class="postTitle">[post title]</h1>
-                <p class="pageParagraph"> [post content]</p>
-                <div class="d-flex flex-row">
-                    <p class="digitalSignature">Posted on [time stamp]</p>
+        @{
+            foreach (Post p in Model.Posts)
+            {
+                <div class="overflow-auto mb-5">
+                    <div class="text-light darkParagraphBackground p-4">
+                        <h1 class="postTitle">@p.Title</h1>
+                        <p class="pageParagraph"> @p.Content</p>
+                        <div class="d-flex flex-row">
+                            <p class="digitalSignature">Posted on @p.TimeStamp</p>
+                        </div>
+                    </div>
+                    <a class="btn btn-link text-dark" href="#">Reply</a>
                 </div>
-            </div>
-            <form asp-action="" asp-controller="">
-                <fieldset>
-                    <button type="submit" class="btn btn-link text-dark">Reply</button>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="overflow-auto mb-5">
-            <div class="text-light darkParagraphBackground p-4">
-                <h1 class="postTitle">[post title]</h1>
-                <p class="pageParagraph"> [post content]</p>
-                <div class="d-flex flex-row">
-                    <p class="digitalSignature">Posted on [time stamp]</p>
-                </div>
-            </div>
-            <form asp-action="" asp-controller="">
-                <fieldset>
-                    <button type="submit" class="btn btn-link text-dark">Reply</button>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="overflow-auto mb-5">
-            <div class="text-light darkParagraphBackground p-4">
-                <h1 class="postTitle">[post title]</h1>
-                <p class="pageParagraph"> [post content]</p>
-                <div class="d-flex flex-row">
-                    <p class="digitalSignature">Posted on [time stamp]</p>
-                </div>
-            </div>
-            <form asp-action="" asp-controller="">
-                <fieldset>
-                    <button type="submit" class="btn btn-link text-dark">Reply</button>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="overflow-auto mb-5">
-            <div class="text-light darkParagraphBackground p-4">
-                <h1 class="postTitle">[post title]</h1>
-                <p class="pageParagraph"> [post content]</p>
-                <div class="d-flex flex-row">
-                    <p class="digitalSignature">Posted on [time stamp]</p>
-                </div>
-            </div>
-            <form asp-action="" asp-controller="">
-                <fieldset>
-                    <button type="submit" class="btn btn-link text-dark">Reply</button>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="overflow-auto mb-5">
-            <div class="text-light darkParagraphBackground p-4">
-                <h1 class="postTitle">[post title]</h1>
-                <p class="pageParagraph"> [post content]</p>
-                <div class="d-flex flex-row">
-                    <p class="digitalSignature">Posted on [time stamp]</p>
-                </div>
-            </div>
-            <form asp-action="" asp-controller="">
-                <fieldset>
-                    <button type="submit" class="btn btn-link text-dark">Reply</button>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="overflow-auto mb-5">
-            <div class="text-light darkParagraphBackground p-4">
-                <h1 class="postTitle">[post title]</h1>
-                <p class="pageParagraph"> [post content]</p>
-                <div class="d-flex flex-row">
-                    <p class="digitalSignature">Posted on [time stamp]</p>
-                </div>
-            </div>
-            <form asp-action="" asp-controller="">
-                <fieldset>
-                    <button type="submit" class="btn btn-link text-dark">Reply</button>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="overflow-auto mb-5">
-            <div class="text-light darkParagraphBackground p-4">
-                <h1 class="postTitle">[post title]</h1>
-                <p class="pageParagraph"> [post content]</p>
-                <div class="d-flex flex-row">
-                    <p class="digitalSignature">Posted on [time stamp]</p>
-                </div>
-            </div>
-            <form asp-action="" asp-controller="">
-                <fieldset>
-                    <button type="submit" class="btn btn-link text-dark">Reply</button>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="overflow-auto mb-5">
-            <div class="text-light darkParagraphBackground p-4">
-                <h1 class="postTitle">[post title]</h1>
-                <p class="pageParagraph"> [post content]</p>
-                <div class="d-flex flex-row">
-                    <p class="digitalSignature">Posted on [time stamp]</p>
-                </div>
-            </div>
-            <form asp-action="" asp-controller="">
-                <fieldset>
-                    <button type="submit" class="btn btn-link text-dark">Reply</button>
-                </fieldset>
-            </form>
-        </div>
-
+            }
+        }
     </div>
 </section>
 

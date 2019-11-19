@@ -42,9 +42,20 @@ namespace BlogEngineProject.Controllers
             return View();
         }
 
-        public IActionResult ViewBlog()
+        public IActionResult ViewBlog(int threadID = -1)
         {
-            return View();
+            Thread searchResult;
+            if(threadID != -1)
+            {
+                // search for the thread by name
+                searchResult = ThreadRepo.GetThreadById(threadID);
+            }
+            else
+            {
+                // returns to thread page if no parameter values are found
+                return View("Index");
+            }
+            return View(searchResult);
         }
 
         // specific get request or related actions

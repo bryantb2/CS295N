@@ -30,6 +30,18 @@ namespace BlogEngineProject.Models
             return categorySpecificThreads;
         }
 
+        public static Thread GetThreadById(int threadID)
+        {
+            foreach(Thread t in activeThreads)
+            {
+                if(t.ThreadID == threadID)
+                {
+                    return t;
+                }
+            }
+            return null;
+        }
+
         public static void AddThreadtoRepo(Thread thread)
         {
             if (IsThreadnameValid(thread.Name) == true)

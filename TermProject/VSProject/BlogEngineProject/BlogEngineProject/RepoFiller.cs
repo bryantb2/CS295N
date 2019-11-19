@@ -19,7 +19,8 @@ namespace BlogEngineProject
         {
             PostID = ObjectIDBuilder.GetPostID(),
             Title = "Test Post",
-            Content = "Hello my friends, this is a test post create by the GOD himself, Blake"
+            Content = "Hello my friends, this is a test post create by the GOD himself, Blake",
+            TimeStamp = DateTime.Now
         };
 
         public static void FillRepos()

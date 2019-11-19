@@ -27,5 +27,10 @@ namespace BlogEngineProject.Controllers
         {
             return View();
         }
+
+        public String ComingSoon()
+        {
+            return "Haha you thought that feature was present! Lol, what an idiot";
+        }
     }
 }

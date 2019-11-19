@@ -13,6 +13,7 @@ namespace BlogEngineProject.Models
         public String Content { get; set; }
         public String ImageURL { get; set; }
         public List<Comment> Comments { get; set; }
+        public DateTime TimeStamp { get; set; }
         
         // METHODS
         public void AddCommentToHistory(Comment comment) => Comments.Add(comment);
