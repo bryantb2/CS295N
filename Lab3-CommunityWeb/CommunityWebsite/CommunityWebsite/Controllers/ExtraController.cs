@@ -40,5 +40,26 @@ namespace CommunityWebsite.Controllers
 
             return Json(jsonObject);
         }
+
+        // Unit testing methods
+        public int Divide(int number1, int number2)
+        {
+            return (number1 / number2);
+        }
+
+        public String ReturnPostTitleObject(Message message)
+        {
+            return message.MessageTitle;
+        }
+
+        public int GetNumberOfRepliesOnMessage(Message message)
+        {
+            return message.GetReplyHistory.Count;
+        }
+
+        public bool DoesMessageHaveReplies(Message message)
+        {
+            return (message.GetReplyHistory.Count > 0 ? true : false);
+        }
     }
 }
