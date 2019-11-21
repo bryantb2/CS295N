@@ -18,7 +18,10 @@ namespace CommunityWebsite.Controllers
             messageRepo = m;
 
             // delete this later
-            messageRepo.FillRepoWithMessages();
+            if(RealMessageRepo.HasFillBeenUsed == false)
+            {
+                messageRepo.FillRepoWithMessages();
+            }
         }
 
         [HttpPost]

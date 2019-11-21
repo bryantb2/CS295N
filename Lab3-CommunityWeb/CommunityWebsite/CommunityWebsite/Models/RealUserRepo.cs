@@ -5,19 +5,19 @@ using System.Threading.Tasks;
 
 namespace CommunityWebsite.Models
 {
-    public class FakeUserRepo : IUserRepo
+    public class RealUserRepo : IUserRepo
     {
         // CLASS FIELDS
-        private List<User> listOfUsers = new List<User>();
+        private static List<User> listOfUsers = new List<User>();
 
         // PROPERTIES
         public List<User> ListOfUsers { get { return listOfUsers; } }
-        
+
         public int NumberOfUsers { get { return listOfUsers.Count; } }
-        
+
         // METHODS
         /* this series of method will modify the message or reply history of a USER */
-        public void ModifyUserMessageHistory(string userName, string operation, Message newMessage=null, int messageID=-1)
+        public void ModifyUserMessageHistory(string userName, string operation, Message newMessage = null, int messageID = -1)
         {
             //GENERAL INFO:
             //username and operation must be defined ALWAYS
@@ -30,7 +30,7 @@ namespace CommunityWebsite.Models
                 throw new ArgumentException("Username is not valid or does not exist in the UserList collection");
             if (!(operation == "add" || operation == "remove"))
                 throw new ArgumentException("Enter a valid operation; either string 'add' or string 'remove'");
-            if(operation=="add")
+            if (operation == "add")
             {
                 //validated inside the if block because this parameter is only defined when the operation is defined as add
                 if (newMessage != null)
@@ -88,7 +88,7 @@ namespace CommunityWebsite.Models
         }
 
         public void FindAndReplaceUser(string userName, User newUser) => listOfUsers[FindUserIndex(userName)] = newUser;
-       
+
         public void AddNewUser(User user) => listOfUsers.Add(user);
 
         public void RemoveUser(string userName)

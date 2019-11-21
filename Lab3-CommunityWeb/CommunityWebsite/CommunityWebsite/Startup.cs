@@ -36,8 +36,8 @@ namespace CommunityWebsite
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // injecting repositories into Message controller
-            services.AddTransient<IUserRepo, FakeUserRepo>();
-            services.AddTransient<IMessageRepo, FakeMessageRepo>();
+            services.AddTransient<IUserRepo, RealUserRepo>();
+            services.AddTransient<IMessageRepo, RealMessageRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
