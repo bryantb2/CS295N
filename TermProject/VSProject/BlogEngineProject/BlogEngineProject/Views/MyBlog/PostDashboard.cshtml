@@ -28,7 +28,7 @@
                             <div class="d-flex">
                                 <a class="p-2 btn btn-link text-dark" asp-controller="MyBlog" asp-action="RemovePost" asp-route-userId=@Model.UserID asp-route-threadId=@thread.ThreadID asp-route-postId=@p.PostID>Remove</a>
 
-                                <a class="p-2 btn btn-link text-dark" asp-action="MyBlog" asp-controller="PostEditor" asp-route-userId=@Model.UserID asp-route-threadId=@thread.ThreadID asp-route-postId=@p.PostID>Edit</a>
+                                <a class="p-2 btn btn-link text-dark" asp-controller="MyBlog" asp-action="PostEditor" asp-route-userId=@Model.UserID asp-route-threadId=@thread.ThreadID asp-route-postId=@p.PostID>Edit</a>
                             </div>
                         </div>
                     }

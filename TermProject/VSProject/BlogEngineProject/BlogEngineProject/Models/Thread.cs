@@ -16,32 +16,36 @@ namespace BlogEngineProject.Models
         public String Bio { get; set; }
         public String Category { get; set; }
         public String ProfilePicURL { get; set; }
-        public List<Post> Posts
-        {
-            get
-            {
-                return posts;
-            }
-        }
+        public List<Post> Posts { get { return posts; } }
 
         // METHODS
+        public Post GetPostById(int postId)
+        {
+            // loop through posts
+            // return ref to post if IDs match
+            foreach(Post p in Posts)
+            {
+                if (p.PostID == postId)
+                    return p;
+            }
+            return null;
+        }
+
         public void AddPostToThread(Post post) => Posts.Add(post);
 
         public Post RemovePostFromHistory(int postID)
         {
             // find post
             // then remove it
-            Post removedPost = null;
             foreach (Post p in Posts)
             {
                 if (p.PostID == postID)
                 {
-                    removedPost = p;
                     Posts.Remove(p);
-                    return removedPost;
+                    return p;
                 }
             }
-            return removedPost;
+            return null;
         }
     }
 }

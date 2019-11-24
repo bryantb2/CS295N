@@ -69,7 +69,7 @@ namespace BlogEngineProject.Controllers
             return View("MyBlogMainPanel", userObject);
         }
 
-        // these methods require a userId for access
+        // THESE METHODS REQUIRE A USER ID FOR ACCESS
         public IActionResult ReloadBlogDashboard()
         {
             // takes in userId from temp data entry
@@ -118,9 +118,61 @@ namespace BlogEngineProject.Controllers
             return RedirectToAction("ReloadBlogDashboard");
         }
 
-        public IActionResult PostEditor(string postId, string userId)
+        [HttpPost]
+        public RedirectToActionResult EditPost(string editedTitle, string editedContent, string postId, string threadId, string userId)
         {
-            return View();
+            // Get Thread by id
+            // Get post by id from thread
+            // Set the post's editedTitle and editedContent properties
+            // make a temp data entry containing the userId
+            // redirect to ReloadBlogDashboard action method 
+            int POST_ID = int.Parse(postId);
+            int THREAD_ID = int.Parse(threadId);
+
+            Post postReference = ThreadRepo.GetThreadById(THREAD_ID).GetPostById(POST_ID);
+            postReference.Title = editedTitle;
+            postReference.Content = editedTitle;
+
+            TempData["userId"] = userId;
+            return RedirectToAction("ReloadBlogDashboard");
+        }
+
+        [HttpPost]
+        public RedirectToActionResult EditProfile(string editedThreadname, string editedThreadCategory, string editedBio, string threadId, string userId)
+        {
+            // Get thread by id
+            // Update appropriate thread properties
+            // make a temp data entry containing the userId
+            // redirect to ReloadBlogDashboard action method 
+            int THREAD_ID = int.Parse(threadId);
+
+            Thread threadReference = ThreadRepo.GetThreadById(THREAD_ID);
+            if (editedThreadname != null)
+                threadReference.Name = editedThreadname;
+            if (editedThreadCategory != null)
+                threadReference.Category = editedThreadCategory;
+            if (editedBio != null)
+                threadReference.Bio = editedBio;
+
+            TempData["userId"] = userId;
+            return RedirectToAction("ReloadBlogDashboard");
+        }
+
+
+        public IActionResult PostEditor(string postId, string threadId, string userId)
+        {
+            // NOTE: object IDs are passed in via viewbag because there we don't want to build DB retrieval logic into the view
+            // Get thread repo by id
+            // Find post by id from thread
+            // Pass postObject into view
+            // Pass userId into view by Viewbag
+            int POST_ID = int.Parse(postId);
+            int THREAD_ID = int.Parse(threadId);
+            Post postToEdit = ThreadRepo.GetThreadById(THREAD_ID).GetPostById(POST_ID);
+
+            ViewBag.ThreadId = threadId;
+            ViewBag.UserId = userId;
+            return View(postToEdit);
         }
 
         public IActionResult PostDashboard(string userId)
@@ -135,7 +187,14 @@ namespace BlogEngineProject.Controllers
 
         public IActionResult EditProfile(string userId)
         {
-            return View();
+            // NOTE: object IDs are passed in via viewbag because there we don't want to build DB retrieval logic into the view
+            // Utilize userId to get owned thread
+            // pass thread object to view
+            int USERID = int.Parse(userId);
+            Thread thread = UserRepo.GetUserById(USERID).OwnedThread;
+
+            ViewBag.UserId = userId;
+            return View(thread);
         }
 
         public IActionResult GettingStarted(string userId)
