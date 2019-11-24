@@ -60,35 +60,34 @@ namespace BlogEngineProject.Controllers
             return RedirectToAction("MyBlogDashboard");
         }
 
-        public IActionResult PostDashboard()
+
+        // all method below are set to private because they only get called if the user signup redirect method is fired
+        private IActionResult PostDashboard()
         {
             return View();
         }
 
-        public IActionResult PostEditor()
+        private IActionResult PostEditor()
         {
             return View();
         }
 
-        public IActionResult EditProfile()
+        private IActionResult EditProfile()
         {
             return View();
         }
 
-        public IActionResult GettingStarted()
+        private IActionResult GettingStarted()
         {
             return View();
         }
 
         public IActionResult MyBlogDashboard()
         {
-            User userObject = null;
+            // no need to valid tempdata, only time this method gets called is if a valid username is passed
             string username = TempData["validUsername"].ToString();
-            if (username != null)
-            {
-                // if validUsername tempdata entry is not null, get userByUsername and pass object to the view
-                userObject = UserRepo.GetUserByUsername(username);
-            }
+            User userObject = UserRepo.GetUserByUsername(username);
+
             return View("MyBlogMainPanel", userObject);
         }
     }

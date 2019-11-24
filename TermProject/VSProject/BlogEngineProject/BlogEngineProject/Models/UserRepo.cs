@@ -46,7 +46,7 @@ namespace BlogEngineProject.Models
 
         public static void AddUsertoRepo(User user)
         {
-            if(IsUsernameValid(user.Username) == true)
+            if (IsUsernameTaken(user.Username) == false)
             {
                 userList.Add(user);
             }
@@ -84,16 +84,16 @@ namespace BlogEngineProject.Models
             return false;
         }
 
-        private static bool IsUsernameValid(String username)
+        private static bool IsUsernameTaken(String username)
         {
             // looks through the user list for an identical username string
             // if the username is unique, return true
             foreach(User u in userList)
             {
                 if (u.Username == username)
-                    return false;
+                    return true;
             }
-            return true;
+            return false;
         }
 
         private static User FindUserById(int userId)
@@ -110,10 +110,11 @@ namespace BlogEngineProject.Models
 
         private static User FindUserByUsername(string username)
         {
-            // validate username
+            // determine if username exists
             // run foreach loop on userlist
             // return true if current user's ID matches the parameter
-            if(IsUsernameValid(username) == true)
+            bool doesUsernameExist = IsUsernameTaken(username);
+            if (doesUsernameExist == true)
             {
                 foreach(User u in userList)
                 {
