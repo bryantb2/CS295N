@@ -5,19 +5,19 @@
 @model User
 @{ Thread thread = Model.OwnedThread;}
 <section>
-    <h1 class="universalPageTitleStyle mt-5 mb-5">Thread Dashboard</h1>
+    <h1 class="universalPageTitleStyle mt-5 mb-5">Welcome to the your thread dashboard, @Model.Username</h1>
     <div class="row mb-5">
 
         <div class="col-3 p-4">
             <div class="d-flex flex-column">
                 <div class="mb-3 ">
-                    <a asp-controller="" asp-action="" class="btn btn-secondary text-light optionButtonCustom" role="button" aria-pressed="true">Edit Profile</a>
+                    <a asp-route-userID=@Model.UserID asp-controller="MyBlog" asp-action="EditProfile" class="btn btn-secondary text-light optionButtonCustom" role="button" aria-pressed="true">Edit Profile</a>
                 </div>
                 <div class="mb-3 ">
-                    <a asp-controller="" asp-action="" class="btn btn-secondary text-light optionButtonCustom" role="button" aria-pressed="true">Modify Posts</a>
+                    <a asp-route-userID=@Model.UserID asp-controller="MyBlog" asp-action="PostDashboard" class="btn btn-secondary text-light optionButtonCustom" role="button" aria-pressed="true">Modify Posts</a>
                 </div>
                 <div class="mb-3 ">
-                    <a asp-controller="" asp-action="" class="btn btn-secondary text-light optionButtonCustom" role="button" aria-pressed="true">Change Thread Styling</a>
+                    <a asp-route-userID=@Model.UserID asp-controller="MyBlog" asp-action="GettingStarted" class="btn btn-secondary text-light optionButtonCustom" role="button" aria-pressed="true">Blog Editor Tips</a>
                 </div>
             </div>
         </div>
@@ -32,9 +32,9 @@
                                 <a class="profileTitle">@thread.Name</a>
                             </h1>
                             <div class="text-dark">
-                                @Model.Username
+                                <b>Creator:</b> @thread.CreatorName
                                 <span class="pr-2">&nbsp;</span>
-                                @thread.Category
+                                <b>Category:</b> @thread.Category
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,6 @@
                                         <p class="digitalSignature">Posted on @p.TimeStamp</p>
                                     </div>
                                 </div>
-                                <a class="btn btn-link text-dark" href="#">Reply</a>
                             </div>
                         }
                     }

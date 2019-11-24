@@ -11,10 +11,9 @@ namespace BlogEngineProject.Models
         private static List<Thread> activeThreads = new List<Thread>();
 
         // METHODS
-        public static List<Thread> GetThreads()
-        {
-            return activeThreads;
-        }
+        public static List<Thread> GetThreads() => activeThreads;
+        public static Thread GetThreadById(int threadId) => FindThreadById(threadId);
+        public static Thread GetThreadByName(string threadname) => FindThreadByName(threadname);
 
         public static List<Thread> GetCategoryOfThreads(int categoryIndex)
         {
@@ -30,21 +29,9 @@ namespace BlogEngineProject.Models
             return categorySpecificThreads;
         }
 
-        public static Thread GetThreadById(int threadID)
-        {
-            foreach(Thread t in activeThreads)
-            {
-                if(t.ThreadID == threadID)
-                {
-                    return t;
-                }
-            }
-            return null;
-        }
-
         public static void AddThreadtoRepo(Thread thread)
         {
-            if (IsThreadnameValid(thread.Name) == true)
+            if (IsThreadnameTaken(thread.Name) == false)
             {
                 activeThreads.Add(thread);
             }
@@ -70,16 +57,45 @@ namespace BlogEngineProject.Models
             return removedThread;
         }
         
-        private static bool IsThreadnameValid(String threadName)
+        private static bool IsThreadnameTaken(String threadName)
         {
             // looks through the thread list for an identical threadname string
-            // if the threadname is unique, return true
+            // if the threadname is taken, return true
             foreach (Thread t in activeThreads)
             {
                 if (t.Name == threadName)
-                    return false;
+                    return true;
             }
-            return true;
+            return false;
+        }
+
+        private static Thread FindThreadById(int threadId)
+        {
+            // run foreach loop on userlist
+            // return true if current thread's ID matches the parameter
+            foreach (Thread t in activeThreads)
+            {
+                if (t.ThreadID == threadId)
+                    return t;
+            }
+            return null;
+        }
+
+        private static Thread FindThreadByName(string threadname)
+        {
+            // determine if threadName exists
+            // run foreach loop on userlist
+            // return true if current user's ID matches the parameter
+            bool doesThreadExist = IsThreadnameTaken(threadname);
+            if (doesThreadExist == true)
+            {
+                foreach (Thread t in activeThreads)
+                {
+                    if (t.Name == threadname)
+                        return t;
+                }
+            }
+            return null;
         }
     }
 }

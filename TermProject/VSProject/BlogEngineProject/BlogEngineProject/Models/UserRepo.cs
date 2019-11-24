@@ -87,7 +87,7 @@ namespace BlogEngineProject.Models
         private static bool IsUsernameTaken(String username)
         {
             // looks through the user list for an identical username string
-            // if the username is unique, return true
+            // if the username is taken, return true
             foreach(User u in userList)
             {
                 if (u.Username == username)

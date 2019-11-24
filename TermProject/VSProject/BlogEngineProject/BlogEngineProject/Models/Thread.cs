@@ -38,6 +38,7 @@ namespace BlogEngineProject.Models
                 {
                     removedPost = p;
                     Posts.Remove(p);
+                    return removedPost;
                 }
             }
             return removedPost;

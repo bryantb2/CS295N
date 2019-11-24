@@ -60,28 +60,6 @@ namespace BlogEngineProject.Controllers
             return RedirectToAction("MyBlogDashboard");
         }
 
-
-        // all method below are set to private because they only get called if the user signup redirect method is fired
-        private IActionResult PostDashboard()
-        {
-            return View();
-        }
-
-        private IActionResult PostEditor()
-        {
-            return View();
-        }
-
-        private IActionResult EditProfile()
-        {
-            return View();
-        }
-
-        private IActionResult GettingStarted()
-        {
-            return View();
-        }
-
         public IActionResult MyBlogDashboard()
         {
             // no need to valid tempdata, only time this method gets called is if a valid username is passed
@@ -90,5 +68,58 @@ namespace BlogEngineProject.Controllers
 
             return View("MyBlogMainPanel", userObject);
         }
+
+        // these methods require a userId for access
+        public IActionResult ReloadBlogDashboard()
+        {
+            // takes in userId from temp data entry
+            // retrieves user object and then passes it into the dashboard view
+            int userId = int.Parse(TempData["userId"].ToString());
+            User userObject = UserRepo.GetUserById(userId);
+
+            return View("MyBlogMainPanel", userObject);
+        }
+
+        public RedirectToActionResult RemovePost(string postId, string threadId, string userId)
+        {
+            // get thread by id
+            // remove the post from thread
+            // make a temp data entry containing the userId
+            // redirect to ReloadBlogDashboard action method
+            int POST_ID = int.Parse(postId);
+            int THREAD_ID = int.Parse(threadId);
+
+            Thread thread = ThreadRepo.GetThreadById(THREAD_ID);
+            thread.RemovePostFromHistory(POST_ID);
+
+            TempData["userId"] = userId;
+            return RedirectToAction("ReloadBlogDashboard");
+        }
+
+        public IActionResult PostEditor(string postId, string userId)
+        {
+            return View();
+        }
+
+        public IActionResult PostDashboard(string userId)
+        {
+            // get user by id
+            // pass user object into view
+            int ID = int.Parse(userId);
+            User userObject = UserRepo.GetUserById(ID);
+
+            return View(userObject);
+        }
+
+        public IActionResult EditProfile(string userId)
+        {
+            return View();
+        }
+
+        public IActionResult GettingStarted(string userId)
+        {
+            return View();
+        }
+
     }
 }
