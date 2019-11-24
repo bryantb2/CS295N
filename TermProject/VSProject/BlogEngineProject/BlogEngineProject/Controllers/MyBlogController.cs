@@ -199,7 +199,7 @@ namespace BlogEngineProject.Controllers
             }
             if(!(ThreadRepo.GetThreadnameEligibility(trimmedThreadname) == true))
             {
-                TempData["ThreadCreationMessage"] = "No fields can be left blank";
+                TempData["ThreadCreationMessage"] = "Unforunately, that thread name is already taken :(";
                 TempData["userId"] = userId;
                 return RedirectToAction("GettingStarted");
             }
