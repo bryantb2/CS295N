@@ -9,7 +9,7 @@
     <div class="row mb-5">
         <div class="col-6">
             @{
-                if (thread.Posts.Count != 0)
+                if (thread.Posts.Count == 0)
                 {
                     <h2 class="postTitle">No posts to view :(</h2>
                 }
@@ -38,7 +38,7 @@
 
         <div class="col-6 p-4 customBorder">
             <article class="text-dark mb-2">
-                <form class="inputFieldText well form-horizontal" asp-controller="MyBlog" asp-action="" method="post" id="editThread_form">
+                <form class="inputFieldText well form-horizontal" asp-route-userId=@Model.UserID asp-route-threadId=@thread.ThreadID asp-controller="MyBlog" asp-action="AddPost" method="post" id="addPost_form">
                     <fieldset>
                         <legend class="formHeaderText mb-1">Add a Post</legend>
 

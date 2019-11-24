@@ -79,6 +79,28 @@ namespace BlogEngineProject.Controllers
 
             return View("MyBlogMainPanel", userObject);
         }
+        
+        public RedirectToActionResult AddPost(string postTitle, string postContent, string threadId, string userId)
+        {
+            // Build post object
+            // Get thread by id
+            // add post to thread
+            // make a temp data entry containing the userId
+            // redirect to ReloadBlogDashboard action method
+
+            Post newPost = new Post()
+            {
+                PostID = ObjectIDBuilder.GetPostID(),
+                Title = postTitle,
+                Content = postContent
+            };
+
+            int THREADID = int.Parse(threadId);
+            ThreadRepo.GetThreadById(THREADID).AddPostToThread(newPost);
+
+            TempData["userId"] = userId;
+            return RedirectToAction("ReloadBlogDashboard");
+        }
 
         public RedirectToActionResult RemovePost(string postId, string threadId, string userId)
         {
