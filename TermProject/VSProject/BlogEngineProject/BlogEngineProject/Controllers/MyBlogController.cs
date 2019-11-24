@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using BlogEngineProject.Models;
 
 namespace BlogEngineProject.Controllers
 {
@@ -41,14 +42,21 @@ namespace BlogEngineProject.Controllers
             else
             {
                 // create a tempdata entry that contains the message to be returned in the sign up view
-                // return signup view because the password/username combo is not valid
+                // return signup view because the password/username combo is empty
                 TempData["SignUpMessage"] = "Password and/or username fields cannot be empty";
                 return RedirectToAction("Index");
             }
 
+            bool areCredentialsValid = UserRepo.CheckUserCredentials(trimmedUsername, trimmedPassword);
+            if(areCredentialsValid != true)
+            {
+                // create a tempdata entry that contains the message to be returned in the sign up view
+                // return signup view because the password/username combo is not valid
+                TempData["SignUpMessage"] = "Password and/or username fields are incorrect. If are not a user already, then sign up!";
+                return RedirectToAction("Index");
+            }
 
-
-            TempData["SignUpMessage"] = "Please enter a valid username and/or password. If you are not a user, sign up!";
+            TempData["validUsername"] = trimmedUsername;
             return RedirectToAction("MyBlogDashboard");
         }
 
@@ -74,7 +82,14 @@ namespace BlogEngineProject.Controllers
 
         public IActionResult MyBlogDashboard()
         {
-            return View("MyBlogMainPanel");
+            User userObject = null;
+            string username = TempData["validUsername"].ToString();
+            if (username != null)
+            {
+                // if validUsername tempdata entry is not null, get userByUsername and pass object to the view
+                userObject = UserRepo.GetUserByUsername(username);
+            }
+            return View("MyBlogMainPanel", userObject);
         }
     }
 }

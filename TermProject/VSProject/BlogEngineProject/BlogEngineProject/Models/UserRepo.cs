@@ -11,11 +11,11 @@ namespace BlogEngineProject.Models
         private static List<User> userList = new List<User>();
         
         // METHODS
-        public static List<User> GetUsers()
-        {
-            return userList;
-        }
-        
+        public static List<User> GetUsers() => userList;
+        public static User GetUserById(int userId) => FindUserById(userId);
+        public static User GetUserByUsername(string username) => FindUserByUsername(username);
+        public static bool CheckUserCredentials(string username, string password) => AreUserCredentialsValid(username, password);
+
         public static List<Thread> SearchForUsersAndThreads(String searchString)
         {
             // ASSUMPTION: search string could be a username OR a threadname
@@ -72,6 +72,18 @@ namespace BlogEngineProject.Models
             return removedUser;
         }
 
+        private static bool AreUserCredentialsValid(string username, string password)
+        {
+            // run a foreach loop on the user list
+            // return true if username and password match an existing user
+            foreach (User u in userList)
+            {
+                if (u.Username == username && u.Password == password)
+                    return true;
+            }
+            return false;
+        }
+
         private static bool IsUsernameValid(String username)
         {
             // looks through the user list for an identical username string
@@ -82,6 +94,34 @@ namespace BlogEngineProject.Models
                     return false;
             }
             return true;
+        }
+
+        private static User FindUserById(int userId)
+        {
+            // run foreach loop on userlist
+            // return true if current user's ID matches the parameter
+            foreach (User u in userList)
+            {
+                if (u.UserID == userId)
+                    return u;
+            }
+            return null;
+        }
+
+        private static User FindUserByUsername(string username)
+        {
+            // validate username
+            // run foreach loop on userlist
+            // return true if current user's ID matches the parameter
+            if(IsUsernameValid(username) == true)
+            {
+                foreach(User u in userList)
+                {
+                    if (u.Username == username)
+                        return u;
+                }
+            }
+            return null;
         }
     }
 }
