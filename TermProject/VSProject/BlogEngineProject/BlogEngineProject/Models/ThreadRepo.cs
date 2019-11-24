@@ -14,6 +14,7 @@ namespace BlogEngineProject.Models
         public static List<Thread> GetThreads() => activeThreads;
         public static Thread GetThreadById(int threadId) => FindThreadById(threadId);
         public static Thread GetThreadByName(string threadname) => FindThreadByName(threadname);
+        public static bool GetThreadnameEligibility(string username) => !(IsThreadnameTaken(username));
 
         public static List<Thread> GetCategoryOfThreads(int categoryIndex)
         {

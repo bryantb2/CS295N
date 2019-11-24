@@ -14,6 +14,7 @@ namespace BlogEngineProject.Models
         public static List<User> GetUsers() => userList;
         public static User GetUserById(int userId) => FindUserById(userId);
         public static User GetUserByUsername(string username) => FindUserByUsername(username);
+        public static bool GetUsernameEligibility(string username) => !(IsUsernameTaken(username));
         public static bool CheckUserCredentials(string username, string password) => AreUserCredentialsValid(username, password);
 
         public static List<Thread> SearchForUsersAndThreads(String searchString)

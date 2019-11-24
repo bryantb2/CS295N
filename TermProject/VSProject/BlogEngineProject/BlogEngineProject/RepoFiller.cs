@@ -57,7 +57,7 @@ namespace BlogEngineProject
                     UserID = ObjectIDBuilder.GetUserID(),
                     Username = usernames[i],
                     Password = "password",
-                    DateJoined = DateTime.UnixEpoch
+                    DateJoined = DateTime.Now
                 };
 
                 // call thread builder

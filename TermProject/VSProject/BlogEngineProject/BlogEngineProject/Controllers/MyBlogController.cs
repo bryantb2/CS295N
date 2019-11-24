@@ -9,22 +9,82 @@ namespace BlogEngineProject.Controllers
 {
     public class MyBlogController : Controller
     {
+        // SIGN IN METHODS
+        //  ---------------------------------------------------------------------------------------------------->
+        //  ---------------------------------------------------------------------------------------------------->
         public IActionResult Index()
         {
-            if (TempData["SignUpMessage"] != null)
+            if (TempData["SignInMessage"] != null)
             {
                 // if message tempdata entry is not null, pass the message to the view
-                ViewBag.ErrorMessage = TempData["SignUpMessage"];
+                ViewBag.ErrorMessage = TempData["SignInMessage"];
             }
             return View("MyBlogSignIn");
         }
 
         public IActionResult SignUp()
         {
+            if (TempData["SignUpMessage"] != null)
+            {
+                // if message tempdata entry is not null, pass the message to the view
+                ViewBag.ErrorMessage = TempData["SignUpMessage"];
+            }
             return View("MyBlogSignUp");
         }
-        
-        public RedirectToActionResult SignUpRedirect(string username, string password)
+
+        [HttpPost]
+        public RedirectToActionResult SignUpRedirect(string username, string password, string passwordConfirmation)
+        {
+            // validate username and password (not empty AND trim trailing white space)
+            // search repo to see if username is already taken
+            // check to make sure password and confirmed password fields match
+            // build user object
+            // add user to repo
+            // redirect to myblogpanel
+            // else show signup with an invalid username and password error
+            var trimmedUsername = "";
+            var trimmedPassword = "";
+            var trimmedConfirmPassword = "";
+
+            if (username != null && password != null && passwordConfirmation != null)
+            {
+                trimmedUsername = username.Trim();
+                trimmedPassword = password.Trim();
+                trimmedConfirmPassword = passwordConfirmation.Trim();
+            }
+            else
+            {
+                // create a tempdata entry that contains the message to be returned in the sign up view
+                // return signup view because the password/username combo is empty
+                TempData["SignUpMessage"] = "Password and/or username fields cannot be empty";
+                return RedirectToAction("SignUp");
+            }
+            if(UserRepo.GetUsernameEligibility(trimmedUsername)==false)
+            {
+                TempData["SignUpMessage"] = "That username is taken :(";
+                return RedirectToAction("SignUp");
+            }
+            if(trimmedPassword != trimmedConfirmPassword)
+            {
+                TempData["SignUpMessage"] = "Password and/or username fields cannot be empty";
+                return RedirectToAction("SignUp");
+            }
+
+            User newUser = new User()
+            {
+                UserID = ObjectIDBuilder.GetUserID(),
+                Username = trimmedUsername,
+                Password = trimmedConfirmPassword,
+                DateJoined = DateTime.Now
+            };
+            UserRepo.AddUsertoRepo(newUser);
+
+            TempData["validUsername"] = trimmedUsername;
+            return RedirectToAction("MyBlogDashboard");
+        }
+
+
+        public RedirectToActionResult SignInRedirect(string username, string password)
         {
             // validate username and password (not empty AND trim trailing white space)
             // search repo for username
@@ -43,7 +103,7 @@ namespace BlogEngineProject.Controllers
             {
                 // create a tempdata entry that contains the message to be returned in the sign up view
                 // return signup view because the password/username combo is empty
-                TempData["SignUpMessage"] = "Password and/or username fields cannot be empty";
+                TempData["SignInMessage"] = "Password and/or username fields cannot be empty";
                 return RedirectToAction("Index");
             }
 
@@ -52,7 +112,7 @@ namespace BlogEngineProject.Controllers
             {
                 // create a tempdata entry that contains the message to be returned in the sign up view
                 // return signup view because the password/username combo is not valid
-                TempData["SignUpMessage"] = "Password and/or username fields are incorrect. If are not a user already, then sign up!";
+                TempData["SignInMessage"] = "Password and/or username fields are incorrect. If are not a user already, then sign up!";
                 return RedirectToAction("Index");
             }
 
@@ -70,6 +130,8 @@ namespace BlogEngineProject.Controllers
         }
 
         // THESE METHODS REQUIRE A USER ID FOR ACCESS
+        //  ---------------------------------------------------------------------------------------------------->
+        //  ---------------------------------------------------------------------------------------------------->
         public IActionResult ReloadBlogDashboard()
         {
             // takes in userId from temp data entry
@@ -79,7 +141,87 @@ namespace BlogEngineProject.Controllers
 
             return View("MyBlogMainPanel", userObject);
         }
-        
+
+        public IActionResult GettingStarted(string userId="")
+        {
+            // SPECIAL CASE: this action method needs to accept both get parameters OR tempdata (both of which represent a userId)
+            // this is done because a the dashboard view might call this action method, or the BuildThread action method will redirect to it internally
+            // Check if userId parameter is empty
+            // if empty use tempdata
+            // Get user by id
+            // Pass in userId to view]
+            var userIdString = "";
+            if(userId != "")
+            {
+                userIdString = userId;
+            }
+            else
+            {
+                userIdString = TempData["userId"].ToString();
+            }
+
+            int userIdAsInt = int.Parse(userIdString);
+            User userObject = UserRepo.GetUserById(userIdAsInt);
+
+            if (TempData["ThreadCreationMessage"] != null)
+            {
+                // if message tempdata entry is not null, pass the message to the view
+                ViewBag.ErrorMessage = TempData["ThreadCreationMessage"];
+            }
+            return View(userObject);
+        }
+
+        [HttpPost]
+        public RedirectToActionResult BuildThread(string threadName, string threadCategory, string bio, string userId)
+        {
+            // validate input (not empty AND trim trailing white space)
+            // search thread repo and determine if the threadname is in use
+            // Build a thread object using the input parameters
+            // Get reference to user by id
+            // Set the user's owned thread property
+            // Add thread to threadRepo
+            // make a temp data entry containing the userId
+            // redirect to ReloadBlogDashboard action method
+            var trimmedThreadname = "";
+            var trimmedBio = "";
+            if (threadName != null && threadCategory != null && bio != null)
+            {
+                trimmedThreadname = threadName.Trim();
+                trimmedBio = bio.Trim();
+            }
+            else
+            {
+                // create a tempdata entry that contains the message to be returned in the getting started view
+                // return getting started view because the inputted data is empty
+                TempData["ThreadCreationMessage"] = "No fields can be left blank";
+                TempData["userId"] = userId;
+                return RedirectToAction("GettingStarted");
+            }
+            if(!(ThreadRepo.GetThreadnameEligibility(trimmedThreadname) == true))
+            {
+                TempData["ThreadCreationMessage"] = "No fields can be left blank";
+                TempData["userId"] = userId;
+                return RedirectToAction("GettingStarted");
+            }
+
+            int USERID = int.Parse(userId);
+            User user = UserRepo.GetUserById(USERID);
+
+            Thread newThread = new Thread()
+            {
+                ThreadID = ObjectIDBuilder.GetThreadID(),
+                Name = threadName,
+                Bio = bio,
+                Category = threadCategory,
+                CreatorName = user.Username
+            };
+            user.OwnedThread = newThread;
+            ThreadRepo.AddThreadtoRepo(newThread);
+
+            TempData["userId"] = userId;
+            return RedirectToAction("ReloadBlogDashboard");
+        }
+
         public RedirectToActionResult AddPost(string postTitle, string postContent, string threadId, string userId)
         {
             // Build post object
@@ -92,7 +234,8 @@ namespace BlogEngineProject.Controllers
             {
                 PostID = ObjectIDBuilder.GetPostID(),
                 Title = postTitle,
-                Content = postContent
+                Content = postContent,
+                TimeStamp = DateTime.Now
             };
 
             int THREADID = int.Parse(threadId);
@@ -196,11 +339,5 @@ namespace BlogEngineProject.Controllers
             ViewBag.UserId = userId;
             return View(thread);
         }
-
-        public IActionResult GettingStarted(string userId)
-        {
-            return View();
-        }
-
     }
 }
