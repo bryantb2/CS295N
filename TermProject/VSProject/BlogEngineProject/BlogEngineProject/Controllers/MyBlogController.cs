@@ -9,6 +9,15 @@ namespace BlogEngineProject.Controllers
 {
     public class MyBlogController : Controller
     {
+        // DEPENDENCY INJECTION
+        IUserRepo userRepo;
+        IThreadRepo threadRepo;
+        public MyBlogController(IUserRepo u, IThreadRepo t)
+        {
+            userRepo = u;
+            threadRepo = t;
+        }
+
         // SIGN IN METHODS
         //  ---------------------------------------------------------------------------------------------------->
         //  ---------------------------------------------------------------------------------------------------->
@@ -59,7 +68,7 @@ namespace BlogEngineProject.Controllers
                 TempData["SignUpMessage"] = "Password and/or username fields cannot be empty";
                 return RedirectToAction("SignUp");
             }
-            if(UserRepo.GetUsernameEligibility(trimmedUsername)==false)
+            if(userRepo.GetUsernameEligibility(trimmedUsername)==false)
             {
                 TempData["SignUpMessage"] = "That username is taken :(";
                 return RedirectToAction("SignUp");
@@ -77,7 +86,7 @@ namespace BlogEngineProject.Controllers
                 Password = trimmedConfirmPassword,
                 DateJoined = DateTime.Now
             };
-            UserRepo.AddUsertoRepo(newUser);
+            userRepo.AddUsertoRepo(newUser);
 
             TempData["validUsername"] = trimmedUsername;
             return RedirectToAction("MyBlogDashboard");
@@ -107,7 +116,7 @@ namespace BlogEngineProject.Controllers
                 return RedirectToAction("Index");
             }
 
-            bool areCredentialsValid = UserRepo.CheckUserCredentials(trimmedUsername, trimmedPassword);
+            bool areCredentialsValid = userRepo.CheckUserCredentials(trimmedUsername, trimmedPassword);
             if(areCredentialsValid != true)
             {
                 // create a tempdata entry that contains the message to be returned in the sign up view
@@ -124,7 +133,7 @@ namespace BlogEngineProject.Controllers
         {
             // no need to valid tempdata, only time this method gets called is if a valid username is passed
             string username = TempData["validUsername"].ToString();
-            User userObject = UserRepo.GetUserByUsername(username);
+            User userObject = userRepo.GetUserByUsername(username);
 
             return View("MyBlogMainPanel", userObject);
         }
@@ -137,7 +146,7 @@ namespace BlogEngineProject.Controllers
             // takes in userId from temp data entry
             // retrieves user object and then passes it into the dashboard view
             int userId = int.Parse(TempData["userId"].ToString());
-            User userObject = UserRepo.GetUserById(userId);
+            User userObject = userRepo.GetUserById(userId);
 
             return View("MyBlogMainPanel", userObject);
         }
@@ -161,7 +170,7 @@ namespace BlogEngineProject.Controllers
             }
 
             int userIdAsInt = int.Parse(userIdString);
-            User userObject = UserRepo.GetUserById(userIdAsInt);
+            User userObject = userRepo.GetUserById(userIdAsInt);
 
             if (TempData["ThreadCreationMessage"] != null)
             {
@@ -197,7 +206,7 @@ namespace BlogEngineProject.Controllers
                 TempData["userId"] = userId;
                 return RedirectToAction("GettingStarted");
             }
-            if(!(ThreadRepo.GetThreadnameEligibility(trimmedThreadname) == true))
+            if(!(threadRepo.GetThreadnameEligibility(trimmedThreadname) == true))
             {
                 TempData["ThreadCreationMessage"] = "Unforunately, that thread name is already taken :(";
                 TempData["userId"] = userId;
@@ -205,7 +214,7 @@ namespace BlogEngineProject.Controllers
             }
 
             int USERID = int.Parse(userId);
-            User user = UserRepo.GetUserById(USERID);
+            User user = userRepo.GetUserById(USERID);
 
             Thread newThread = new Thread()
             {
@@ -216,7 +225,7 @@ namespace BlogEngineProject.Controllers
                 CreatorName = user.Username
             };
             user.OwnedThread = newThread;
-            ThreadRepo.AddThreadtoRepo(newThread);
+            threadRepo.AddThreadtoRepo(newThread);
 
             TempData["userId"] = userId;
             return RedirectToAction("ReloadBlogDashboard");
@@ -239,7 +248,7 @@ namespace BlogEngineProject.Controllers
             };
 
             int THREADID = int.Parse(threadId);
-            ThreadRepo.GetThreadById(THREADID).AddPostToThread(newPost);
+            threadRepo.GetThreadById(THREADID).AddPostToThread(newPost);
 
             TempData["userId"] = userId;
             return RedirectToAction("ReloadBlogDashboard");
@@ -254,7 +263,7 @@ namespace BlogEngineProject.Controllers
             int POST_ID = int.Parse(postId);
             int THREAD_ID = int.Parse(threadId);
 
-            Thread thread = ThreadRepo.GetThreadById(THREAD_ID);
+            Thread thread = threadRepo.GetThreadById(THREAD_ID);
             thread.RemovePostFromHistory(POST_ID);
 
             TempData["userId"] = userId;
@@ -272,7 +281,7 @@ namespace BlogEngineProject.Controllers
             int POST_ID = int.Parse(postId);
             int THREAD_ID = int.Parse(threadId);
 
-            Post postReference = ThreadRepo.GetThreadById(THREAD_ID).GetPostById(POST_ID);
+            Post postReference = threadRepo.GetThreadById(THREAD_ID).GetPostById(POST_ID);
             postReference.Title = editedTitle;
             postReference.Content = editedTitle;
 
@@ -289,7 +298,7 @@ namespace BlogEngineProject.Controllers
             // redirect to ReloadBlogDashboard action method 
             int THREAD_ID = int.Parse(threadId);
 
-            Thread threadReference = ThreadRepo.GetThreadById(THREAD_ID);
+            Thread threadReference = threadRepo.GetThreadById(THREAD_ID);
             if (editedThreadname != null)
                 threadReference.Name = editedThreadname;
             if (editedThreadCategory != null)
@@ -311,7 +320,7 @@ namespace BlogEngineProject.Controllers
             // Pass userId into view by Viewbag
             int POST_ID = int.Parse(postId);
             int THREAD_ID = int.Parse(threadId);
-            Post postToEdit = ThreadRepo.GetThreadById(THREAD_ID).GetPostById(POST_ID);
+            Post postToEdit = threadRepo.GetThreadById(THREAD_ID).GetPostById(POST_ID);
 
             ViewBag.ThreadId = threadId;
             ViewBag.UserId = userId;
@@ -323,7 +332,7 @@ namespace BlogEngineProject.Controllers
             // get user by id
             // pass user object into view
             int ID = int.Parse(userId);
-            User userObject = UserRepo.GetUserById(ID);
+            User userObject = userRepo.GetUserById(ID);
 
             return View(userObject);
         }
@@ -334,7 +343,7 @@ namespace BlogEngineProject.Controllers
             // Utilize userId to get owned thread
             // pass thread object to view
             int USERID = int.Parse(userId);
-            Thread thread = UserRepo.GetUserById(USERID).OwnedThread;
+            Thread thread = userRepo.GetUserById(USERID).OwnedThread;
 
             ViewBag.UserId = userId;
             return View(thread);

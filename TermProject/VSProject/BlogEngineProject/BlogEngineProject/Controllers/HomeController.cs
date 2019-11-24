@@ -10,6 +10,15 @@ namespace BlogEngineProject.Controllers
 {
     public class HomeController : Controller
     {
+        // DEPENDENCY INJECTION
+        IUserRepo userRepo;
+        IThreadRepo threadRepo;
+        public HomeController(IUserRepo u, IThreadRepo t)
+        {
+            userRepo = u;
+            threadRepo = t;
+        }
+
         public IActionResult Index(int category=-1)
         {
             // Get thread objects
@@ -18,11 +27,11 @@ namespace BlogEngineProject.Controllers
             List<Thread> threadList;
             if (category != -1)
             {
-                threadList = ThreadRepo.GetCategoryOfThreads(category);
+                threadList = threadRepo.GetCategoryOfThreads(category);
             }
             else
             {
-                threadList = ThreadRepo.GetThreads();
+                threadList = threadRepo.GetThreads();
             }
             return View("Home",threadList);
         }
@@ -43,7 +52,7 @@ namespace BlogEngineProject.Controllers
             if (searchString != "")
             {
                 // called the repo search function
-                searchResults = UserRepo.SearchForUsersAndThreads(searchString);
+                searchResults = userRepo.SearchForUsersAndThreads(searchString);
             }
             ViewBag.SearchQuery = searchString;
             return View(searchResults);
@@ -55,7 +64,7 @@ namespace BlogEngineProject.Controllers
             if(threadID != -1)
             {
                 // search for the thread by name
-                searchResult = ThreadRepo.GetThreadById(threadID);
+                searchResult = threadRepo.GetThreadById(threadID);
             }
             else
             {

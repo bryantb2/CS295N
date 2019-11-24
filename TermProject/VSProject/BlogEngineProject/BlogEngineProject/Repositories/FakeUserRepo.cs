@@ -5,19 +5,19 @@ using System.Threading.Tasks;
 
 namespace BlogEngineProject.Models
 {
-    public static class UserRepo
+    public class FakeUserRepo : IUserRepo
     {
         // CLASS FIELDS
-        private static List<User> userList = new List<User>();
+        private List<User> userList = new List<User>();
         
         // METHODS
-        public static List<User> GetUsers() => userList;
-        public static User GetUserById(int userId) => FindUserById(userId);
-        public static User GetUserByUsername(string username) => FindUserByUsername(username);
-        public static bool GetUsernameEligibility(string username) => !(IsUsernameTaken(username));
-        public static bool CheckUserCredentials(string username, string password) => AreUserCredentialsValid(username, password);
+        public  List<User> GetUsers() => userList;
+        public  User GetUserById(int userId) => FindUserById(userId);
+        public  User GetUserByUsername(string username) => FindUserByUsername(username);
+        public  bool GetUsernameEligibility(string username) => !(IsUsernameTaken(username));
+        public  bool CheckUserCredentials(string username, string password) => AreUserCredentialsValid(username, password);
 
-        public static List<Thread> SearchForUsersAndThreads(String searchString)
+        public  List<Thread> SearchForUsersAndThreads(String searchString)
         {
             // ASSUMPTION: search string could be a username OR a threadname
             // therefore, the search will be conducted here since the User domain model has a Thread
@@ -35,7 +35,7 @@ namespace BlogEngineProject.Models
 
             // search thread list
             // add the thread to search results if the thread matches the searchString
-            List<Thread> threads = ThreadRepo.GetThreads();
+            List<Thread> threads = new FakeThreadRepo().GetThreads();
             foreach (Thread t in threads)
             {
                 if (t.Name == searchString)
@@ -45,7 +45,7 @@ namespace BlogEngineProject.Models
             return threadSearchResult;
         }
 
-        public static void AddUsertoRepo(User user)
+        public  void AddUsertoRepo(User user)
         {
             if (IsUsernameTaken(user.Username) == false)
             {
@@ -57,7 +57,7 @@ namespace BlogEngineProject.Models
             }
         }
 
-        public static User RemoveUserfromRepo(int userID)
+        public  User RemoveUserfromRepo(int userID)
         {
             // find user
             // then remove it
@@ -73,7 +73,7 @@ namespace BlogEngineProject.Models
             return removedUser;
         }
 
-        private static bool AreUserCredentialsValid(string username, string password)
+        private  bool AreUserCredentialsValid(string username, string password)
         {
             // run a foreach loop on the user list
             // return true if username and password match an existing user
@@ -85,7 +85,7 @@ namespace BlogEngineProject.Models
             return false;
         }
 
-        private static bool IsUsernameTaken(String username)
+        private  bool IsUsernameTaken(String username)
         {
             // looks through the user list for an identical username string
             // if the username is taken, return true
@@ -97,7 +97,7 @@ namespace BlogEngineProject.Models
             return false;
         }
 
-        private static User FindUserById(int userId)
+        private  User FindUserById(int userId)
         {
             // run foreach loop on userlist
             // return true if current user's ID matches the parameter
@@ -109,7 +109,7 @@ namespace BlogEngineProject.Models
             return null;
         }
 
-        private static User FindUserByUsername(string username)
+        private  User FindUserByUsername(string username)
         {
             // determine if username exists
             // run foreach loop on userlist
