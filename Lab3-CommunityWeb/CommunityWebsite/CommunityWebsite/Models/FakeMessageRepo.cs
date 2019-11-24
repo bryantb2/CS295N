@@ -27,22 +27,22 @@ namespace CommunityWebsite.Models
         public void FillRepoWithMessages()
         {
             Message message = new Message("testMessage1",
-                "test message 1 content", "bob", "tech"
+                "test message 1 content", "bob", "general"
                 );
             this.addMessageToBoard("general",message);
 
             message = new Message("testMessage2",
-                "test message 2 content", "sally", "gaming"
+                "test message 2 content", "sally", "general"
                 );
             this.addMessageToBoard("general", message);
 
             message = new Message("testMessage3",
-                "test message 3 content", "gordon", "warm welcome"
+                "test message 3 content", "gordon", "general"
                 );
             this.addMessageToBoard("general", message);
 
             message = new Message("testMessage4",
-                "test message 4 content", "hugh", "get out of here bro"
+                "test message 4 content", "hugh", "general"
                 );
             this.addMessageToBoard("general", message);
             HasFillBeenUsed = true;
