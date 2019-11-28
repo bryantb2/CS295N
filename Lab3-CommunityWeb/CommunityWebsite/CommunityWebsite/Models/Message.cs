@@ -1,47 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommunityWebsite.Models
 {
     public class Message
     {
-        //STATIC FIELDS
-        private static int messageNumber = 0;
-
         //CLASS FIELDS (instance variables)
         private string messageContent;
         private string topic;
         private Int32 unixTimeStamp;
-        private int messageID; //unique message ID
+        private int messageID;
         private string userNameSignature; //name of user who inputted the message
         private string messageTitle;
-        private List<Reply> replies;
+        private List<Reply> replies = new List<Reply>();
 
         //CONSTRUCTOR
-        public Message(string contentHeader, string content, string nameOfUser, string topic)
+        /*public Message(string MessageTitle, string MessageContent, string UserNameSignature, string Topic)
         {
-            this.messageContent = content;
-            //increments and set message ID
-            this.messageID = GetNewMessageID();
-            this.userNameSignature = nameOfUser;
-            this.topic = topic;
-            this.messageTitle = contentHeader;
+            this.messageContent = MessageContent;
+            this.userNameSignature = UserNameSignature;
+            this.topic = Topic;
+            this.messageTitle = MessageTitle;
             this.replies = new List<Reply>();
             this.unixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-        }
-
-        //METHOD MANIPULATING STATIC MESSAGE ID INT
-        private int GetNewMessageID()
-        {
-            //this should only get called within the class upon object instantiation
-            if (messageNumber != 0)
-            {
-                Message.messageNumber += 1;
-            }
-            return Message.messageNumber;
-        }
+        }*/
 
         //PROPERTIES
         public string Topic
@@ -50,9 +36,11 @@ namespace CommunityWebsite.Models
             set { this.topic = value; }
         }
 
+        [Key]
         public int MessageID
         {
             get { return this.messageID; }
+            set { this.messageID = value; }
         }
 
         public List<Reply> GetReplyHistory

@@ -1,25 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommunityWebsite.Models
 {
-    public class User
+    public class User   
     {
         //CLASS FIELDS
+        private int userID;
         private string userName;
         private List<Message> messageHistory = new List<Message>();
         private List<Reply> replyHistory = new List<Reply>();
         private string password;
 
         //CONSTRUCTOR
-        public User(string userName)
+        /*public User(string Username)
         {
-            this.userName = userName;
-        }
+            this.userName = Username;
+        }*/
 
         //PROPERTIES
+        public int UserID
+        {
+            get { return this.userID; }
+            set { this.userID = value; }
+        }
+
         public List<Reply> GetReplyHistory
         {
             get { return this.replyHistory; }

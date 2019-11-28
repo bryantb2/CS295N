@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CommunityWebsite.Models;
+using CommunityWebsite.Respositories;
 
 namespace CommunityWebsite.Controllers
 {
@@ -33,7 +34,10 @@ namespace CommunityWebsite.Controllers
         public JsonResult ReturnUsers()
         {
             FakeUserRepo userRepo = new FakeUserRepo();
-            User newUser = new User("bob");
+            User newUser = new User()
+            {
+                Username = "bob"
+            };
             newUser.Password = "nice-Try-FBI!";
             userRepo.AddNewUser(newUser);
             var jsonObject = userRepo.ListOfUsers;

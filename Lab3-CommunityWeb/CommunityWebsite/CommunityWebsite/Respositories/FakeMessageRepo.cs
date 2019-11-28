@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityWebsite.Models;
 
-namespace CommunityWebsite.Models
+namespace CommunityWebsite.Respositories
 {
     public class FakeMessageRepo : IMessageRepo
     {
@@ -15,40 +16,44 @@ namespace CommunityWebsite.Models
         // PROPERTIES 
         public bool HasFillBeenUsed { get; set; }
 
-        public List<Message> GeneralMessages { get { return generalChat; } }
-        
-        public List<Message> SWMessages { get { return starWarsChat; } }
-        
+        public List<Message> Messages { get { return generalChat; } }
+
+        public List<Message> SWMesssages {
+            get
+            {
+                // get messages and then add the SW ones to the return list
+                List<Message> starWarsMessageList = new List<Message>();
+                foreach(Message m in Messages)
+                {
+                    if (m.Topic == "starwars")
+                        starWarsMessageList.Add(m);
+                }
+
+                return starWarsMessageList;
+            }
+        }
+
+        public List<Message> GeneralMesssages
+        {
+            get
+            {
+                // get messages and then add the general ones to the return list
+                List<Message> generalMessageList = new List<Message>();
+                foreach (Message m in Messages)
+                {
+                    if (m.Topic == "general")
+                        generalMessageList.Add(m);
+                }
+
+                return generalMessageList;
+            }
+        }
+
         public int NumberOfChats { get { return chatGenres.Length; } }
         
         public String[] ChatNameArray { get { return chatGenres; } }
 
-        // METHODS
-        public void FillRepoWithMessages()
-        {
-            Message message = new Message("testMessage1",
-                "test message 1 content", "bob", "general"
-                );
-            this.addMessageToBoard("general",message);
-
-            message = new Message("testMessage2",
-                "test message 2 content", "sally", "general"
-                );
-            this.addMessageToBoard("general", message);
-
-            message = new Message("testMessage3",
-                "test message 3 content", "gordon", "general"
-                );
-            this.addMessageToBoard("general", message);
-
-            message = new Message("testMessage4",
-                "test message 4 content", "hugh", "general"
-                );
-            this.addMessageToBoard("general", message);
-            HasFillBeenUsed = true;
-        }
-
-        public void SortMessagesByDate(string chatRoom)
+        public List<Message> SortMessagesByDate(string chatRoom)
         {
             if(chatRoom == "general")
             {
@@ -58,6 +63,8 @@ namespace CommunityWebsite.Models
             {
                 starWarsChat.Sort((message1, message2) => message2.UnixTimeStamp.CompareTo(message1.UnixTimeStamp));
             }
+
+            return null;
             
         }
 

@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityWebsite.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace CommunityWebsite.Models
+namespace CommunityWebsite.Respositories
 {
     public class RealUserRepo : IUserRepo
     {
         // CLASS FIELDS
-        private static List<User> listOfUsers = new List<User>();
+        private AppDbContext context;
+
+        // CONSTRUCTOR
+        public RealUserRepo(AppDbContext appDbContext)
+        {
+            context = appDbContext;
+        }
 
         // PROPERTIES
-        public List<User> ListOfUsers { get { return listOfUsers; } }
-
-        public int NumberOfUsers { get { return listOfUsers.Count; } }
+        public List<User> ListOfUsers { get { return context.Users.Include("Messages").Include("Replies").ToList(); } }
+        public int NumberOfUsers { get { return context.Users.ToList().Count; } }
 
         // METHODS
         /* this series of method will modify the message or reply history of a USER */
@@ -37,7 +44,12 @@ namespace CommunityWebsite.Models
                 {
                     //index into list
                     //add to user message history
-                    listOfUsers[elementIndex].AddMessageToHistory(newMessage);
+                    User user = ListOfUsers[elementIndex];
+                    user.AddMessageToHistory(newMessage);
+
+                    // update user in DB
+                    context.Users.Update(user);
+                    context.SaveChanges();
                 }
                 else
                     throw new ArgumentException("message is invalid; either null or undefined");
@@ -48,7 +60,15 @@ namespace CommunityWebsite.Models
                 if (messageID == -1)
                     throw new ArgumentException("messageID must be defined");
                 else
-                    listOfUsers[elementIndex].RemoveMessageFromHistory(messageID);
+                {
+                    User user = ListOfUsers[elementIndex];
+                    user.RemoveMessageFromHistory(messageID);
+
+                    // update user in DB
+                    context.Users.Update(user);
+                    context.SaveChanges();
+                }
+
             }
         }
 
@@ -71,8 +91,13 @@ namespace CommunityWebsite.Models
                 if (newReply != null)
                 {
                     //index into list
-                    //add to user message history
-                    listOfUsers[elementIndex].AddToReplyHistory(newReply);
+                    //add to user reply history
+                    User user = ListOfUsers[elementIndex];
+                    user.AddToReplyHistory(newReply);
+
+                    // update user in DB
+                    context.Users.Update(user);
+                    context.SaveChanges();
                 }
                 else
                     throw new ArgumentException("message is invalid; either null or undefined");
@@ -83,21 +108,43 @@ namespace CommunityWebsite.Models
                 if (replyID == -1)
                     throw new ArgumentException("messageID must be defined");
                 else
-                    listOfUsers[elementIndex].RemoveReplyFromHistory(replyID);
+                {
+                    User user = ListOfUsers[elementIndex];
+                    user.RemoveReplyFromHistory(replyID);
+
+                    // update user in DB
+                    context.Users.Update(user);
+                    context.SaveChanges();
+                }
+
             }
         }
 
-        public void FindAndReplaceUser(string userName, User newUser) => listOfUsers[FindUserIndex(userName)] = newUser;
+        public void FindAndReplaceUser(string userName, User newUser)
+        {
+            User user = ListOfUsers[FindUserIndex(userName)];
 
-        public void AddNewUser(User user) => listOfUsers.Add(user);
+            // remove old user, add new one
+            context.Users.Remove(user);
+            context.Users.Add(user);
+            context.SaveChanges();
+        }
+
+        public void AddNewUser(User user)
+        {
+            context.Users.Add(user);
+            context.SaveChanges();
+        }
 
         public void RemoveUser(string userName)
         {
-            foreach (User user in listOfUsers)
+            foreach (User user in ListOfUsers)
             {
                 if (user.Username == userName)
                 {
-                    listOfUsers.Remove(user);
+                    context.Users.Remove(user);
+                    context.SaveChanges();
+                    break;
                 }
             }
         }
@@ -105,9 +152,9 @@ namespace CommunityWebsite.Models
         private int FindUserIndex(string userName)
         {
             //returns index in list where the user exists
-            for (int i = 0; i < listOfUsers.Count; i++)
+            for (int i = 0; i < ListOfUsers.Count; i++)
             {
-                if (listOfUsers[i].Username == userName)
+                if (ListOfUsers[i].Username == userName)
                     return i;
             }
             //returns -1 if not found

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CommunityWebsite.Models;
+using CommunityWebsite.Respositories;
 
 namespace CommunityWebsite.Controllers
 {
@@ -16,12 +17,6 @@ namespace CommunityWebsite.Controllers
             // THIS IS DEPENDENCY INJECTION
             userRepo = u;
             messageRepo = m;
-
-            // delete this later
-            if(RealMessageRepo.HasFillBeenUsed == false)
-            {
-                messageRepo.FillRepoWithMessages();
-            }
         }
 
         [HttpPost]
@@ -29,32 +24,45 @@ namespace CommunityWebsite.Controllers
         {
             User newUser;
             Message newMessage;
-            List<User> listOfUsers = userRepo.ListOfUsers.ToList();
+            List<User> listOfUsers = userRepo.ListOfUsers == null ? null : userRepo.ListOfUsers;
             bool userExists = false;
 
-            foreach (User u in listOfUsers)
+            if(listOfUsers != null)
             {
-                //checking database to user if the username already exists
-                if(u.Username == userName)
+                foreach (User u in listOfUsers)
                 {
-                    userExists = true;  //this means that the user has been found in the "database"
+                    //checking database to user if the username already exists
+                    if (u.Username == userName)
+                    {
+                        userExists = true;  //this means that the user has been found in the "database"
+                    }
                 }
             }
             //sets topic to the appropriate input string for the model
+             
             if (userExists != true)
             {
-                //assumes that user does not exist in "database"
-                //build a user
-                //add user to user list
-                //build a message
-                //add to messaging history of the user
-                //add message to messsage board
-                newUser = new User(userName);
-                newMessage = new Message(messageTitle, messageContent, userName, topic);
-                newUser.AddMessageToHistory(newMessage);
+            //assumes that user does not exist in "database"
+            //build a user
+            //add user to user list
+            //build a message
+            //add to messaging history of the user
+            //add message to messsage board
+            newUser = new User()
+            {
+                Username = userName
+            };
+            newMessage = new Message()
+            {
+                MessageContent = messageContent,
+                Topic = topic,
+                UserNameSignature = userName,
+                MessageTitle = messageTitle
+            };
+            newUser.AddMessageToHistory(newMessage);
 
-                userRepo.AddNewUser(newUser);
-                messageRepo.addMessageToBoard(topic, newMessage);
+            userRepo.AddNewUser(newUser);
+            messageRepo.addMessageToBoard(topic, newMessage);
             }
             else
             {
@@ -64,9 +72,15 @@ namespace CommunityWebsite.Controllers
                 /*
                     this is done by passing the desired username into the FindUser method in the userlist static class
                     the method will return either -1, meaning the user was not found, or the index of the element the user exists in
-                */
+               `*/
                 //add message to message board
-                newMessage = new Message(messageTitle, messageContent, userName, topic);
+                newMessage = new Message()
+                {
+                    MessageContent=messageContent,
+                    MessageTitle=messageTitle,
+                    UserNameSignature = userName,
+                    Topic = topic
+                };
                 userRepo.ModifyUserMessageHistory(userName, "add", newMessage);
                 messageRepo.addMessageToBoard(topic,newMessage);
             }
@@ -104,12 +118,11 @@ namespace CommunityWebsite.Controllers
         public IActionResult Forum()
         {
             string chatRoom = TempData["chatRoom"].ToString();
-            messageRepo.SortMessagesByDate(chatRoom);
+            var sortedMessages = messageRepo.SortMessagesByDate(chatRoom);
             ViewBag.BackgroundStyle = "pageContainer7";
             ViewBag.SelectedChat = chatRoom;
             ViewBag.TitleText = TempData["pageTitleText"];
-            List<Message> messageBoardContent = (chatRoom == "general") ? messageRepo.GeneralMessages : messageRepo.SWMessages;
-            return View("Forum", messageBoardContent);
+            return View("Forum", sortedMessages);
         }
 
         //METHODS FOR REPLY SYSTEM
@@ -173,7 +186,10 @@ namespace CommunityWebsite.Controllers
             {
                 //create new user
                 //add user to Userlist
-                newUser = new User(poster);
+                newUser = new User()
+                {
+                    Username = poster
+                };
                 userRepo.AddNewUser(newUser);
             }
 
@@ -183,7 +199,11 @@ namespace CommunityWebsite.Controllers
             string OGCommenter = message.UserNameSignature;
             
             //instantiating reply object
-            reply = new Reply(replyMessageContent, poster);
+            reply = new Reply()
+            {
+                UserNameSignature = poster,
+                ReplyContent = replyMessageContent
+            };
 
             messageRepo.findAndAddToMessageReplies(chatGenre, OGMessageID, reply);
             userRepo.ModifyUserReplyHistory(poster, "add", reply);

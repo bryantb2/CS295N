@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityWebsite.Models;
 
-namespace CommunityWebsite.Models
+namespace CommunityWebsite.Respositories
 {
     public class FakeUserRepo : IUserRepo
     {
         // CLASS FIELDS
-        private List<User> listOfUsers = new List<User>();
+        private static List<User> listOfUsers = new List<User>();
 
         // PROPERTIES
         public List<User> ListOfUsers { get { return listOfUsers; } }

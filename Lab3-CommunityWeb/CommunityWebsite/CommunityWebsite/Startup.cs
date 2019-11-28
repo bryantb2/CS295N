@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CommunityWebsite.Models;
+using CommunityWebsite.Respositories;
+using Microsoft.EntityFrameworkCore;
+using CommunityWebsite.Respositories;
 
 namespace CommunityWebsite
 {
@@ -38,6 +41,8 @@ namespace CommunityWebsite
             // injecting repositories into Message controller
             services.AddTransient<IUserRepo, RealUserRepo>();
             services.AddTransient<IMessageRepo, RealMessageRepo>();
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
+                Configuration["Data:CommunityWebsite:LocalConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +68,9 @@ namespace CommunityWebsite
                     name: "default",
                     template: "{controller=Home}/{action=Home}/{id?}");
             });
+
+            // adding seed data
+            SeedData.Seed(app);
         }
     }
 }
