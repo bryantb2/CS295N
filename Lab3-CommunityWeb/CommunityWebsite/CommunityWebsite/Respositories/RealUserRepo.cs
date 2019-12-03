@@ -19,7 +19,7 @@ namespace CommunityWebsite.Respositories
         }
 
         // PROPERTIES
-        public List<User> ListOfUsers { get { return context.Users.Include("Messages").Include("Replies").ToList(); } }
+        public List<User> ListOfUsers { get { return context.Users.ToList(); } }
         public int NumberOfUsers { get { return context.Users.ToList().Count; } }
 
         // METHODS

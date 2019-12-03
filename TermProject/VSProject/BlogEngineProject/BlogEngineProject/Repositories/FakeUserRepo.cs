@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlogEngineProject.Models;
 
-namespace BlogEngineProject.Models
+namespace BlogEngineProject.Repositories
 {
     public class FakeUserRepo : IUserRepo
     {

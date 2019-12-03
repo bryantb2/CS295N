@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlogEngineProject.Models;
 
-namespace BlogEngineProject.Models
+namespace BlogEngineProject.Repositories
 {
     public class FakeThreadRepo : IThreadRepo
     {
@@ -47,12 +48,13 @@ namespace BlogEngineProject.Models
             // find thread
             // then remove it
             Thread removedThread = null;
-            foreach (Thread t in activeThreads)
+            foreach (Thread t in this.activeThreads)
             {
                 if (t.ThreadID == threadID)
                 {
                     removedThread = t;
                     activeThreads.Remove(t);
+                    return removedThread;
                 }
             }
             return removedThread;

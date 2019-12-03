@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using BlogEngineProject.Repositories;
 using BlogEngineProject.Models;
 
 namespace BlogEngineProject.Controllers
@@ -18,7 +19,7 @@ namespace BlogEngineProject.Controllers
             threadRepo = t;
         }
 
-        // SIGN IN METHODS
+        // GENERAL SIGN IN METHODS
         //  ---------------------------------------------------------------------------------------------------->
         //  ---------------------------------------------------------------------------------------------------->
         public IActionResult Index()
@@ -137,6 +138,17 @@ namespace BlogEngineProject.Controllers
 
             return View("MyBlogMainPanel", userObject);
         }
+
+        // SIGN IN METHODS FOR COMMENTS
+        //  ---------------------------------------------------------------------------------------------------->
+        //  ---------------------------------------------------------------------------------------------------->
+        /*public RedirectToActionResult ReplySignInRedirect(string username, string password)
+        {
+
+        }*/
+    
+
+
 
         // THESE METHODS REQUIRE A USER ID FOR ACCESS
         //  ---------------------------------------------------------------------------------------------------->
