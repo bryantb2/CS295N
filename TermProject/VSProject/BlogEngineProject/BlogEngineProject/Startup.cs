@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BlogEngineProject.Models;
 using BlogEngineProject.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogEngineProject
 {
@@ -37,6 +37,10 @@ namespace BlogEngineProject
             // injecting repositories into Message controller
             services.AddTransient<IUserRepo, RealUserRepo>();
             services.AddTransient<IThreadRepo, RealThreadRepo>();
+
+            // add context string for DB
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
+                Configuration["Data:GoodBookNook:ConnectionString"]));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
