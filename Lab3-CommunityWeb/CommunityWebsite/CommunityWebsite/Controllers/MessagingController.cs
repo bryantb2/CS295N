@@ -57,7 +57,8 @@ namespace CommunityWebsite.Controllers
                 MessageContent = messageContent,
                 Topic = topic,
                 UserNameSignature = userName,
-                MessageTitle = messageTitle
+                MessageTitle = messageTitle,
+                UnixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
             };
             messageRepo.addMessageToBoard(topic, newMessage);
             newUser.AddMessageToHistory(newMessage);
@@ -78,7 +79,8 @@ namespace CommunityWebsite.Controllers
                     MessageContent=messageContent,
                     MessageTitle=messageTitle,
                     UserNameSignature = userName,
-                    Topic = topic
+                    Topic = topic,
+                    UnixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
                 };
                 messageRepo.addMessageToBoard(topic, newMessage);
                 userRepo.ModifyUserMessageHistory(userName, "add", newMessage);
@@ -201,7 +203,8 @@ namespace CommunityWebsite.Controllers
             reply = new Reply()
             {
                 UserNameSignature = poster,
-                ReplyContent = replyMessageContent
+                ReplyContent = replyMessageContent,
+                UnixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
             };
 
             messageRepo.findAndAddToMessageReplies(chatGenre, OGMessageID, reply);
