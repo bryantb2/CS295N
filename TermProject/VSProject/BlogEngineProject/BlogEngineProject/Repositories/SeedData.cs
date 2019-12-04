@@ -36,7 +36,7 @@ namespace BlogEngineProject.Repositories
                 const string bio = "hello there friends";
                 const string name = "testThread1";
                 string creatorName = newUser.Username;
-                const string category = "games and music";
+                string category = ThreadCategories.GetCategory(0);
                 Thread thread1 = new Thread()
                 {
                     Name = name,
@@ -66,7 +66,7 @@ namespace BlogEngineProject.Repositories
                 const string bio2 = "hello there friends";
                 const string name2 = "testThread2";
                 string creatorName2 = newUser2.Username;
-                const string category2 = "games and music";
+                string category2 = ThreadCategories.GetCategory(1);
                 Thread thread2 = new Thread()
                 {
                     Name = name2,
@@ -95,7 +95,7 @@ namespace BlogEngineProject.Repositories
                 const string bio3 = "hello there friends";
                 const string name3 = "testThread3";
                 string creatorName3 = newUser3.Username;
-                const string category3 = "games and music";
+                string category3 = ThreadCategories.GetCategory(2);
                 Thread thread3 = new Thread()
                 {
                     Name = name3,

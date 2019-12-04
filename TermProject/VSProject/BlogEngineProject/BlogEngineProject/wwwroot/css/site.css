@@ -49,8 +49,8 @@ body {
 }
 
 a.nav-link:hover {
-    background-color: white !important;
-    color: #343a40 !important;
+    background-color: #868e96 !important;
+    color: white !important;
     border-radius: 3px;
 }
 
@@ -58,4 +58,10 @@ a.nav-link:hover {
 .universalPageTitleStyle {
     font-family: 'FuturaPT-Medium';
     font-size: 40pt;
+}
+
+/* About page navigation button styles */
+.navigationButton:hover {
+    background-color: white !important;
+    border: 3px solid blue;
 }
