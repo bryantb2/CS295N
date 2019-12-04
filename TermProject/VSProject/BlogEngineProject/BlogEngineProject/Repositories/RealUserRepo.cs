@@ -52,7 +52,7 @@ namespace BlogEngineProject.Repositories
 
             // search thread list
             // add the thread to search results if the thread matches the searchString
-            List<Thread> threads = new FakeThreadRepo().GetThreads();
+            List<Thread> threads = new RealThreadRepo(context).GetThreads();
             foreach (Thread t in threads)
             {
                 if (t.Name == searchString)
