@@ -243,19 +243,15 @@ namespace BlogEngineProject.Controllers
 
         public RedirectToActionResult AddPost(string postTitle, string postContent, string threadId, string userId)
         {
-            // Build post object
-            // Get thread by id
             // add post to thread
             // make a temp data entry containing the userId
             // redirect to ReloadBlogDashboard action method
-
             Post newPost = new Post()
             {
                 Title = postTitle,
                 Content = postContent,
                 TimeStamp = DateTime.Now
             };
-
             
             int threadIdAsInt = int.Parse(threadId);
             threadRepo.AddThreadPost(threadIdAsInt, newPost);
@@ -266,15 +262,13 @@ namespace BlogEngineProject.Controllers
 
         public RedirectToActionResult RemovePost(string postId, string threadId, string userId)
         {
-            // get thread by id
             // remove the post from thread
             // make a temp data entry containing the userId
             // redirect to ReloadBlogDashboard action method
-            int POST_ID = int.Parse(postId);
-            int THREAD_ID = int.Parse(threadId);
+            int postIdAsInt = int.Parse(postId);
+            int threadIdAsInt = int.Parse(threadId);
 
-            Thread thread = threadRepo.GetThreadById(THREAD_ID);
-            thread.RemovePostFromHistory(POST_ID);
+            threadRepo.RemoveThreadPost(threadIdAsInt, postIdAsInt);
 
             TempData["userId"] = userId;
             return RedirectToAction("ReloadBlogDashboard");
@@ -283,17 +277,13 @@ namespace BlogEngineProject.Controllers
         [HttpPost]
         public RedirectToActionResult EditPost(string editedTitle, string editedContent, string postId, string threadId, string userId)
         {
-            // Get Thread by id
-            // Get post by id from thread
             // Set the post's editedTitle and editedContent properties
             // make a temp data entry containing the userId
             // redirect to ReloadBlogDashboard action method 
-            int POST_ID = int.Parse(postId);
-            int THREAD_ID = int.Parse(threadId);
+            int postIdAsInt = int.Parse(postId);
+            int threadIdAsInt = int.Parse(threadId);
 
-            Post postReference = threadRepo.GetThreadById(THREAD_ID).GetPostById(POST_ID);
-            postReference.Title = editedTitle;
-            postReference.Content = editedTitle;
+            threadRepo.EditThreadPost(threadIdAsInt, postIdAsInt, editedTitle, editedContent);
 
             TempData["userId"] = userId;
             return RedirectToAction("ReloadBlogDashboard");

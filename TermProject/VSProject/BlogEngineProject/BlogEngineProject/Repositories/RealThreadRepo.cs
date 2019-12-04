@@ -60,7 +60,34 @@ namespace BlogEngineProject.Repositories
 
         public void RemoveThreadPost(int threadId, int postId)
         {
+            // get thread by id
+            // get the post by id
+            // remove post from context
+            // remove post from thread post history
+            // save changes
+            Thread targetThread = GetThreadById(threadId);
+            Post targetPost = FindPostById(threadId, postId);
+            targetThread.RemovePostFromHistory(postId);
 
+            context.Threads.Update(targetThread);
+            context.Posts.Remove(targetPost);
+            context.SaveChanges();
+        }
+
+        public void EditThreadPost(int threadId, int postId, string editedTitle, string editedContent)
+        {
+            // Get Thread by id
+            // Get post by id from thread
+            // Set the post's editedTitle and editedContent properties
+            // update the post with new data
+            // save changes
+            Thread targetThread = GetThreadById(threadId);
+            Post targetPost = FindPostById(threadId, postId);
+            targetPost.Title = editedTitle;
+            targetPost.Content = editedContent;
+
+            context.Posts.Update(targetPost);
+            context.SaveChanges();
         }
 
         public void AddThreadtoRepo(Thread thread)
@@ -137,6 +164,21 @@ namespace BlogEngineProject.Repositories
                 }
             }
             return null;
+        }
+
+        private Post FindPostById(int threadId, int postId)
+        {
+            // get thread by id
+            // get the post list
+            // return post if id matches postId
+            Thread foundThread = FindThreadById(threadId);
+            List<Post> postList = foundThread.Posts;
+            foreach (Post p in postList)
+            {
+                if (p.PostID == postId)
+                    return p;
+            }
+            return null; //error if this is returned
         }
     }
 }

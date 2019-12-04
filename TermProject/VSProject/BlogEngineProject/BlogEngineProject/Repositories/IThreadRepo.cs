@@ -16,6 +16,7 @@ namespace BlogEngineProject.Repositories
         bool GetThreadnameEligibility(string username);
         void AddThreadtoRepo(Thread thread);
         void AddThreadPost(int threadId, Post newPost);
-         void RemoveThreadPost(int threadId, int postId);
+        void RemoveThreadPost(int threadId, int postId);
+        void EditThreadPost(int threadId, int postId, string editedTitle, string editedContent);
     }
 }
