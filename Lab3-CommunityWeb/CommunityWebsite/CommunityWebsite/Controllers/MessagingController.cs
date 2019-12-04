@@ -59,10 +59,9 @@ namespace CommunityWebsite.Controllers
                 UserNameSignature = userName,
                 MessageTitle = messageTitle
             };
-            newUser.AddMessageToHistory(newMessage);
-
-            userRepo.AddNewUser(newUser);
             messageRepo.addMessageToBoard(topic, newMessage);
+            newUser.AddMessageToHistory(newMessage);
+            userRepo.AddNewUser(newUser);
             }
             else
             {
@@ -81,8 +80,8 @@ namespace CommunityWebsite.Controllers
                     UserNameSignature = userName,
                     Topic = topic
                 };
+                messageRepo.addMessageToBoard(topic, newMessage);
                 userRepo.ModifyUserMessageHistory(userName, "add", newMessage);
-                messageRepo.addMessageToBoard(topic,newMessage);
             }
             //set the genre the user selected for retrieval later
             TempData["chatRoom"] = topic;
