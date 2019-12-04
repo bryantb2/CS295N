@@ -19,7 +19,14 @@ namespace BlogEngineProject.Repositories
         }
 
         // METHODS
-        public List<Thread> GetThreads() => context.Threads.Include("Posts").ToList();
+        public List<Thread> GetThreads()
+        {
+            var threadList = context.Threads
+                .Include(thread => thread.Posts)
+                    .ThenInclude(post => post.Comments)
+                .ToList();
+            return threadList;
+        }
         public Thread GetThreadById(int threadId) => FindThreadById(threadId);
         public Thread GetThreadByName(string threadname) => FindThreadByName(threadname);
         public bool GetThreadnameEligibility(string username) => !(IsThreadnameTaken(username));
@@ -37,6 +44,23 @@ namespace BlogEngineProject.Repositories
                     categorySpecificThreads.Add(t);
             }
             return categorySpecificThreads;
+        }
+
+        public void AddThreadPost(int threadId, Post newPost)
+        {
+            // get thread by id
+            // add post to context
+            // add post to thread
+            // save changes
+            Thread targetThread = GetThreadById(threadId);
+            context.Posts.Add(newPost);
+            targetThread.AddPostToThread(newPost);
+            context.SaveChanges();
+        }
+
+        public void RemoveThreadPost(int threadId, int postId)
+        {
+
         }
 
         public void AddThreadtoRepo(Thread thread)

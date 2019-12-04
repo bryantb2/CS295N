@@ -15,5 +15,7 @@ namespace BlogEngineProject.Repositories
         Thread RemoveThreadfromRepo(int threadID);
         bool GetThreadnameEligibility(string username);
         void AddThreadtoRepo(Thread thread);
+        void AddThreadPost(int threadId, Post newPost);
+         void RemoveThreadPost(int threadId, int postId);
     }
 }

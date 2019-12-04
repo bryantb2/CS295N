@@ -19,7 +19,14 @@ namespace BlogEngineProject.Repositories
         }
 
         // METHODS
-        public List<User> GetUsers() => context.Users.ToList();
+        public List<User> GetUsers()
+        {
+            var userList = context.Users
+                .Include(user => user.OwnedThread)
+                    .ThenInclude(thread => thread.Posts)
+                .ToList();
+            return userList;
+        }
         public User GetUserById(int userId) => FindUserById(userId);
         public User GetUserByUsername(string username) => FindUserByUsername(username);
         public bool GetUsernameEligibility(string username) => !(IsUsernameTaken(username));

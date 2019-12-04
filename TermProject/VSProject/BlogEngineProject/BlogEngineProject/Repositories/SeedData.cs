@@ -44,9 +44,10 @@ namespace BlogEngineProject.Repositories
                     Bio = bio,
                     Category = category
                 };
+                threadRepo.AddThreadtoRepo(thread1);
                 newUser.OwnedThread = thread1;
                 userRepo.AddUsertoRepo(newUser);
-                threadRepo.AddThreadtoRepo(thread1);
+                
 
                 // ---------------------------------------->
 
@@ -73,9 +74,9 @@ namespace BlogEngineProject.Repositories
                     Bio = bio2,
                     Category = category2
                 };
+                threadRepo.AddThreadtoRepo(thread2);
                 newUser2.OwnedThread = thread2;
                 userRepo.AddUsertoRepo(newUser2);
-                threadRepo.AddThreadtoRepo(thread2);
 
                 // ---------------------------------------->
 
@@ -102,9 +103,9 @@ namespace BlogEngineProject.Repositories
                     Bio = bio3,
                     Category = category3
                 };
+                threadRepo.AddThreadtoRepo(thread3);
                 newUser3.OwnedThread = thread3;
                 userRepo.AddUsertoRepo(newUser3);
-                threadRepo.AddThreadtoRepo(thread3);
 
                 // ---------------------------------------->
 

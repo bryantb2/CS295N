@@ -59,6 +59,16 @@ namespace BlogEngineProject.Repositories
             }
             return removedThread;
         }
+
+        public void AddThreadPost(int threadId, Post newPost)
+        {
+            // TODO: code this for memory repo
+        }
+
+        public void RemoveThreadPost(int threadId, int postId)
+        {
+            // TODO: code this for memory repo
+        }
         
         private bool IsThreadnameTaken(String threadName)
         {

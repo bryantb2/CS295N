@@ -82,7 +82,6 @@ namespace BlogEngineProject.Controllers
 
             User newUser = new User()
             {
-                UserID = ObjectIDBuilder.GetUserID(),
                 Username = trimmedUsername,
                 Password = trimmedConfirmPassword,
                 DateJoined = DateTime.Now
@@ -230,7 +229,6 @@ namespace BlogEngineProject.Controllers
 
             Thread newThread = new Thread()
             {
-                ThreadID = ObjectIDBuilder.GetThreadID(),
                 Name = threadName,
                 Bio = bio,
                 Category = threadCategory,
@@ -253,14 +251,14 @@ namespace BlogEngineProject.Controllers
 
             Post newPost = new Post()
             {
-                PostID = ObjectIDBuilder.GetPostID(),
                 Title = postTitle,
                 Content = postContent,
                 TimeStamp = DateTime.Now
             };
 
-            int THREADID = int.Parse(threadId);
-            threadRepo.GetThreadById(THREADID).AddPostToThread(newPost);
+            
+            int threadIdAsInt = int.Parse(threadId);
+            threadRepo.AddThreadPost(threadIdAsInt, newPost);
 
             TempData["userId"] = userId;
             return RedirectToAction("ReloadBlogDashboard");
