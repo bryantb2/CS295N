@@ -16,12 +16,6 @@ namespace CommunityWebsite.Models
         private List<Reply> replyHistory = new List<Reply>();
         private string password;
 
-        //CONSTRUCTOR
-        /*public User(string Username)
-        {
-            this.userName = Username;
-        }*/
-
         //PROPERTIES
         public int UserID
         {

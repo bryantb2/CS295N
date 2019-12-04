@@ -18,25 +18,13 @@ namespace CommunityWebsite.Models
         private string messageTitle;
         private List<Reply> replies = new List<Reply>();
 
-        //CONSTRUCTOR
-        /*public Message(string MessageTitle, string MessageContent, string UserNameSignature, string Topic)
-        {
-            this.messageContent = MessageContent;
-            this.userNameSignature = UserNameSignature;
-            this.topic = Topic;
-            this.messageTitle = MessageTitle;
-            this.replies = new List<Reply>();
-            this.unixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-        }*/
-
-        //PROPERTIES
+        //PROPERTIES    
         public string Topic
         {
             get { return this.topic; }
             set { this.topic = value; }
         }
-
-        [Key]
+        
         public int MessageID
         {
             get { return this.messageID; }

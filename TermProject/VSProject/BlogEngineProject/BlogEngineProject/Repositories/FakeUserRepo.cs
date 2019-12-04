@@ -9,7 +9,7 @@ namespace BlogEngineProject.Repositories
     public class FakeUserRepo : IUserRepo
     {
         // CLASS FIELDS
-        private List<User> userList = new List<User>();
+        private static List<User> userList = new List<User>();
         
         // METHODS
         public  List<User> GetUsers() => userList;
@@ -18,7 +18,7 @@ namespace BlogEngineProject.Repositories
         public  bool GetUsernameEligibility(string username) => !(IsUsernameTaken(username));
         public  bool CheckUserCredentials(string username, string password) => AreUserCredentialsValid(username, password);
 
-        public  List<Thread> SearchForUsersAndThreads(String searchString)
+        public  List<Thread> SearchForUsersAndThreads(string searchString)
         {
             // ASSUMPTION: search string could be a username OR a threadname
             // therefore, the search will be conducted here since the User domain model has a Thread
@@ -69,6 +69,7 @@ namespace BlogEngineProject.Repositories
                 {
                     removedUser = u;
                     userList.Remove(u);
+                    return removedUser;
                 }
             }
             return removedUser;

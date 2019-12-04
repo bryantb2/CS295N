@@ -20,6 +20,8 @@ namespace CommunityWebsite.Respositories
 
             if (!context.Users.Any())
             {
+                RealUserRepo userRepo = new RealUserRepo(context);
+                RealMessageRepo messageRepo = new RealMessageRepo(context);
                 // Add users
                 User user = new User() { Username = "Robert" };
                 Message message = new Message
@@ -30,7 +32,7 @@ namespace CommunityWebsite.Respositories
                     UserNameSignature = user.Username,
                     UnixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
                 };
-                
+                message.UserNameSignature = user.Username;
 
                 User user2 = new User() { Username = "Bob" };
                 Message message2 = new Message
@@ -41,14 +43,24 @@ namespace CommunityWebsite.Respositories
                     UserNameSignature = user2.Username,
                     UnixTimeStamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
                 };
+                message2.UserNameSignature = user2.Username;
 
                 // add users and messages to DB
-                context.Users.Add(user);
-                context.Users.Add(user2);
-                context.Messages.Add(message);
-                context.Messages.Add(message2);
+                /*context.Users.Add(user);
+                context.Messages.Add(message);*/
+                user.AddMessageToHistory(message);
+                userRepo.AddNewUser(user);
+                messageRepo.addMessageToBoard("",message);
 
-                context.SaveChanges(); // save all the data
+
+                /*context.Users.Add(user2);
+                context.Messages.Add(message2);*/
+                user2.AddMessageToHistory(message2);
+                userRepo.AddNewUser(user2);
+                messageRepo.addMessageToBoard("", message2);
+                context.SaveChanges();
+
+                //context.SaveChanges(); // save all the data
             }
         }
     }

@@ -9,7 +9,7 @@ namespace BlogEngineProject.Repositories
     public class FakeThreadRepo : IThreadRepo
     {
         // CLASS FIELDS
-        private List<Thread> activeThreads = new List<Thread>();
+        private static List<Thread> activeThreads = new List<Thread>();
 
         // METHODS
         public List<Thread> GetThreads() => activeThreads;
@@ -48,7 +48,7 @@ namespace BlogEngineProject.Repositories
             // find thread
             // then remove it
             Thread removedThread = null;
-            foreach (Thread t in this.activeThreads)
+            foreach (Thread t in FakeThreadRepo.activeThreads)
             {
                 if (t.ThreadID == threadID)
                 {

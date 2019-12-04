@@ -31,6 +31,7 @@ namespace BlogEngineProject.Models
                 {
                     removedThreadID = thread;
                     FavoriteThreads.Remove(thread);
+                    return removedThreadID;
                 }
             }
             return removedThreadID;
@@ -49,6 +50,7 @@ namespace BlogEngineProject.Models
                 {
                     removedComment = c;
                     CommentHistory.Remove(c);
+                    return removedComment;
                 }
             }
             return removedComment;

@@ -16,6 +16,9 @@ namespace CommunityWebsite.Respositories
         public RealMessageRepo(AppDbContext appDbContext)
         {
             context = appDbContext;
+            //var messages = context.Messages;
+            //var replies = context.Messages.Include("Replies");
+
         }
 
         // CLASS FIELDS
