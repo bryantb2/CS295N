@@ -25,7 +25,16 @@ namespace CommunityWebsite.Respositories
         private String[] chatGenres = new String[] { "General Chat", "Star Wars Chat" };
 
         // PROPERTIES 
-        public List<Message> Messages { get { return context.Messages.Include("Replies").ToList(); } }
+        public List<Message> Messages
+        {
+            get
+            {
+                var messageList = context.Messages
+                    .Include(message => message.GetReplyHistory)
+                    .ToList();
+                return messageList;
+            }
+        }
 
         public List<Message> SWMesssages
         {

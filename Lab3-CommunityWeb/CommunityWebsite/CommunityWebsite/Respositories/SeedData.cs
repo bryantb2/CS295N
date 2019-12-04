@@ -45,22 +45,20 @@ namespace CommunityWebsite.Respositories
                 };
                 message2.UserNameSignature = user2.Username;
 
-                // add users and messages to DB
-                /*context.Users.Add(user);
-                context.Messages.Add(message);*/
+                // add message to board
+                // add message to user
+                // add message to repo
+                messageRepo.addMessageToBoard("", message);
                 user.AddMessageToHistory(message);
                 userRepo.AddNewUser(user);
-                messageRepo.addMessageToBoard("",message);
 
 
-                /*context.Users.Add(user2);
-                context.Messages.Add(message2);*/
+                // add message to board
+                // add message to user
+                // add message to repo
+                messageRepo.addMessageToBoard("", message2);
                 user2.AddMessageToHistory(message2);
                 userRepo.AddNewUser(user2);
-                messageRepo.addMessageToBoard("", message2);
-                context.SaveChanges();
-
-                //context.SaveChanges(); // save all the data
             }
         }
     }
