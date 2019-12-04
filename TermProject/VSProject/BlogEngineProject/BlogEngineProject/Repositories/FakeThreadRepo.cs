@@ -75,6 +75,11 @@ namespace BlogEngineProject.Repositories
             // TODO: code this for memory repo
         }
 
+        public void EditThreadProfile(string editedThreadname, string editedThreadCategory, string editedBio, int threadId)
+        {
+            // TODO: code this for memory repo
+        }
+
         private bool IsThreadnameTaken(String threadName)
         {
             // looks through the thread list for an identical threadname string

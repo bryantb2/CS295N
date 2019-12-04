@@ -18,5 +18,6 @@ namespace BlogEngineProject.Repositories
         void AddThreadPost(int threadId, Post newPost);
         void RemoveThreadPost(int threadId, int postId);
         void EditThreadPost(int threadId, int postId, string editedTitle, string editedContent);
+        void EditThreadProfile(string editedThreadname, string editedThreadCategory, string editedBio, int threadId);
     }
 }

@@ -83,10 +83,30 @@ namespace BlogEngineProject.Repositories
             // save changes
             Thread targetThread = GetThreadById(threadId);
             Post targetPost = FindPostById(threadId, postId);
-            targetPost.Title = editedTitle;
-            targetPost.Content = editedContent;
+            if(editedTitle != null)
+                targetPost.Title = editedTitle;
+            if(editedContent != null)
+                targetPost.Content = editedContent;
 
             context.Posts.Update(targetPost);
+            context.SaveChanges();
+        }
+
+        public void EditThreadProfile(string editedThreadname, string editedThreadCategory, string editedBio, int threadId)
+        {
+            // Get post by id from thread
+            // Set the thread's text properties
+            // update the thread with new data
+            // save changes
+            Thread targetThread = GetThreadById(threadId);
+            if (editedThreadname != null)
+                targetThread.Name = editedThreadname;
+            if (editedThreadCategory != null)
+                targetThread.Category = editedThreadCategory;
+            if (editedBio != null)
+                targetThread.Bio = editedBio;
+
+            context.Threads.Update(targetThread);
             context.SaveChanges();
         }
 

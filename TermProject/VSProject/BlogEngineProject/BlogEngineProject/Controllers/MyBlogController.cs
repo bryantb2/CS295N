@@ -296,16 +296,10 @@ namespace BlogEngineProject.Controllers
             // Update appropriate thread properties
             // make a temp data entry containing the userId
             // redirect to ReloadBlogDashboard action method 
-            int THREAD_ID = int.Parse(threadId);
+            int threadIdAsInt = int.Parse(threadId);
 
-            Thread threadReference = threadRepo.GetThreadById(THREAD_ID);
-            if (editedThreadname != null)
-                threadReference.Name = editedThreadname;
-            if (editedThreadCategory != null)
-                threadReference.Category = editedThreadCategory;
-            if (editedBio != null)
-                threadReference.Bio = editedBio;
-
+            threadRepo.EditThreadProfile(editedThreadname, editedThreadCategory, editedBio, threadIdAsInt);
+            
             TempData["userId"] = userId;
             return RedirectToAction("ReloadBlogDashboard");
         }
