@@ -14,27 +14,28 @@ namespace BlogEngineProject.Models
         public String Gender { get; set; }
         public DateTime DateJoined { get; set; }
         public Thread OwnedThread { get; set; }
-        public List<int> FavoriteThreads { get; set; } // will store a list of thread DB ID numbers
+        public List<Thread> FavoriteThreads { get; set; } // will store a list of thread DB ID numbers
         public List<Comment> CommentHistory { get; set; }
 
         // METHODS
-        public void AddToFavorites(int threadID) => FavoriteThreads.Add(threadID);
+        public void AddToFavorites(Thread thread) => FavoriteThreads.Add(thread);
 
-        public int RemoveFromFavorites(int threadID)
+        public Thread RemoveFromFavorites(int threadID)
         {
             // find threadID
             // then remove it
-            int removedThreadID = -1;
-            foreach (int thread in FavoriteThreads)
+            Thread removedThread = null;
+            List<Thread> threadList = FavoriteThreads;
+            foreach (Thread thread in FavoriteThreads)
             {
-                if (thread == threadID)
+                if (thread.ThreadID == threadID)
                 {
-                    removedThreadID = thread;
+                    removedThread = thread;
                     FavoriteThreads.Remove(thread);
-                    return removedThreadID;
+                    return removedThread;
                 }
             }
-            return removedThreadID;
+            return removedThread;
         }
 
         public void AddCommentToHistory(Comment comment) => CommentHistory.Add(comment);

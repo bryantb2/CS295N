@@ -70,8 +70,8 @@ namespace BlogEngineProject
                 user.OwnedThread = thread;
 
                 // set objects to object repos
-                new RealThreadRepo().AddThreadtoRepo(thread);
-                new RealUserRepo().AddUsertoRepo(user);
+                new FakeThreadRepo().AddThreadtoRepo(thread);
+                new FakeUserRepo().AddUsertoRepo(user);
             }
         }
 

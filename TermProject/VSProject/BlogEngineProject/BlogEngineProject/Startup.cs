@@ -34,15 +34,15 @@ namespace BlogEngineProject
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             // injecting repositories into Message controller
             services.AddTransient<IUserRepo, RealUserRepo>();
             services.AddTransient<IThreadRepo, RealThreadRepo>();
 
             // add context string for DB
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
-                Configuration["Data:GoodBookNook:ConnectionString"]));
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                Configuration["Data:BlogEngine:ConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +69,9 @@ namespace BlogEngineProject
                     name: "default",
                     template: "{controller=About}/{action=Index}/{id?}");
             });
+
+            // adding seed data
+            SeedData.Seed(app);
         }
     }
 }
