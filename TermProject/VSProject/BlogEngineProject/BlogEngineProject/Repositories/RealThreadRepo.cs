@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlogEngineProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogEngineProject.Repositories
 {
     public class RealThreadRepo : IThreadRepo
     {
         // CLASS FIELDS
-        private static List<Thread> activeThreads = new List<Thread>();
+        private AppDbContext context;
+
+        // CONSTRUCTOR
+        public RealThreadRepo(AppDbContext appContext)
+        {
+            this.context = appContext;
+        }
 
         // METHODS
-        public List<Thread> GetThreads() => activeThreads;
+        public List<Thread> GetThreads() => context.Threads.Include("Posts").ToList();
         public Thread GetThreadById(int threadId) => FindThreadById(threadId);
         public Thread GetThreadByName(string threadname) => FindThreadByName(threadname);
         public bool GetThreadnameEligibility(string username) => !(IsThreadnameTaken(username));
@@ -23,7 +30,8 @@ namespace BlogEngineProject.Repositories
             List<Thread> categorySpecificThreads = new List<Thread>();
             // iterate through activeThreads list
             // add a reference to the thread in categorySEpcificThread list
-            foreach (Thread t in activeThreads)
+            List<Thread> repoThreads = GetThreads();
+            foreach (Thread t in repoThreads)
             {
                 if (t.Category == CATEGORY)
                     categorySpecificThreads.Add(t);
@@ -35,7 +43,8 @@ namespace BlogEngineProject.Repositories
         {
             if (IsThreadnameTaken(thread.Name) == false)
             {
-                activeThreads.Add(thread);
+                context.Threads.Add(thread);
+                context.SaveChanges();
             }
             else
             {
@@ -48,12 +57,14 @@ namespace BlogEngineProject.Repositories
             // find thread
             // then remove it
             Thread removedThread = null;
-            foreach (Thread t in activeThreads)
+            List<Thread> repoThreads = GetThreads();
+            foreach (Thread t in repoThreads)
             {
                 if (t.ThreadID == threadID)
                 {
                     removedThread = t;
-                    activeThreads.Remove(t);
+                    context.Threads.Remove(t);
+                    context.SaveChanges();
                     break;
                 }
             }
@@ -64,7 +75,8 @@ namespace BlogEngineProject.Repositories
         {
             // looks through the thread list for an identical threadname string
             // if the threadname is taken, return true
-            foreach (Thread t in activeThreads)
+            List<Thread> repoThreads = GetThreads();
+            foreach (Thread t in repoThreads)
             {
                 if (t.Name == threadName)
                     return true;
@@ -76,7 +88,8 @@ namespace BlogEngineProject.Repositories
         {
             // run foreach loop on userlist
             // return true if current thread's ID matches the parameter
-            foreach (Thread t in activeThreads)
+            List<Thread> repoThreads = GetThreads();
+            foreach (Thread t in repoThreads)
             {
                 if (t.ThreadID == threadId)
                     return t;
@@ -92,7 +105,8 @@ namespace BlogEngineProject.Repositories
             bool doesThreadExist = IsThreadnameTaken(threadname);
             if (doesThreadExist == true)
             {
-                foreach (Thread t in activeThreads)
+                List<Thread> repoThreads = GetThreads();
+                foreach (Thread t in repoThreads)
                 {
                     if (t.Name == threadname)
                         return t;

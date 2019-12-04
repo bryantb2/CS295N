@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlogEngineProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogEngineProject.Repositories
 {
     public class RealUserRepo : IUserRepo
     {
         // CLASS FIELDS
-        private static List<User> userList = new List<User>();
+        private AppDbContext context;
+
+        // CONSTRUCTOR
+        public RealUserRepo(AppDbContext appContext)
+        {
+            this.context = appContext;
+        }
 
         // METHODS
-        public List<User> GetUsers() => userList;
+        public List<User> GetUsers() => context.Users.Include("Threads").Include("Posts").ToList();
         public User GetUserById(int userId) => FindUserById(userId);
         public User GetUserByUsername(string username) => FindUserByUsername(username);
         public bool GetUsernameEligibility(string username) => !(IsUsernameTaken(username));
@@ -26,6 +33,8 @@ namespace BlogEngineProject.Repositories
             // search user list
             // add the user's thread if the username matches the searchString
             List<Thread> threadSearchResult = new List<Thread>();
+
+            List<User> userList = GetUsers();
             foreach (User u in userList)
             {
                 if (u.Username == searchString)
@@ -50,7 +59,8 @@ namespace BlogEngineProject.Repositories
         {
             if (IsUsernameTaken(user.Username) == false)
             {
-                userList.Add(user);
+                context.Users.Add(user);
+                context.SaveChanges();
             }
             else
             {
@@ -63,12 +73,14 @@ namespace BlogEngineProject.Repositories
             // find user
             // then remove it
             User removedUser = null;
+            List<User> userList = GetUsers();
             foreach (User u in userList)
             {
                 if (u.UserID == userID)
                 {
                     removedUser = u;
-                    userList.Remove(u);
+                    context.Users.Remove(u);
+                    context.SaveChanges();
                 }
             }
             return removedUser;
@@ -78,6 +90,7 @@ namespace BlogEngineProject.Repositories
         {
             // run a foreach loop on the user list
             // return true if username and password match an existing user
+            List<User> userList = GetUsers();
             foreach (User u in userList)
             {
                 if (u.Username == username && u.Password == password)
@@ -90,6 +103,7 @@ namespace BlogEngineProject.Repositories
         {
             // looks through the user list for an identical username string
             // if the username is taken, return true
+            List<User> userList = GetUsers();
             foreach (User u in userList)
             {
                 if (u.Username == username)
@@ -102,6 +116,7 @@ namespace BlogEngineProject.Repositories
         {
             // run foreach loop on userlist
             // return true if current user's ID matches the parameter
+            List<User> userList = GetUsers();
             foreach (User u in userList)
             {
                 if (u.UserID == userId)
@@ -118,6 +133,7 @@ namespace BlogEngineProject.Repositories
             bool doesUsernameExist = IsUsernameTaken(username);
             if (doesUsernameExist == true)
             {
+                List<User> userList = GetUsers();
                 foreach (User u in userList)
                 {
                     if (u.Username == username)
